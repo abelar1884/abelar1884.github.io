@@ -30,7 +30,7 @@ body {
 .site-header__logo {
   display: block;
   height: 44px;
-  width: auto;
+  width: 120px;
 }
 
 .site-header__ctas {
