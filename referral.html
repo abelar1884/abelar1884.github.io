@@ -190,7 +190,7 @@
         <img
           src="assets/images/referral/card-2pct-placeholder.png"
           alt="Гость с чемоданом у стойки регистрации отеля"
-          class="referral-commission__photo"
+          class="referral-commission__photo referral-commission__photo_right"
         >
         <div class="referral-commission__panel">
           <p class="referral-commission__percent">2%</p>
@@ -200,9 +200,9 @@
 
       <article class="referral-commission__card">
         <img
-          src="assets/images/referral/card-15pct-placeholder.png"
+          src="assets/images/referral/card-15pct-placeholder.jpg"
           alt="Женщина с посадочным талоном в зале аэропорта"
-          class="referral-commission__photo"
+          class="referral-commission__photo referral-commission__photo_left"
         >
         <div class="referral-commission__panel">
           <p class="referral-commission__percent">15%</p>
@@ -237,7 +237,7 @@
         <article class="referral-benefits__card">
           <div class="referral-benefits__card-head">
             <div class="referral-benefits__icon">
-              <img src="assets/images/referral/icon-limitless.svg" alt="">
+              <img src="assets/images/referral/icon-rubles.svg" alt="">
             </div>
             <h4 class="referral-benefits__card-title">Без ограничений по размеру вознаграждения</h4>
           </div>
@@ -299,7 +299,7 @@
         <p class="referral-who__note">Стать партнёром GATE могут физические лица, самозанятые, индивидуальные предприниматели и юридические лица</p>
       </div>
 
-      <img src="assets/images/referral/partner-portrait-placeholder.png" alt="Партнер программы GATE" class="referral-who__media">
+      <img src="assets/images/referral/partner-portrait.jpg" alt="Партнер программы GATE" class="referral-who__media">
     </div>
   </div>
 </section>
@@ -411,11 +411,17 @@
     </h2>
 
     <div class="referral-steps__progress" aria-hidden="true">
-      <span class="referral-steps__circle referral-steps__circle--dashed">1</span>
+      <span class="referral-steps__circle">
+        <img src="/assets/images/referral/step-first.svg" alt="">
+      </span>
       <span class="referral-steps__line"></span>
-      <span class="referral-steps__circle">2</span>
+      <span class="referral-steps__circle">
+        <img src="/assets/images/referral/step-second.svg" alt="">
+      </span>
       <span class="referral-steps__line"></span>
-      <span class="referral-steps__circle">3</span>
+      <span class="referral-steps__circle">
+        <img src="/assets/images/referral/step-third.svg" alt="">
+      </span>
     </div>
 
     <ol class="referral-steps__list">
@@ -483,13 +489,13 @@
         </div>
       </div>
 
-      <h3 class="referral__h3 referral-industries__grid-heading">Актуальные отрасли</h3>
+      <h4 class="referral__h4 referral-industries__grid-heading">Актуальные отрасли</h4>
 
       <ul class="referral-industries__grid">
         <li class="referral-industries__card referral-industries__card--wide referral-industries__card--photo">
           <img class="referral-industries__card-bg" src="assets/images/referral/industry-energy-placeholder.png" alt="">
           <span class="referral-industries__card-icon"><img src="assets/images/referral/ind-energy.svg" alt=""></span>
-          <h4 class="referral-industries__card-title">Энергетика и нефтегазовая отрасль</h4>
+          <h4 class="referral-industries__card-title referral-industries__card-title_big">Энергетика и нефтегазовая отрасль</h4>
           <p class="referral-industries__card-body">Командировки на объекты и производственные площадки в разных регионах</p>
         </li>
         <li class="referral-industries__card referral-industries__card--narrow referral-industries__card--pale">
@@ -537,56 +543,58 @@
 </section>
 
     <!-- ===== 08-easy.html ===== -->
-<section class="referral-easy" aria-labelledby="referral-easy-title">
-  <div class="referral__container referral-easy__container">
-    <h2 id="referral-easy-title" class="referral__h2 referral-easy__h2">
-      Рекомендовать <span class="referral__h2-accent referral-easy__h2-accent">GATE</span> легко
-    </h2>
-    <p class="referral-easy__subcopy">Мы делаем организацию командировок простой, прозрачной и управляемой</p>
+<section aria-labelledby="referral-easy-title">
+  <div class="referral-easy">
+    <div class="referral__container referral-easy__container">
+      <h2 id="referral-easy-title" class="referral__h2 referral-easy__h2">
+        Рекомендовать <span class="referral__h2-accent referral-easy__h2-accent">GATE</span> легко
+      </h2>
+      <p class="referral-easy__subcopy">Мы делаем организацию командировок простой, прозрачной и управляемой</p>
 
-    <div class="referral-easy__grid">
-      <div class="referral-easy__card">
-        <div class="referral-easy__card-head">
-          <img class="referral-easy__icon" src="assets/images/referral/icon-expertise.svg" alt="" width="40" height="40">
-          <h3 class="referral-easy__card-title">Экспертиза</h3>
+      <div class="referral-easy__grid">
+        <div class="referral-easy__card">
+          <div class="referral-easy__card-head">
+            <img class="referral-easy__icon" src="assets/images/referral/icon-expertise.svg" alt="" width="40" height="40">
+            <h3 class="referral-easy__card-title">Экспертиза</h3>
+          </div>
+          <ul class="referral-easy__list">
+            <li>30+ лет в деловом туризме</li>
+            <li>24/7 экспертное сопровождение</li>
+            <li>3 000+ клиентов уже доверяют сервису</li>
+          </ul>
         </div>
-        <ul class="referral-easy__list">
-          <li>30+ лет в деловом туризме</li>
-          <li>24/7 экспертное сопровождение</li>
-          <li>3 000+ клиентов уже доверяют сервису</li>
-        </ul>
+
+        <div class="referral-easy__card">
+          <div class="referral-easy__card-head">
+            <img class="referral-easy__icon" src="assets/images/referral/icon-convenience.svg" alt="" width="40" height="40">
+            <h3 class="referral-easy__card-title">Удобство</h3>
+          </div>
+          <ul class="referral-easy__list">
+            <!-- 🔴 "Подлючение" reproduced verbatim from the Figma render — misspelled in the
+                 source design (missing "к"). Flagged to the lead as a copy bug for the client
+                 to decide; not silently corrected here. -->
+            <li>Подлючение за минуту, без абонентской платы и скрытых комиссий</li>
+            <li>Выгодные цены от прямых поставщиков</li>
+            <li>Авиа-, ж/д билеты, отели и квартиры в одном сервисе</li>
+          </ul>
+        </div>
+
+        <div class="referral-easy__card">
+          <div class="referral-easy__card-head">
+            <img class="referral-easy__icon" src="assets/images/referral/icon-automation.png" alt="" width="40" height="40">
+            <h3 class="referral-easy__card-title">Автоматизация</h3>
+          </div>
+          <ul class="referral-easy__list">
+            <li>Тревел-политика и контроль расходов</li>
+            <li>API-интеграция с 1С</li>
+            <li>Закрывающие по ЭДО</li>
+          </ul>
+        </div>
       </div>
 
-      <div class="referral-easy__card">
-        <div class="referral-easy__card-head">
-          <img class="referral-easy__icon" src="assets/images/referral/icon-convenience.svg" alt="" width="40" height="40">
-          <h3 class="referral-easy__card-title">Удобство</h3>
-        </div>
-        <ul class="referral-easy__list">
-          <!-- 🔴 "Подлючение" reproduced verbatim from the Figma render — misspelled in the
-               source design (missing "к"). Flagged to the lead as a copy bug for the client
-               to decide; not silently corrected here. -->
-          <li>Подлючение за минуту, без абонентской платы и скрытых комиссий</li>
-          <li>Выгодные цены от прямых поставщиков</li>
-          <li>Авиа-, ж/д билеты, отели и квартиры в одном сервисе</li>
-        </ul>
-      </div>
-
-      <div class="referral-easy__card">
-        <div class="referral-easy__card-head">
-          <img class="referral-easy__icon" src="assets/images/referral/icon-automation.png" alt="" width="40" height="40">
-          <h3 class="referral-easy__card-title">Автоматизация</h3>
-        </div>
-        <ul class="referral-easy__list">
-          <li>Тревел-политика и контроль расходов</li>
-          <li>API-интеграция с 1С</li>
-          <li>Закрывающие по ЭДО</li>
-        </ul>
-      </div>
+      <!-- TODO: destination URL not specified in design -->
+      <a class="referral-easy__cta" href="#">Скачать презентацию для партнера</a>
     </div>
-
-    <!-- TODO: destination URL not specified in design -->
-    <a class="referral-easy__cta" href="#">Скачать презентацию для партнера</a>
   </div>
 </section>
 

@@ -1,0 +1,54 @@
+- generic [ref=f2e2]:
+  - region [ref=f2e3]:
+    - generic [ref=f2e4]:
+      - heading "Экспертная живая поддержка 24/7" [level=2] [ref=f2e5]
+      - paragraph [ref=f2e6]: Персональный менеджер сопровождает на всех этапах командировки
+      - generic [ref=f2e7]:
+        - generic [ref=f2e8]: Поможем
+        - list [ref=f2e10]:
+          - listitem [ref=f2e11]: разобраться в нештатной ситуации
+          - listitem [ref=f2e12]: подобрать вариант размещения
+          - listitem [ref=f2e13]: изменить или отменить заказ
+          - listitem [ref=f2e14]: с вопросами о работе сервиса
+      - generic [ref=f2e15]:
+        - generic [ref=f2e16]: Мы всегда на связи
+        - paragraph [ref=f2e18]: чат в личном кабинете
+        - paragraph [ref=f2e19]:
+          - text: "телефон:"
+          - link "+7 (495) 477 11 11" [ref=f2e20] [cursor=pointer]:
+            - /url: tel:+74954771111
+        - paragraph [ref=f2e21]:
+          - text: "e-mail:"
+          - link "info@gate.ru" [ref=f2e22] [cursor=pointer]:
+            - /url: mailto:info@gate.ru
+      - generic [ref=f2e23]:
+        - generic [ref=f2e24]:
+          - paragraph [ref=f2e25]: 1 минута
+          - paragraph [ref=f2e26]: Время ответа оператора
+        - generic [ref=f2e27]:
+          - paragraph [ref=f2e28]: 98,5%
+          - paragraph [ref=f2e29]: Клиентов довольны сервисом*
+          - paragraph [ref=f2e30]: "*По результатам оценки CSAT"
+    - generic [ref=f2e31]:
+      - img "Персональный менеджер поддержки на связи с клиентом в дороге" [ref=f2e32]
+      - generic [ref=f2e34]:
+        - paragraph [ref=f2e35]: Здравствуйте! Встречу перенесли на день позже, нужно обменять билет на другую дату — с 15 на 16 октября. Это возможно?
+        - paragraph [ref=f2e36]: Здравствуйте! Оформляю. Новый билет будет на почте в течение пары минут. Также пришлю памятку с правилами посадки — на случай, если планы снова поменяются.
+  - region [ref=f2e37]:
+    - generic [ref=f2e38]:
+      - heading "Все тревел-услуги в одном сервисе" [level=2] [ref=f2e39]:
+        - text: Все тревел-услуги
+        - generic [ref=f2e40]: в одном сервисе
+      - list [ref=f2e41]:
+        - listitem [ref=f2e42]:
+          - heading "Отели" [level=3] [ref=f2e43]
+          - paragraph [ref=f2e44]: 3+ млн отелей, апартаментов и квартир по всему миру
+        - listitem [ref=f2e45]:
+          - heading "Авиабилеты" [level=3] [ref=f2e46]
+          - paragraph [ref=f2e47]: 800+ российских и международных авиакомпаний
+        - listitem [ref=f2e48]:
+          - heading "Ж/д билеты" [level=3] [ref=f2e49]
+          - paragraph [ref=f2e50]: Поезда по всей России, включая сложные и стыковочные маршруты
+        - listitem [ref=f2e51]:
+          - heading "Трансферы" [level=3] [ref=f2e52]
+          - paragraph [ref=f2e53]: Комфортный транспорт на каждом этапе командировки

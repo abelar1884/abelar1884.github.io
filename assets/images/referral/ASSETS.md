@@ -76,6 +76,88 @@ section uses a pure-CSS chevron already. No markup change needed unless the lead
 | story-avatar-placeholder.svg | 14053:110220 (Ellipse 392) | **yes — no real portrait exists** | n/a | Plain 48x48 grey circle, `#D9D9D9`. Node 14053:110220 (the full six-story set) uses this ONE shared placeholder for every avatar — there is no real photo for Алексей, Ольга or Мария anywhere in the Figma file. Used by story cards 4-6. Cards 1-3 keep their real photos from 14086:110932. Swap in real portraits when available: it is a `src` change only, no rule edits. |
 | icon-chevron.svg | 467:1790 ("vuesax/bold/arrow-down") | no | n/a | Solid down-chevron, dark teal fill (#004650). svg, 24x24. **Exported but currently UNUSED** — referral.html's FAQ accordion uses a pure-CSS chevron; this file is available if the lead wants to swap it in later. |
 
+## Mobile-only blocks C + D (worker M2, 2026-08-19)
+
+| filename | source Figma node id | placeholder? | notes |
+|---|---|---|---|
+| m-support-photo.png | 14132:114004 (image 97) | no | Woman at train station, looking at phone, red train blurred in background. png, 1037x1518. `download_assets` on this node returned 2 rawImages (this + a 260x380 thumbnail duplicate); kept the higher-res one. |
+| m-support-icon-heart.svg | 14132:114004 ("Heart" layer) | no | Pink/magenta gradient heart-in-hand icon for the «Поможем» block. svg, 48.72x40.84 viewBox. |
+| m-support-icon-messages.svg | 14132:114004 ("Messages" layer) | no | Pink chat-bubbles icon for the «Мы всегда на связи» block. svg, 42x42.3 viewBox. Uses a `backdrop-filter: blur()` + clip-path internally (same pattern as `icon-convenience.svg` from unit 08) — renders correctly in-browser, may look soft in lightweight SVG previewers. |
+| m-service-hotels.svg | 14132:114060 (Group78, Отели icon) | no | Teal building + pink door/awning icon. svg, ~60x59.4 viewBox. |
+| m-service-flights.svg | 14132:114060 (Group79, Авиабилеты icon) | no | Pink airplane icon. svg, ~60.8x59.1 viewBox. |
+| m-service-train.svg | 14132:114060 (Group80, Ж/д билеты icon) | no | Teal/pink train icon. svg, ~60.5x56.8 viewBox. |
+| m-service-transfer.svg | 14132:114060 (Group81, Трансферы icon) | no | Pink car/transfer icon on a pink circular badge. svg, includes its own gradient badge shape + car glyph. |
+
+A third svgAsset returned alongside the two icons above for node `14132:114004` — a generic
+24x24 "book-saved" bookmark glyph — did not match anything visible in this block's
+`get_screenshot` render and was not saved; likely leaked from an adjacent/hidden layer in the
+same subtree (same pattern noted for unit 04's portrait pull).
+
+## Mobile-only block A — 4 feature cards (worker M1, node `14132:112977`)
+
+No exportable assets. `get_design_context` on `14132:112977` returned no `<img>`/icon
+references — the four cards are pure gradient/text (title + body copy), no per-card icon in
+the comp. Nothing to export for this block.
+
+## Mobile-only block B — «Нам доверяют» logo marquee (worker M1, node `14132:114111`)
+
+Logo row node `14132:114116` truncated at the 20-svgAsset cap on a single `download_assets`
+call (11 logo instances × up to 2 files each = up to 22). Subdivided into one
+`download_assets` call per logo instance node (`14132:114118` … `14132:114128`, 11 calls, no
+further truncation) — see the mobile call log below. Two of the four "masked" logos turned
+out to use a mask that is just a full-bbox rectangle (`fill="black"` covering the whole
+viewBox, confirmed by inspecting the downloaded mask SVGs), so the mask contributes no visual
+clipping beyond the image's own bounds; only the underlying image SVG was kept for those.
+
+All logo marks are flat single-colour SVGs — `fill="#004650"` (dark teal) on ten of eleven,
+`fill="#DFF0EB"` on one — **not** greyscale/desaturated PNGs. The grey "muted" look in the
+comp comes from a wrapper `opacity:0.5`, applied in `09b-mtrust.css` on
+`.referral-m-trust__viewport`; verified by re-reading the design-context Tailwind hint
+(`opacity-50` on the row's wrapper div) and the raw SVG fills.
+
+Brand identity was confirmed by literal text-path shape for АЛХИМ (path glyphs spelling the
+word) and by cross-referencing the MOBILE-SPEC's named brands (АЛХИМ, Weatherford, SERVIER)
+against logo width/shape (SERVIER is the widest wordmark, 192px, matching the italic text seen
+in `m9-odd.png`; Weatherford is the one with a heart/drop icon fused to the wordmark). The
+remaining logo marks in the comp have no legible name in the design (no layer name beyond
+generic "svgexport-NN 1" / "logo") and were **not guessed** — they ship with `alt=""` and the
+marquee container carries `aria-label="Логотипы клиентов: АЛХИМ, Weatherford, SERVIER и
+другие"` so screen readers get a truthful, non-fabricated summary instead of invented company
+names.
+
+| filename | source Figma node id | placeholder? | notes |
+|---|---|---|---|
+| m-trust-alhim.svg | `14132:114118` (masked; image sub-asset used, mask was a full-bbox rect) | no | АЛХИМ wordmark, teal `#004650`. svg, 117.37×14.63 viewBox. |
+| m-trust-weatherford.svg | `14132:114119` (masked; image sub-asset used) | no | Weatherford wordmark + heart/drop mark, teal `#004650`. svg, 92.92×21.86 viewBox. |
+| m-trust-logo-03.svg | `14132:114120` (direct image) | no | Unnamed brand mark, teal `#004650`. svg, 118.43×21.85 viewBox. |
+| m-trust-logo-04.svg | `14132:114121` (direct image) | no | Unnamed brand mark, teal `#004650`. svg, 112.05×14.63 viewBox. |
+| m-trust-logo-05.svg | `14132:114122` (direct image) | no | Unnamed brand mark, teal `#004650`. svg, 70.15×29.31 viewBox. |
+| m-trust-logo-06.svg | `14132:114123` (direct image) | no | Unnamed square icon mark, teal `#004650`. svg, 21.86×21.86 viewBox. |
+| m-trust-logo-07.svg | `14132:114124` (direct image) | no | Unnamed brand mark, teal `#004650`. svg, 108.41×21.81 viewBox. |
+| m-trust-servier.svg | `14132:114125` (direct image) | no | SERVIER wordmark (widest logo, 192px — matches the italic SERVIER text visible in `m9-odd.png`), teal `#004650`. svg, 192.22×21.87 viewBox. |
+| m-trust-logo-09.svg | `14132:114126` (masked; image sub-asset used) | no | Unnamed brand mark, teal `#004650`. svg, 51.00×21.84 viewBox. |
+| m-trust-logo-10.svg | `14132:114127` (direct image) | no | Unnamed brand mark, teal `#004650`. svg, 68.32×28.97 viewBox. |
+| m-trust-logo-11.svg | `14132:114128` (masked; image sub-asset used) | no | Unnamed brand mark, mint `#DFF0EB` fill (only non-teal logo). svg, 85.02×16.00 viewBox. |
+
+### Mobile call log (block B)
+
+| node | rawImages | svgAssets | truncated? |
+|---|---|---|---|
+| 14132:114111 (parent — export only, not used for logos) | 0 | 20 | **T** — subdivided below |
+| 14132:114118 | 0 | 5 | - |
+| 14132:114119 | 0 | 5 | - |
+| 14132:114120 | 0 | 3 | - |
+| 14132:114121 | 0 | 3 | - |
+| 14132:114122 | 0 | 3 | - |
+| 14132:114123 | 0 | 3 | - |
+| 14132:114124 | 0 | 3 | - |
+| 14132:114125 | 0 | 3 | - |
+| 14132:114126 | 0 | 5 | - |
+| 14132:114127 | 0 | 3 | - |
+| 14132:114128 | 0 | 4 | - |
+
+`14132:114113` and `14132:114115` (hidden nodes, per MOBILE-SPEC) were **not** called.
+
 ## Assets NOT exported (confirmed non-existent as separate exportable fills, or intentionally skipped)
 
 - **Unit 06 step icons** — node `14086:111174` only contains 3 plain "Ellipse 390" circle/ellipse
@@ -117,6 +199,8 @@ required subdivision), `-` = not truncated.
 | 14086:111741 (unit 08, automation icon, targeted re-pull) | 0 | 1 | - |
 | 14086:111774 (unit 09, CTA banner) | 2 | 1 | - |
 | 467:1790 (unit 10, FAQ chevron, optional) | 0 | 1 | - |
+| 14132:114004 (mobile block C, support) | 2 | 3 | - |
+| 14132:114060 (mobile block D, services) | 0 | 4 | - |
 
 `14086:111771` (rejected CTA variant), `14086:112456` (dropped calculator), and all nodes marked
 hidden in Figma metadata were **not** called, per the exclusion list.

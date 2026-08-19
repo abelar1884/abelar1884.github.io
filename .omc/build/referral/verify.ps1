@@ -25,6 +25,11 @@ $start = $h.IndexOf('<!-- ===== 01-hero.html')
 $end   = $h.LastIndexOf('</main>')
 if ($start -lt 0 -or $end -lt 0) { throw "cannot delimit authored region" }
 $body  = $h.Substring($start, $end - $start)
+# Phone numbers legitimately use ASCII spaces between digit groups (repo convention: the
+# site footer's +7 901 468 23 44 and the mobile support block's +7 (495) 477 11 11).
+# Strip tel: anchors before the digit-grouping assertion. THIRD time this gate collided
+# with legitimate content, so the carve-out is general rather than per-case.
+$bodyNoTel = [regex]::Replace($body, '(?s)<a[^>]*href="tel:[^"]*"[^>]*>.*?</a>', '')
 # tag-stripped text of the authored region, for prose assertions
 $text  = ($body -replace '<[^>]+>', ' ' -replace '\s+', ' ')
 
@@ -97,7 +102,7 @@ chk "'Кто может стать партнером' appears twice total: sect
 Write-Host "`n=== RUSSIAN TYPOGRAPHY (authored prose only) ==="
 # raw $body, not $text: stripping tags inserts spaces between digits, and
 # collapsing \s+ destroys U+00A0 (NBSP matches \s in .NET) -> false failures
-$asciiDigit = [regex]::Matches($body,'\d \d')
+$asciiDigit = [regex]::Matches($bodyNoTel,'\d \d')
 chk "no ASCII space between digits ($($asciiDigit.Count) found)" ($asciiDigit.Count -eq 0)
 chk "NBSP present in authored prose" ([regex]::Matches($body,$nb).Count -gt 0)
 $rub = [regex]::Matches($body,'.₽')

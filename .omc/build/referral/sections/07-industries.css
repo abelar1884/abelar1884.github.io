@@ -218,10 +218,22 @@
   }
 }
 
-/* NO COMP — inferred */
+/* ⚠ Mobile comp node 14154:121720 is a heading plus a genuinely BLANK white
+   card (375x956, radius 24) — confirmed via get_metadata: the panel frame
+   has exactly one text child (the heading) and one empty rounded-rectangle,
+   no hidden layers, no further children. This is not a render failure; the
+   content for this section was never designed for mobile. Per the team-
+   lead's instruction, NOT inventing a mobile layout for the panel/checklist/
+   grid below — those stay on the generic inferred rules already in this
+   file. The heading's own values (21px, centred, pink "GATE" accent) ARE
+   real comp values and are applied here; only the panel body is inferred. */
 @media (max-width: 768px) {
   .referral-industries {
     padding-block: 64px;
+  }
+
+  .referral-industries__heading {
+    font-size: 21px;
   }
 
   .referral-industries__panel {

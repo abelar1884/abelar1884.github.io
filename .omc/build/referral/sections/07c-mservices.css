@@ -1,0 +1,82 @@
+/* ==========================================================================
+   Mobile-only block D — «Все тревел-услуги в одном сервисе» (node
+   14132:114060, 375x940, full-bleed edge-to-edge, dark teal gradient panel,
+   flush against block C's photo panel above it — square top corners).
+   ========================================================================== */
+
+.referral-m-services__panel {
+  padding: 80px 16px 64px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+  background: linear-gradient(228deg, #004650 22.86%, #009fb6 233.38%);
+  border-radius: 0 0 40px 40px;
+}
+
+.referral-m-services__heading {
+  margin: 0;
+  font-family: var(--font-cofo-kak);
+  font-weight: 900;
+  font-size: 21px;
+  line-height: 1.25;
+  letter-spacing: 0.42px;
+  color: #fff;
+  text-align: center;
+}
+
+.referral-m-services__accent {
+  display: block;
+  color: var(--rf-lemon);
+}
+
+.referral-m-services__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.referral-m-services__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  text-align: center;
+}
+
+.referral-m-services__icon {
+  width: 64px;
+  height: 64px;
+  flex-shrink: 0;
+}
+
+.referral-m-services__title {
+  margin: 0;
+  font-family: var(--font-inter);
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1.3;
+  color: #fff;
+}
+
+.referral-m-services__body {
+  margin: 0;
+  font-family: var(--font-inter);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #fff;
+}
+
+/* --- Responsive ------------------------------------------------------------ */
+
+/* NO COMP — inferred */
+@media (max-width: 400px) {
+  .referral-m-services__panel {
+    padding-inline: 12px;
+  }
+}

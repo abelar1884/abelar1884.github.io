@@ -314,18 +314,37 @@
   }
 }
 
-/* NO COMP — inferred */
+/* Mobile comp (node 14132:113005, upper part — the calculator card).
+   Real values from get_design_context, not inferred:
+   title 21px fixed / margin-bottom 32 (root gap between title and card);
+   card is FULL-BLEED — w-375 exactly matches the 375 frame width, i.e. the
+   white card breaks out of the standard container gutter entirely on mobile
+   (a deliberate mobile-only treatment, not present on desktop). Escaped via
+   negative margin equal to the container's current padding-inline, which
+   00-base.css steps at 24px (≤768) / 16px (≤480) — kept in sync with that
+   ladder rather than hardcoding one gutter value. Card inner padding 16px
+   uniform; label 14px; value stays 32px (unchanged from desktop, NOT
+   shrunk); scale numbers 8px; result label 12px uppercase tracking .24px;
+   result year 28px tracking .56px; result month 10px; note 8px. */
 @media (max-width: 767px) {
   .referral-calc {
     padding-block: 40px 20px;
   }
 
   .referral-calc__title {
-    margin-bottom: 28px;
+    font-size: 21px;
+    margin-bottom: 32px;
   }
 
   .referral-calc__card {
-    padding: 20px;
+    margin-inline: -24px;
+    width: auto;
+    max-width: none;
+    padding: 16px;
+  }
+
+  .referral-calc__label {
+    font-size: 14px;
   }
 
   .referral-calc__label-row {
@@ -333,34 +352,51 @@
   }
 
   .referral-calc__value {
-    font-size: 28px;
+    font-size: 32px;
   }
 
-  .referral-calc__result-year {
-    font-size: 40px;
-    letter-spacing: 0.8px;
-  }
-
-  .referral-calc__result {
-    gap: 12px;
-    min-height: 0;
-    padding: 20px 16px;
-  }
-}
-
-/* NO COMP — inferred: four 96px chips + gaps exceed a 320-375px card, so let
-   them share two rows evenly rather than overflow. */
-@media (max-width: 479px) {
   .referral-calc__chips {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    flex-wrap: nowrap;
   }
 
   .referral-calc__chip {
-    width: 100%;
+    flex: 1 1 0;
+    width: auto;
+    min-width: 0;
+    padding-inline: 4px;
+  }
+
+  .referral-calc__scale {
+    font-size: 8px;
+  }
+
+  .referral-calc__result-label {
+    font-size: 12px;
   }
 
   .referral-calc__result-year {
-    font-size: 32px;
+    font-size: 28px;
+    letter-spacing: 0.56px;
+  }
+
+  .referral-calc__result-month {
+    font-size: 10px;
+  }
+
+  .referral-calc__result {
+    min-height: 0;
+    padding: 15px 16px 10px;
+  }
+
+  .referral-calc__note {
+    font-size: 8px;
+  }
+}
+
+/* Container's own gutter steps to 16px here (00-base.css) — keep the
+   full-bleed card's negative margin in sync with it. */
+@media (max-width: 479px) {
+  .referral-calc__card {
+    margin-inline: -16px;
   }
 }

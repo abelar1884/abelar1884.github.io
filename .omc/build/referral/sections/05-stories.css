@@ -17,6 +17,12 @@
   text-align: center;
 }
 
+/* Mobile-only forced break between "Истории" / "партнеров" (comp 14132:113835
+   shows this as a deliberate 2-liner). Hidden on desktop. */
+.referral-stories__break {
+  display: none;
+}
+
 /* --- Carousel ------------------------------------------------------------ */
 
 .referral-stories__carousel {
@@ -203,19 +209,68 @@
   }
 }
 
-/* NO COMP — inferred: 1 card visible below 768, so the rail becomes the
-   primary means of paging through all six stories. */
+/* Mobile comp (node 14132:113835). Real values, not inferred, for the
+   ACTIVE/full-size card (14154:121598 — the first, unscaled card; cards 2-3
+   in this comp are the SAME cards rendered smaller as a carousel "peek"
+   preview, not distinct target sizes, so they aren't used as a separate
+   reference): 1 card visible below 768, rail is the primary paging means.
+   Card radius ~19px (was 24), padding ~26/19/26/26 (was 24/20 uniform),
+   avatar shrinks to ~39px (was 48), name 13px (was 16), body copy 10px
+   (was 12); headline stays 16px, unchanged. The comp's track uses a FIXED
+   16px gutter (not the container's stepped 24px→16px ladder) — matches the
+   MOBILE-SPEC's "16px side gutters" baseline directly, so pin it rather
+   than inherit the wider 24px tier that applies 480-768px elsewhere.
+   The comp's per-card internal gap is actually two-tier (person↔text 13px,
+   headline↔body 7px); approximated here as a single blended 12px on
+   .referral-stories__card rather than restructuring the card into a nested
+   wrapper — close visually, flagged in the report. */
 @media (max-width: 767px) {
   .referral-stories {
     padding-block: 40px;
   }
 
   .referral-stories__title {
+    font-size: 21px;
     margin-bottom: 28px;
+  }
+
+  .referral-stories__break {
+    display: inline;
+  }
+
+  /* Track needs a FIXED 16px gutter regardless of the container's own
+     24px→16px step, so it escapes the container's current padding with a
+     matching negative margin first, then applies its own fixed 16px. */
+  .referral-stories__track {
+    margin-inline: -24px;
+    padding-inline: 16px;
   }
 
   .referral-stories__card {
     width: 100%;
-    padding: 24px 20px;
+    gap: 12px;
+    padding: 26px 19px 26px 26px;
+    border-radius: 19px;
+  }
+
+  .referral-stories__avatar {
+    width: 39px;
+    height: 39px;
+  }
+
+  .referral-stories__name {
+    font-size: 13px;
+  }
+
+  .referral-stories__body p {
+    font-size: 10px;
+  }
+}
+
+/* Container's own gutter steps to 16px here — keep the track's negative
+   margin in sync with it so the net gutter stays a fixed 16px. */
+@media (max-width: 480px) {
+  .referral-stories__track {
+    margin-inline: -16px;
   }
 }

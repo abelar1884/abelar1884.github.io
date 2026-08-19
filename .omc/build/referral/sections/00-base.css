@@ -142,3 +142,20 @@ body {
     max-width: 100%;
   }
 }
+
+/* --- Mobile-only blocks ---------------------------------------------------
+   Four content blocks exist ONLY in the mobile comp (frame 14132:112911) and
+   have no desktop design: the 4 hero feature cards, «Нам доверяют», «Экспертная
+   живая поддержка 24/7», and «Все тревел-услуги в одном сервисе». Per the user's
+   decision they render below 768 and are hidden above it, so each breakpoint
+   matches its own comp and nothing is invented for desktop.
+   Single shared gate — do not add a second visibility mechanism per block. */
+.referral-m {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .referral-m {
+    display: block;
+  }
+}

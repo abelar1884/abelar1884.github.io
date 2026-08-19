@@ -1,0 +1,228 @@
+/* ==========================================================================
+   Mobile-only block C — «Экспертная живая поддержка 24/7» (node 14132:114004,
+   375x1222, full-bleed edge-to-edge — confirmed against m8.png, no side
+   gutters like desktop's .referral__container). Two stacked full-bleed
+   panels: a light gradient info panel, then a dark photo panel with
+   overlaid chat bubbles.
+   ========================================================================== */
+
+.referral-m-support__panel {
+  padding: 56px 16px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  background: linear-gradient(180deg, #dfece9 0%, #eeeeee 100%);
+  border-radius: 40px 40px 24px 40px;
+}
+
+.referral-m-support__heading {
+  margin: 0 0 8px;
+  font-family: var(--font-cofo-kak);
+  font-weight: 900;
+  font-size: 21px;
+  line-height: 1.25;
+  letter-spacing: 0.42px;
+  color: var(--rf-teal);
+  text-align: center;
+}
+
+.referral-m-support__accent {
+  color: var(--rf-pink);
+}
+
+.referral-m-support__subcopy {
+  margin: 0 0 24px;
+  font-family: var(--font-inter);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #000;
+  text-align: center;
+}
+
+.referral-m-support__block {
+  margin-bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.referral-m-support__block-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-inter);
+  font-weight: 700;
+  font-size: 20px;
+  color: var(--rf-teal);
+}
+
+.referral-m-support__block-icon {
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+}
+
+.referral-m-support__block-icon--messages {
+  padding: 3px;
+}
+
+.referral-m-support__list {
+  margin: 0;
+  padding-left: 24px;
+  font-family: var(--font-inter);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #000;
+}
+
+.referral-m-support__list li + li {
+  margin-top: 0;
+}
+
+.referral-m-support__contact-line {
+  margin: 0 0 16px;
+  font-family: var(--font-inter);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.3;
+  color: #000;
+}
+
+.referral-m-support__contact-line:last-child {
+  margin-bottom: 0;
+}
+
+.referral-m-support__link {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.referral-m-support__link:hover,
+.referral-m-support__link:focus-visible {
+  color: var(--rf-teal);
+}
+
+/* --- Stat card ------------------------------------------------------------ */
+
+.referral-m-support__stats {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 8px 5px 5px 21px;
+  border: 1px solid rgba(217, 217, 217, 0.25);
+  border-radius: 13px;
+  background: linear-gradient(195deg, #004650 22.86%, #009fb6 233.38%);
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  color: #fff;
+}
+
+.referral-m-support__stat-figure {
+  margin: 0;
+  font-family: var(--font-cofo-kak);
+  font-weight: 900;
+  line-height: 1;
+}
+
+.referral-m-support__stat-number {
+  font-size: 44px;
+}
+
+.referral-m-support__stat-unit {
+  font-size: 22px;
+}
+
+.referral-m-support__stats .referral-m-support__stat:last-child .referral-m-support__stat-figure {
+  font-size: 44px;
+}
+
+.referral-m-support__stat-caption {
+  margin: 4px 0 0;
+  font-family: var(--font-inter);
+  font-weight: 400;
+  font-size: 14.5px;
+  line-height: 1.3;
+}
+
+.referral-m-support__stat-footnote {
+  margin: 3px 0 0;
+  font-family: var(--font-inter);
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 1.3;
+  opacity: 0.5;
+}
+
+/* --- Photo panel ------------------------------------------------------------ */
+
+.referral-m-support__photo {
+  position: relative;
+  width: 100%;
+  height: 454px;
+  overflow: hidden;
+  background: var(--rf-teal);
+  border-radius: 0 0 40px 40px;
+}
+
+.referral-m-support__photo-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+}
+
+.referral-m-support__scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0) 48%);
+}
+
+.referral-m-support__chat {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 16px;
+  padding: 0 16px 24px;
+}
+
+.referral-m-support__bubble {
+  margin: 0;
+  padding: 10px 24px;
+  font-family: var(--font-inter);
+  font-size: 12px;
+  line-height: 1.4;
+  color: #fff;
+  max-width: 85%;
+}
+
+.referral-m-support__bubble--out {
+  align-self: flex-start;
+  background: rgba(166, 228, 211, 0.4);
+  border-radius: 0 40px 40px 40px;
+}
+
+.referral-m-support__bubble--in {
+  align-self: flex-end;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 40px 0 40px 40px;
+}
+
+/* --- Responsive ------------------------------------------------------------ */
+
+/* NO COMP — inferred */
+@media (max-width: 400px) {
+  .referral-m-support__panel {
+    padding-inline: 12px;
+  }
+
+  .referral-m-support__stats {
+    padding-left: 16px;
+  }
+}

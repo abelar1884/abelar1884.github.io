@@ -165,62 +165,52 @@
   }
 }
 
-/* NO COMP — inferred: stack text above collage, collage centred and capped,
-   still visible (not hidden) at phone/tablet widths. */
+/* Mobile comp (node 14132:112913, 375x691): stack text above collage, one
+   column, no cap on the collage — it fills the full content width. Values
+   below are real comp values, not inferred:
+   pt 120 / gap 40 (text-block to collage) / pb 40; title 21px CoFo Kak Black
+   1.25/0.42px tracking; content-block internal gap (title↔subcopy) 16px;
+   subcopy 16px/1.5, accent stays 16px (not enlarged, unlike desktop).
+   🔴 The mobile comp has NO CTA button in the hero at all — verified via
+   get_metadata on 14132:112911 (no button/link node exists in the subtree,
+   no "Стать партнером" text anywhere in it). Hiding rather than removing
+   from markup, since the same fragment renders both breakpoints. */
 @media (max-width: 768px) {
   .referral-hero {
     border-radius: 0 0 40px 40px;
   }
 
   .referral-hero__body {
-    padding-top: 160px;
+    padding-top: 120px;
     grid-template-columns: 1fr;
-    gap: 32px;
+    gap: 40px;
+  }
+
+  .referral-hero__content {
+    gap: 16px;
   }
 
   .referral-hero__title {
-    /* Fluid: "Реферальная" is ~470px at 44px but the column is ~408px at 520. */
-    font-size: clamp(24px, 7vw, 44px);
-    letter-spacing: 1.5px;
-  }
-
-  .referral-hero__subcopy {
-    font-size: 18px;
-  }
-
-  .referral-hero__cta {
-    width: 100%;
-  }
-
-  .referral-hero__collage {
-    max-width: 420px;
-    margin-inline: auto;
-    margin-top: 0;
-  }
-}
-
-/* NO COMP — inferred */
-@media (max-width: 480px) {
-  .referral-hero__body {
-    padding-top: 150px;
-  }
-
-  .referral-hero__title {
-    /* Fluid: "Реферальная" is 363px at 34px and the column is only 273px at a
-       320 viewport, so a fixed size forced a mid-word break. */
-    font-size: clamp(20px, 7vw, 34px);
+    font-size: 21px;
+    line-height: 1.25;
+    letter-spacing: 0.42px;
   }
 
   .referral-hero__subcopy {
     font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .referral-hero__accent {
+    font-size: 16px;
   }
 
   .referral-hero__cta {
-    height: 52px;
-    padding: 0 24px;
+    display: none;
   }
 
   .referral-hero__collage {
-    max-width: 320px;
+    max-width: 100%;
+    margin-top: 0;
   }
 }

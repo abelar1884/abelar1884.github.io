@@ -93,14 +93,14 @@
   "hotPaths": [
     {
       "path": "assets/images/referral/ASSETS.md",
-      "accessCount": 5,
-      "lastAccessed": 1787126273839,
+      "accessCount": 12,
+      "lastAccessed": 1787143585088,
       "type": "file"
     },
     {
       "path": "js/referral.js",
-      "accessCount": 2,
-      "lastAccessed": 1787131999585,
+      "accessCount": 3,
+      "lastAccessed": 1787143324377,
       "type": "file"
     },
     {
@@ -161,6 +161,72 @@
       "path": "unit08_icons.png",
       "accessCount": 1,
       "lastAccessed": 1787126048178,
+      "type": "file"
+    },
+    {
+      "path": "m-full-375.png",
+      "accessCount": 1,
+      "lastAccessed": 1787144497242,
+      "type": "file"
+    },
+    {
+      "path": "m-hero.png",
+      "accessCount": 1,
+      "lastAccessed": 1787144506499,
+      "type": "file"
+    },
+    {
+      "path": "m-calc.png",
+      "accessCount": 1,
+      "lastAccessed": 1787144514447,
+      "type": "file"
+    },
+    {
+      "path": "m-commission.png",
+      "accessCount": 1,
+      "lastAccessed": 1787144514705,
+      "type": "file"
+    },
+    {
+      "path": "m-calc2.png",
+      "accessCount": 1,
+      "lastAccessed": 1787144622273,
+      "type": "file"
+    },
+    {
+      "path": "m-commission2.png",
+      "accessCount": 1,
+      "lastAccessed": 1787144630863,
+      "type": "file"
+    },
+    {
+      "path": "m-benefits2.png",
+      "accessCount": 1,
+      "lastAccessed": 1787144631432,
+      "type": "file"
+    },
+    {
+      "path": "m-who2.png",
+      "accessCount": 1,
+      "lastAccessed": 1787144631574,
+      "type": "file"
+    },
+    {
+      "path": "m-steps2.png",
+      "accessCount": 1,
+      "lastAccessed": 1787144676499,
+      "type": "file"
+    },
+    {
+      "path": "m-stories2.png",
+      "accessCount": 1,
+      "lastAccessed": 1787144676624,
+      "type": "file"
+    },
+    {
+      "path": "m-industries2.png",
+      "accessCount": 1,
+      "lastAccessed": 1787144676722,
       "type": "file"
     }
   ],

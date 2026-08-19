@@ -1,0 +1,276 @@
+- generic [active] [ref=f6e1]:
+  - main [ref=f6e2]:
+    - region [ref=f6e3]:
+      - navigation "Главная навигация" [ref=f6e5]:
+        - link "GATE" [ref=f6e6] [cursor=pointer]:
+          - /url: /
+          - img "GATE" [ref=f6e7]
+        - button "Открыть меню" [ref=f6e8] [cursor=pointer]
+      - generic [ref=f6e11]:
+        - generic [ref=f6e12]:
+          - heading "Реферальная программа" [level=1] [ref=f6e13]
+          - paragraph [ref=f6e14]: Получайте до 500 000 ₽ за каждого нового клиента, который пришёл в GATE по вашей рекомендации
+        - generic [ref=f6e15]:
+          - img "Партнёр GATE — мужчина в кепке за рабочим столом дома" [ref=f6e16]
+          - img "Партнёр GATE — женщина в зелёном свитере" [ref=f6e17]
+          - img "Партнёр GATE — женщина у книжной полки" [ref=f6e18]
+          - img "Партнёр GATE — мужчина со скрещенными руками у окна" [ref=f6e19]
+    - region [ref=f6e20]:
+      - generic [ref=f6e21]:
+        - heading "Рассчитайте свой доход" [level=2] [ref=f6e22]
+        - generic [ref=f6e23]:
+          - generic [ref=f6e24]:
+            - generic [ref=f6e25]:
+              - generic [ref=f6e26]:
+                - generic [ref=f6e27]: "Количество привлеченных клиентов:"
+                - status [ref=f6e28]: "5"
+              - generic [ref=f6e29]:
+                - slider "Количество привлеченных клиентов:" [ref=f6e30] [cursor=pointer]: "5"
+                - generic [ref=f6e31]:
+                  - generic [ref=f6e32]: "1"
+                  - generic [ref=f6e33]: "100"
+            - group "Размер бизнеса" [ref=f6e34]:
+              - generic [ref=f6e36]:
+                - radio "Малый" [ref=f6e37]
+                - generic [ref=f6e38] [cursor=pointer]: Малый
+                - radio "Средний" [ref=f6e39]
+                - generic [ref=f6e40] [cursor=pointer]: Средний
+                - radio "Крупный" [checked] [ref=f6e41]
+                - generic [ref=f6e42] [cursor=pointer]: Крупный
+                - radio "Холдинг" [ref=f6e43]
+                - generic [ref=f6e44] [cursor=pointer]: Холдинг
+          - generic [ref=f6e45]:
+            - paragraph [ref=f6e46]: Ваш потенциальный доход в год
+            - paragraph [ref=f6e47]: 2 500 000 ₽
+            - paragraph [ref=f6e48]: / ≈208 500 ₽ в месяц
+        - paragraph [ref=f6e49]: "*Расчет приведен в качестве примера. Фактический размер вознаграждения зависит от объема и стоимости оплаченных командировок привлеченных клиентов."
+    - region [ref=f6e50]:
+      - generic [ref=f6e51]:
+        - heading "Получайте партнерское вознаграждение за оплаченные и реализованные командировки новых клиентов, которых вы привели в GATE" [level=2] [ref=f6e52]
+        - generic [ref=f6e53]:
+          - article [ref=f6e54]:
+            - img "Гость с чемоданом у стойки регистрации отеля" [ref=f6e55]
+            - generic [ref=f6e56]:
+              - paragraph [ref=f6e57]: 2%
+              - paragraph [ref=f6e58]: от бронирований отелей и квартир
+          - article [ref=f6e59]:
+            - img "Женщина с посадочным талоном в зале аэропорта" [ref=f6e60]
+            - generic [ref=f6e61]:
+              - paragraph [ref=f6e62]: 15%
+              - paragraph [ref=f6e63]: от сервисных сборов по авиа — и ж/д билетам
+    - region [ref=f6e64]:
+      - generic [ref=f6e65]:
+        - heading "Почему это выгодно" [level=2] [ref=f6e66]
+        - generic [ref=f6e67]:
+          - generic [ref=f6e71]:
+            - heading "Реальные деньги, а не бонусы" [level=3] [ref=f6e72]
+            - paragraph [ref=f6e73]: Получайте до 500 000 ₽ за каждого нового привлечённого клиента. Прозрачные отчёты и регулярные выплаты
+          - generic [ref=f6e74]:
+            - article [ref=f6e75]:
+              - heading "Без ограничений по размеру вознаграждения" [level=4] [ref=f6e78]
+              - paragraph [ref=f6e79]: Чем больше клиентов — тем выше доход. Если по вашей рекомендации к GATE подключились две и более компании, объемы их бронирований суммируются при расчете партнерского вознаграждения
+            - article [ref=f6e80]:
+              - heading "Личный кабинет партнера" [level=4] [ref=f6e83]
+              - paragraph [ref=f6e84]: Создайте реферальную ссылку, отслеживайте переходы, привлеченных клиентов, начисления и выплаты в одном месте
+            - article [ref=f6e85]:
+              - heading "Легко рекомендовать" [level=4] [ref=f6e88]
+              - paragraph [ref=f6e89]: Регистрация за минуту, простые условия, технологичный продукт
+    - region [ref=f6e90]:
+      - generic [ref=f6e91]:
+        - heading "Кто может стать партнером?" [level=2] [ref=f6e92]
+        - generic [ref=f6e93]:
+          - generic [ref=f6e94]:
+            - list [ref=f6e95]:
+              - listitem [ref=f6e96]:
+                - heading "Руководители и собственники бизнеса" [level=3] [ref=f6e97]
+                - paragraph [ref=f6e98]: Рекомендуйте GATE коллегам, партнерам и другим компаниям, которым важно сделать организацию командировок проще и эффективнее
+              - listitem [ref=f6e99]:
+                - heading "Бухгалтеры, HR-специалисты, тревел-менеджеры" [level=3] [ref=f6e100]
+                - paragraph [ref=f6e101]: А также специалисты по закупкам, консультанты и другие профессионалы, работающие с корпоративными клиентами
+              - listitem [ref=f6e102]:
+                - heading "Пользователи GATE" [level=3] [ref=f6e103]
+                - paragraph [ref=f6e104]: Если вы уже пользуетесь сервисом и знаете преимущества сервиса, рекомендуйте его другим компаниям и получайте партнерское вознаграждение
+              - listitem [ref=f6e105]:
+                - heading "Владельцы интернет-ресурсов" [level=3] [ref=f6e106]
+                - paragraph [ref=f6e107]: Сайты, блоги, Telegram-каналы, профессиональные сообщества и другие онлайн-площадки. Делитесь рекомендациями GATE и получайте дополнительный доход
+            - paragraph [ref=f6e108]: Стать партнёром GATE могут физические лица, самозанятые, индивидуальные предприниматели и юридические лица
+          - img "Партнер программы GATE" [ref=f6e109]
+    - region [ref=f6e110]:
+      - generic [ref=f6e111]:
+        - heading "Истории партнеров" [level=2] [ref=f6e112]
+        - generic [ref=f6e113]:
+          - group "Истории партнеров" [ref=f6e114]:
+            - article [ref=f6e115]:
+              - generic [ref=f6e116]:
+                - img "Анна, HR-директор" [ref=f6e117]
+                - paragraph [ref=f6e118]: Анна, HR-директор
+              - paragraph [ref=f6e119]: Накопила 300 000 ₽ на семейный отпуск
+              - generic [ref=f6e120]:
+                - paragraph [ref=f6e121]: Анна порекомендовала GATE нескольким знакомым HR и руководителям. Компании начали пользоваться сервисом, а вознаграждение Анна решила откладывать.
+                - paragraph [ref=f6e122]: Через полгода накопилось 300 000 ₽ — как раз на долгожданный отпуск с семьёй
+            - article [ref=f6e123]:
+              - generic [ref=f6e124]:
+                - img "Михаил, собственник бизнеса" [ref=f6e125]
+                - paragraph [ref=f6e126]: Михаил, собственник бизнеса
+              - paragraph [ref=f6e127]: Заработал больше 1 млн ₽ на рекомендациях
+              - generic [ref=f6e128]:
+                - paragraph [ref=f6e129]: Михаил занимается внешнеэкономической деятельностью, сам пользуется GATE и часто общается с другими предпринимателями.
+                - paragraph [ref=f6e130]: За год несколько компаний стали постоянными клиентами сервиса по его рекомендации, а вознаграждение за их командировки превысило 1 млн ₽
+            - article [ref=f6e131]:
+              - generic [ref=f6e132]:
+                - img "Екатерина, бухгалтер" [ref=f6e133]
+                - paragraph [ref=f6e134]: Екатерина, бухгалтер
+              - paragraph [ref=f6e135]: Получила 150 000 ₽ и купила новый iPhone
+              - generic [ref=f6e136]:
+                - paragraph [ref=f6e137]: Екатерина работает с командировочными документами и знает, сколько времени занимает оформление. Она рассказала о GATE знакомым бухгалтерам из других компаний.
+                - paragraph [ref=f6e138]: Несколько компаний подключились к сервису, а Екатерина за несколько месяцев получила 150 000 ₽ партнёрского вознаграждения и купила новый iPhone
+            - article [ref=f6e139]:
+              - paragraph [ref=f6e141]: Алексей, консультант
+              - paragraph [ref=f6e142]: Заработал 300 000 ₽ и закрыл автокредит
+              - generic [ref=f6e143]:
+                - paragraph [ref=f6e144]: Алексей работает с корпоративными клиентами и рекомендует GATE компаниям, которые часто организуют командировки.
+                - paragraph [ref=f6e145]: За полгода Алексей получил 300 000 ₽ и направил их на досрочное погашение автокредита.
+            - article [ref=f6e146]:
+              - paragraph [ref=f6e148]: Ольга, тревел-менеджер
+              - paragraph [ref=f6e149]: Получила 240 000 ₽ за полгода
+              - generic [ref=f6e150]:
+                - paragraph [ref=f6e151]: Ольга хорошо знает рынок делового туризма и много общается с коллегами из других компаний.
+                - paragraph [ref=f6e152]: Она стала рассказывать о GATE тем, кому сервис может быть полезен в ежедневной работе.
+                - paragraph [ref=f6e153]: Несколько компаний подключились, а за полгода Ольга получила 240 000 ₽ партнерского вознаграждения.
+            - article [ref=f6e154]:
+              - paragraph [ref=f6e156]: Мария, автор Telegram-канала
+              - paragraph [ref=f6e157]: Более 100 000 ₽за первые месяцы
+              - generic [ref=f6e158]:
+                - paragraph [ref=f6e159]: Мария делится с подписчиками полезными сервисами для бизнеса. В одной из публикаций она рассказала о GATE и разместила реферальную ссылку.
+                - paragraph [ref=f6e160]: Несколько компаний зарегистрировались и начали пользоваться сервисом, а за первые месяцы Мария получила более 100 000 ₽ партнерского вознаграждения.
+          - generic [ref=f6e161]:
+            - button "Страница 1 из 6" [ref=f6e162] [cursor=pointer]
+            - button "Страница 2 из 6" [ref=f6e163] [cursor=pointer]
+            - button "Страница 3 из 6" [ref=f6e164] [cursor=pointer]
+            - button "Страница 4 из 6" [ref=f6e165] [cursor=pointer]
+            - button "Страница 5 из 6" [ref=f6e166] [cursor=pointer]
+            - button "Страница 6 из 6" [ref=f6e167] [cursor=pointer]
+    - region [ref=f6e168]:
+      - generic [ref=f6e169]:
+        - heading "Начать зарабатывать с GATE просто" [level=2] [ref=f6e170]
+        - generic [ref=f6e171]:
+          - generic [ref=f6e172]: "1"
+          - generic [ref=f6e174]: "2"
+          - generic [ref=f6e176]: "3"
+        - generic [ref=f6e177]:
+          - 'list "Шаги: как начать зарабатывать с GATE" [ref=f6e178]':
+            - listitem [ref=f6e179]:
+              - heading "Зарегистрируйтесь и рекомендуйте GATE" [level=3] [ref=f6e180]: Зарегистрируйтесьи рекомендуйте GATE
+              - paragraph [ref=f6e181]: Получите персональную реферальную ссылку в личном кабинете партнёра. Рекомендуйте GATE знакомым, коллегам, партнёрам и клиентам
+            - listitem [ref=f6e182]:
+              - heading "Новый клиент бронирует командировки через GATE" [level=3] [ref=f6e183]: Новый клиент бронируеткомандировки через GATE
+              - paragraph [ref=f6e184]: Компания регистрируется в GATE по вашей ссылке, оформляет и оплачивает командировки
+            - listitem [ref=f6e185]:
+              - heading "Вы получаете вознаграждение" [level=3] [ref=f6e186]: Вы получаетевознаграждение
+              - paragraph [ref=f6e187]: За оплаченные командировки клиентов, которые пришли в GATE по вашей рекомендации
+          - generic [ref=f6e188]:
+            - button "Страница 1 из 3" [ref=f6e189] [cursor=pointer]
+            - button "Страница 2 из 3" [ref=f6e190] [cursor=pointer]
+            - button "Страница 3 из 3" [ref=f6e191] [cursor=pointer]
+    - region [ref=f6e192]:
+      - generic [ref=f6e193]:
+        - heading "Кому рекомендовать GATE" [level=2] [ref=f6e194]
+        - generic [ref=f6e195]:
+          - generic [ref=f6e196]:
+            - heading "Компаниям, которые:" [level=3] [ref=f6e197]
+            - generic [ref=f6e198]:
+              - list [ref=f6e199]:
+                - listitem [ref=f6e200]:
+                  - generic [ref=f6e201]: Организуют более 10 командировок в месяц
+                - listitem [ref=f6e202]:
+                  - generic [ref=f6e203]: Имеют филиалы, региональные офисы или зарубежные представительства
+                - listitem [ref=f6e204]:
+                  - generic [ref=f6e205]: Активно развивают бизнес и расширяют географию присутствия
+                - listitem [ref=f6e206]:
+                  - generic [ref=f6e207]: Регулярно отправляют сотрудников на объекты, производства, стройплощадки и к клиентам
+              - list [ref=f6e208]:
+                - listitem [ref=f6e209]:
+                  - generic [ref=f6e210]: Работают с ВЭД, в том числе с Китаем и странами БРИКС
+                - listitem [ref=f6e211]:
+                  - generic [ref=f6e212]: Организуют деловые мероприятия, форумы, конференции, гастроли или концертную деятельность
+                - listitem [ref=f6e213]:
+                  - generic [ref=f6e214]: Реализуют проекты в разных городах и регионах с участием распределённых команд
+          - heading "Актуальные отрасли" [level=3] [ref=f6e215]
+          - list [ref=f6e216]:
+            - listitem [ref=f6e217]:
+              - heading "Энергетика и нефтегазовая отрасль" [level=4] [ref=f6e219]
+              - paragraph [ref=f6e220]: Командировки на объекты и производственные площадки в разных регионах
+            - listitem [ref=f6e221]:
+              - heading "Промышленность и производство" [level=4] [ref=f6e223]
+              - paragraph [ref=f6e224]: Командировки на предприятия, производственные площадки, к поставщикам и партнёрам
+            - listitem [ref=f6e225]:
+              - heading "ИТ и телекоммуникации" [level=4] [ref=f6e227]
+              - paragraph [ref=f6e228]: Распределенные команды, внедрения, работа на площадках клиентов и партнеров.
+            - listitem [ref=f6e229]:
+              - heading "Строительство и девелопмент" [level=4] [ref=f6e231]
+              - paragraph [ref=f6e232]: Поездки на объекты, между регионами и проектными площадками.
+            - listitem [ref=f6e233]:
+              - heading "Фармацевтика и медицина" [level=4] [ref=f6e235]
+              - paragraph [ref=f6e236]: Командировки на предприятия, производственные площадки, к поставщикам и партнёрам
+            - listitem [ref=f6e237]:
+              - heading "Торговля и компании с ВЭД" [level=4] [ref=f6e239]
+              - paragraph [ref=f6e240]: Переговоры с поставщиками и партнерами, международные поездки, в том числе в Китай и страны БРИКС
+            - listitem [ref=f6e241]:
+              - heading "Консалтинг и профессиональные услуги" [level=4] [ref=f6e243]
+              - paragraph [ref=f6e244]: Регулярные поездки проектных команд и встречи с клиентами.
+            - listitem [ref=f6e245]:
+              - heading "Спорт, культура и событийная индустрия" [level=4] [ref=f6e247]
+              - paragraph [ref=f6e248]: Турниры, гастроли, концерты, фестивали, форумы и другие групповые поездки.
+    - region [ref=f6e249]:
+      - generic [ref=f6e250]:
+        - heading "Часто задаваемые вопросы" [level=2] [ref=f6e251]
+        - generic [ref=f6e252]:
+          - heading [level=3] [ref=f6e254]:
+            - button "Что такое реферальная программа GATE?" [ref=f6e255] [cursor=pointer]
+          - heading [level=3] [ref=f6e259]:
+            - button "Как стать партнером?" [ref=f6e260] [cursor=pointer]
+          - heading [level=3] [ref=f6e264]:
+            - button "Кто может стать партнером?" [ref=f6e265] [cursor=pointer]
+          - heading [level=3] [ref=f6e269]:
+            - button "За каких клиентов начисляется вознаграждение?" [ref=f6e270] [cursor=pointer]
+          - heading [level=3] [ref=f6e274]:
+            - button "Как начисляется вознаграждение?" [ref=f6e275] [cursor=pointer]
+          - heading [level=3] [ref=f6e279]:
+            - button "Где можно отслеживать начисления и выплаты?" [ref=f6e280] [cursor=pointer]
+          - heading [level=3] [ref=f6e284]:
+            - button "Можно ли рекомендовать GATE своей компании или связанному бизнесу?" [ref=f6e285] [cursor=pointer]
+          - heading [level=3] [ref=f6e289]:
+            - button "Как увеличить доход в реферальной программе?" [ref=f6e290] [cursor=pointer]
+  - contentinfo [ref=f6e293]:
+    - generic [ref=f6e294]:
+      - heading "Деловые поездки" [level=2] [ref=f6e295]
+      - paragraph [ref=f6e296]: — это новые города, встречи и возможности. А рутину мы убрали под капот
+    - generic [ref=f6e297]:
+      - navigation "Навигация" [ref=f6e298]:
+        - link "Главная" [ref=f6e299] [cursor=pointer]:
+          - /url: index.html
+        - link "О Компании" [ref=f6e300] [cursor=pointer]:
+          - /url: index.html
+      - navigation "Документы" [ref=f6e301]:
+        - link "Политика конфиденциальности" [ref=f6e302] [cursor=pointer]:
+          - /url: https://go.gate.ru/confidence
+        - link "Оферта" [ref=f6e303] [cursor=pointer]:
+          - /url: https://go.gate.ru/offer
+        - link "База знаний" [ref=f6e304] [cursor=pointer]:
+          - /url: https://go.gate.ru/knowledge
+      - generic [ref=f6e305]:
+        - link "+7 901 468 23 44" [ref=f6e306] [cursor=pointer]:
+          - /url: tel:+79014682344
+        - link "partners@gate.ru" [ref=f6e307] [cursor=pointer]:
+          - /url: mailto:partners@gate.ru
+        - generic [ref=f6e308]: 121614, ул. Крылатская, д. 17, к. 2, 1 эт
+    - generic [ref=f6e309]:
+      - link "GATE" [ref=f6e310] [cursor=pointer]:
+        - /url: /
+        - img "GATE" [ref=f6e311]
+      - generic [ref=f6e312]:
+        - link "ВКонтакте" [ref=f6e313] [cursor=pointer]:
+          - /url: https://vk.com/
+        - link "Telegram" [ref=f6e314] [cursor=pointer]:
+          - /url: https://t.me/
+      - paragraph [ref=f6e315]: © 2026 ООО «ГЕЙТ» Все права защищены

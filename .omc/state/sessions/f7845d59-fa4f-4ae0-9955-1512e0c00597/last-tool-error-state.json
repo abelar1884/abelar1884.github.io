@@ -1,7 +1,7 @@
 {
-  "tool_name": "PowerShell",
-  "tool_input_preview": "{\"command\":\"cd C:\\\\projects\\\\abelar1884.github.io; & .\\\\.omc\\\\build\\\\referral\\\\verify.ps1\",\"description\":\"Run acceptance gates\"}",
-  "error": "Exit code 1\n=== STRUCTURAL (document-wide) ===\nPASS  exactly one <h1>\nPASS  every <img> has alt (40 imgs)\nPASS  stylesheet order template -> about -> referral\nPASS  about.css carries the shared-chrome comment\nPASS  GSAP SRI hash present\nPASS  GSAP SRI hash is NOT index.html's stale one\nPASS  template.js loads before referral.js\nPASS  no about-* classes\nPASS  no #aeroclub-logo / #about-section-title-expert\nPASS  no about-faq / js-faq- (about.js collision guard)\nPASS  js/about.js NOT loaded\n\n=== E...",
-  "timestamp": "2026-08-19T08:00:44.720Z",
+  "tool_name": "Bash",
+  "tool_input_preview": "{\"command\":\"python - <<'PYEOF'\\nimport sys,io,re\\nsys.stdout=io.TextIOWrapper(sys.stdout.buffer,encoding='utf-8')\\np=r\\\"C:\\\\Users\\\\9D20~1\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\C--projects-abelar1884-github-i...",
+  "error": "Exit code 1\n=== MOBILE FRAME TOP-LEVEL SECTIONS (375 wide) ===\r\nid                         y      w       h  name\r\n14132:112912               0    375    1310  Frame 2131329602\r\nTraceback (most recent call last):\r\n  File \"<stdin>\", line 23, in <module>\r\nTypeError: unsupported format string passed to NoneType.__format__",
+  "timestamp": "2026-08-19T12:33:21.747Z",
   "retry_count": 1
 }

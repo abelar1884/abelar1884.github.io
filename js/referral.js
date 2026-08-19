@@ -18,57 +18,50 @@
  * fight this accordion if the classes ever collided).
  *
  * ---------------------------------------------------------------------------
- * FEATURE 2 — Testimonial carousel (unit 05, .referral-stories)
+ * FEATURE 2 — Paged carousel (generic; TWO instances)
  * ---------------------------------------------------------------------------
- * Unit 05 is blocked on a 4th testimonial's copy at the time this file was
- * written, so its markup does not exist yet. This file defines the DOM
- * contract the unit-05 markup MUST match, and no-ops gracefully until then.
+ * One implementation, parameterised by BEM block name:
+ *   initCarousel("referral-stories")  — unit 05, 6 testimonial cards
+ *   initCarousel("referral-steps")    — unit 06, 3 steps (mobile comp 14132:113931
+ *                                       shows one step + a dot rail below 768)
  *
- * Required structure:
- *   <div class="referral-stories__carousel">
- *     <div class="referral-stories__track">
- *       <div class="referral-stories__card">...</div>   × 4, in DOM order
- *       ...
+ * Required structure per block (BLOCK = referral-stories | referral-steps):
+ *   <div class="BLOCK__carousel">
+ *     <div class="BLOCK__track">            <- may be a <ul>/<ol>; steps use <ol>
+ *       <div class="BLOCK__card">...</div>  <- N of them, in paging order
  *     </div>
- *     <div class="referral-stories__dots"></div>        <- built dynamically by this script
+ *     <!-- BLOCK__dots is injected here at runtime; do not author it -->
  *   </div>
  *
- * Requirements on `.referral-stories__track`:
- *   - A horizontally scrollable flex/grid row (`overflow-x: auto` or similar)
- *     containing exactly the `.referral-stories__card` elements as direct
- *     children, in the order they should page through.
- *   - `scroll-snap-type: x` is recommended on the track for visual polish but
- *     not required by this script — the script drives scroll position via
- *     `scrollTo`/`scrollLeft`, it does not rely on native snap.
+ * Requirements on BLOCK__track:
+ *   - Horizontally scrollable row (`overflow-x: auto`) whose direct children are
+ *     exactly the BLOCK__card elements, in paging order.
+ *   - `scroll-snap-type: x` is optional polish; the script drives scroll position
+ *     itself and does not depend on native snap.
  *
- * What this script does NOT expect to find already in the markup:
- *   - `.referral-stories__dots` may be present empty (this script fills it)
- *     or absent entirely (this script creates and appends it as the last
- *     child of `.referral-stories__carousel`). Either is fine.
+ * NO BREAKPOINT LOGIC LIVES HERE. The script measures how many cards fit the
+ * track and derives pageCount = ceil(cards / visible), re-measuring on debounced
+ * resize. CSS card widths therefore fully determine behaviour:
+ *   - steps at desktop: 3 fit -> 1 page -> rail emptied and hidden -> static row
+ *   - steps below 768:  1 fits -> 3 pages -> 3 dots
+ *   - stories: 3/2/1 visible -> 2/3/6 dots across the ladder
+ *   NOTE: CSS must also carry `BLOCK__dots:empty { display: none }` — when the
+ *   rail is emptied it stays in flow and the carousel's gap leaves dead space.
  *
  * Behaviour:
- *   - Visible-card count is MEASURED at runtime (not hard-coded from the
- *     viewport-width table below) by comparing card offsetWidth against the
- *     track's clientWidth, and is re-measured on debounced resize.
- *   - Reference table (what the measurement is expected to yield on a
- *     4-card set, per spec):
- *       >=1024px  -> 3 cards visible -> ceil(4/3) = 2 pages -> 2 dots
- *       768-1023  -> 2 cards visible -> ceil(4/2) = 2 pages -> 2 dots
- *       <768      -> 1 card  visible -> ceil(4/1) = 4 pages -> 4 dots
- *   - Dots index PAGES, not cards. Clicking a dot scrolls the track by
- *     (page index * track.clientWidth), clamped to the track's max scroll
- *     position so the last page never overshoots.
- *   - Dot rail is rebuilt whenever the measured page count changes; hidden
- *     (`hidden` attribute) when there is only 1 page.
- *   - Dots are real <button>s; the active dot carries `aria-current="true"`
- *     (NOT `aria-selected`, which is only valid ARIA under tab/option roles).
- *   - ArrowLeft/ArrowRight move one page when focus is anywhere inside
- *     `.referral-stories__carousel`.
- *   - `prefers-reduced-motion: reduce` disables smooth scrolling (uses
- *     `behavior: "auto"` instead of `"smooth"`).
- *   - The active page is also recomputed from scroll position on a
- *     debounced `scroll` listener, so manual/touch scrolling keeps the dots
- *     in sync.
+ *   - Dots index PAGES, not cards. A dot scrolls to page * track.clientWidth,
+ *     clamped to max scroll so the last page never overshoots.
+ *   - Dots are real <button>s; the active one carries `aria-current="true"`
+ *     (NOT `aria-selected`, which is invalid ARIA outside tab/option roles).
+ *   - ArrowLeft/ArrowRight page when focus is anywhere inside BLOCK__carousel.
+ *   - `prefers-reduced-motion: reduce` switches scrolling to `behavior:"auto"`.
+ *   - Active page is recomputed from scroll position on a debounced `scroll`
+ *     listener, so touch/manual scrolling keeps the dots in sync.
+ *
+ * ---------------------------------------------------------------------------
+ * FEATURE 3 — Income calculator (unit 02, .referral-calc)
+ * ---------------------------------------------------------------------------
+ * See RATES_PER_CLIENT below — all business rules live in that one constant.
  */
 (function () {
   "use strict";
@@ -104,25 +97,38 @@
   }
 
   /* ------------------------------------------------------------------ */
-  /* Feature 2 — Testimonial carousel                                   */
+  /* Feature 2 — Paged carousel (generic)                               */
   /* ------------------------------------------------------------------ */
+  /*
+   * Used by TWO blocks, so it takes a BEM block name rather than hard-coding
+   * selectors:
+   *   initCarousel("referral-stories")  — unit 05, 6 testimonial cards
+   *   initCarousel("referral-steps")    — unit 06, 3 steps
+   *
+   * No breakpoint logic lives here. The script measures how many cards fit the
+   * track and derives pageCount = ceil(cards / visible). At desktop the steps
+   * row fits all three, so pageCount is 1, the rail is emptied and hidden, and
+   * the block behaves as a static row. Below 768 the CSS makes each card full
+   * width, so visible drops to 1 and the rail appears. The card-width rules in
+   * CSS therefore fully determine the behaviour.
+   */
 
-  function initStoriesCarousel() {
-    var carousel = document.querySelector(".referral-stories__carousel");
-    if (!carousel) return; // unit 05 not present yet — no-op
+  function initCarousel(block) {
+    var sel = function (part) { return "." + block + "__" + part; };
 
-    var track = carousel.querySelector(".referral-stories__track");
+    var carousel = document.querySelector(sel("carousel"));
+    if (!carousel) return; // block not present — no-op
+
+    var track = carousel.querySelector(sel("track"));
     var cards = track
-      ? Array.prototype.slice.call(
-          track.querySelectorAll(".referral-stories__card")
-        )
+      ? Array.prototype.slice.call(track.querySelectorAll(sel("card")))
       : [];
     if (!track || !cards.length) return;
 
-    var dotsRail = carousel.querySelector(".referral-stories__dots");
+    var dotsRail = carousel.querySelector(sel("dots"));
     if (!dotsRail) {
       dotsRail = document.createElement("div");
-      dotsRail.className = "referral-stories__dots";
+      dotsRail.className = block + "__dots";
       carousel.appendChild(dotsRail);
     }
 
@@ -165,7 +171,7 @@
     }
 
     function updateDots() {
-      var buttons = dotsRail.querySelectorAll(".referral-stories__dot");
+      var buttons = dotsRail.querySelectorAll(sel("dot"));
       buttons.forEach(function (dot, index) {
         if (index === currentPage) {
           dot.setAttribute("aria-current", "true");
@@ -186,7 +192,7 @@
       for (var i = 0; i < pageCount; i++) {
         var dot = document.createElement("button");
         dot.type = "button";
-        dot.className = "referral-stories__dot";
+        dot.className = block + "__dot";
         dot.setAttribute(
           "aria-label",
           "Страница " + (i + 1) + " из " + pageCount
@@ -344,7 +350,8 @@
 
   function init() {
     initFaqAccordion();
-    initStoriesCarousel();
+    initCarousel("referral-stories");
+    initCarousel("referral-steps");
     initCalculator();
   }
 

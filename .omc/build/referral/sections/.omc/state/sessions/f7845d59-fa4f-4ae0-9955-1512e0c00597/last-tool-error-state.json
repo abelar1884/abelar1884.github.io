@@ -1,0 +1,7 @@
+{
+  "tool_name": "mcp__plugin_playwright_playwright__browser_take_screenshot",
+  "tool_input_preview": "{\"scale\":\"css\",\"fullPage\":true,\"filename\":\"C:\\\\Users\\\\9D20~1\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\C--projects-abelar1884-github-io\\\\f7845d59-fa4f-4ae0-9955-1512e0c00597\\\\scratchpad\\\\m-full-375.png\"}",
+  "error": "### Error\nError: File access denied: C:\\Users\\9D20~1\\AppData\\Local\\Temp\\claude\\C--projects-abelar1884-github-io\\f7845d59-fa4f-4ae0-9955-1512e0c00597\\scratchpad\\m-full-375.png is outside allowed roots. Allowed roots: C:\\projects\\abelar1884.github.io\\.playwright-mcp, C:\\projects\\abelar1884.github.io",
+  "timestamp": "2026-08-19T13:01:27.166Z",
+  "retry_count": 1
+}

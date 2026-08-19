@@ -1,12 +1,16 @@
 /* ==========================================================================
-   Unit 06 — «Начать зарабатывать с GATE просто» (node 14086:111174)
+   Unit 06 — «Начать зарабатывать с GATE просто» (desktop node 14086:111174,
+   mobile node 14132:113931). Markup contract (title/progress/carousel/track/
+   card/dots) set by the team-lead in 06-steps.html — this file styles
+   against it. `.referral-steps__dots` is injected at runtime by
+   js/referral.js; do not add it to markup.
    ========================================================================== */
 
 .referral-steps {
   padding-block: 96px;
 }
 
-.referral-steps__heading {
+.referral-steps__title {
   text-align: center;
 }
 
@@ -58,22 +62,53 @@
   margin-inline: 20px;
 }
 
-/* --- Step cards ------------------------------------------------------------ */
+/* --- Carousel: 3-up static row at desktop, 1-up scroller at mobile --------
+   Mirrors 05-stories.css's carousel pattern exactly, per the lead's brief:
+   the card-width rules alone determine desktop-vs-mobile behaviour, the JS
+   measures how many cards fit and derives the page count itself. */
 
-.referral-steps__list {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+.referral-steps__carousel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   gap: 24px;
+}
+
+.referral-steps__track {
+  display: flex;
+  align-items: stretch;
+  gap: 24px;
+  width: 100%;
   list-style: none;
   margin: 0;
   padding: 0;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.referral-steps__track::-webkit-scrollbar {
+  display: none;
+}
+
+.referral-steps__track:focus-visible {
+  outline: 2px solid var(--rf-pink);
+  outline-offset: 4px;
+  border-radius: 20px;
 }
 
 .referral-steps__card {
+  flex: 0 0 auto;
+  /* three cards + two 24px gaps inside the content column, matching the
+     stories carousel's math exactly */
+  width: calc((100% - 48px) / 3);
+  min-width: 0;
   background: var(--rf-bright-teal);
   border-radius: 20px;
   padding: 32px 28px;
   text-align: center;
+  scroll-snap-align: start;
 }
 
 .referral-steps__card-title {
@@ -94,41 +129,120 @@
   margin: 0;
 }
 
+/* --- Dot rail (built by js/referral.js) --------------------------------- */
+
+.referral-steps__dots {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.referral-steps__dots[hidden] {
+  display: none;
+}
+
+/* Defensive: same fix as the stories carousel needed — when the measured
+   page count is 1, the script empties the rail but the element stays in the
+   flow and the carousel's 24px gap still applies, leaving dead space under
+   the cards at desktop. */
+.referral-steps__dots:empty {
+  display: none;
+}
+
+.referral-steps__dot {
+  width: 12px;
+  height: 12px;
+  padding: 0;
+  border: 0;
+  border-radius: 6px;
+  background: rgba(0, 70, 80, 0.25);
+  cursor: pointer;
+  transition: width 0.2s ease, background-color 0.2s ease;
+}
+
+.referral-steps__dot[aria-current="true"] {
+  width: 28px;
+  background: var(--rf-teal);
+}
+
+.referral-steps__dot:focus-visible {
+  outline: 2px solid var(--rf-pink);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .referral-steps__dot {
+    transition: none;
+  }
+}
+
 /* --- Responsive ------------------------------------------------------------ */
 
 /* NO COMP — inferred */
 @media (max-width: 1024px) {
-  .referral-steps__list {
-    gap: 20px;
-  }
-
   .referral-steps__card {
     padding: 28px 22px;
   }
 }
 
-/* NO COMP — inferred */
+/* Mobile comp (node 14132:113931). Real values, not inferred:
+   title 21px fixed, centred, mobile-only break is already baked into the
+   accent/plain span split the lead's markup carries over from desktop (no
+   change needed there — comp confirms accent = "Начать зарабатывать",
+   plain = "с GATE просто", matching the existing span split exactly).
+   Progress→title gap 24px, progress circles shrink to ~39px, connector line
+   colour is #D9D9D9 in the comp (not --rf-gray-3/#A1A1AA — a real, slightly
+   different mobile value). One card visible (100% width, carousel track),
+   card background is the mobile-only gradient (#DFECE9→#EEEEEE, matching
+   the pattern used across benefits/who/industries-intro on mobile — real
+   comp value, not --rf-bright-teal), radius 24px, padding 24px, title 20px
+   CENTRED (desktop is also centred already, no change), body 12px, colour
+   #000 (not --rf-gray-2). The comp's circle SVGs are actual ring/arc
+   graphics (partial progress rings) rather than a bordered-circle-with-
+   number — kept the existing simpler bordered-circle pattern since no ring
+   asset was exported (SPEC: workers don't export their own assets) and the
+   dashed-border-on-step-1 treatment already approximates the same intent. */
 @media (max-width: 768px) {
   .referral-steps {
     padding-block: 64px;
   }
 
-  .referral-steps__list {
-    grid-template-columns: 1fr;
-    gap: 16px;
+  .referral-steps__title {
+    font-size: 21px;
   }
 
   .referral-steps__progress {
-    margin: 40px auto 32px;
+    margin: 24px auto 24px;
   }
-}
 
-/* NO COMP — inferred */
-@media (max-width: 640px) {
   .referral-steps__circle {
-    width: 48px;
-    height: 48px;
-    font-size: 18px;
+    width: 39px;
+    height: 39px;
+    font-size: 16px;
+  }
+
+  .referral-steps__line {
+    background: #d9d9d9;
+  }
+
+  .referral-steps__card {
+    width: 100%;
+    background: linear-gradient(180deg, #dfece9 0%, #eee 100%);
+    border-radius: 24px;
+    padding: 24px;
+  }
+
+  .referral-steps__card-title {
+    font-size: 20px;
+    line-height: 1.2;
+    letter-spacing: 0.4px;
+    margin-bottom: 6px;
+  }
+
+  .referral-steps__card-body {
+    font-size: 12px;
+    line-height: 1.5;
+    color: #000;
   }
 }
 
@@ -139,16 +253,8 @@
   }
 
   .referral-steps__circle {
-    width: 40px;
-    height: 40px;
-    font-size: 15px;
-  }
-
-  .referral-steps__card {
-    padding: 24px 18px;
-  }
-
-  .referral-steps__card-title {
-    font-size: 18px;
+    width: 34px;
+    height: 34px;
+    font-size: 14px;
   }
 }

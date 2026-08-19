@@ -87,3 +87,27 @@ Rollback: `git clean` those paths. Nothing else to undo.
 - Real portrait photos for Алексей / Ольга / Мария (cards 4-6 currently use a grey placeholder).
 - 5 watermarked stock placeholders must be replaced before production.
 - `index.html`'s stale GSAP SRI hash — one-line fix, awaiting the user's go-ahead.
+
+| ~~No mobile comp~~ **CORRECTED 2026-08-19** | My earlier claim that no mobile comp existed was **WRONG**. The sweep only covered the *Wireframes* page and never dumped the *UI Kit* page. The real mobile comp is frame **`14132:112911`** (375x12144) in the same file. Every `/* NO COMP — inferred */` rule is being replaced with comp-derived values. Lesson: "proven absent" required sweeping *all* pages, and I only swept one. |
+
+## Mobile pass (2026-08-19)
+
+The mobile comp is `14132:112911` in `XdAhG8GZn0xGN8CBWwATKB`. The link the user first sent
+(`FG20BPnZyUi9v5jGqOhrCT`) is the ORIGINAL file and the MCP cannot read it — it requires EDIT
+access and we have none. The node id resolves inside our copy, so no access change is needed.
+
+**The mobile comp is not a reflow of the desktop page.** It contains four content blocks with
+no desktop equivalent, built as MOBILE-ONLY (`.referral-m`, shown <=768, hidden above) per the
+user's decision:
+  A `14132:112977` — 4 dark feature cards under the hero
+  B `14132:114111` — «Нам доверяют» client-logo marquee (1440 wide inside a 375 frame)
+  C `14132:114004` — «Экспертная живая поддержка 24/7»
+  D `14132:114060` — «Все тревел-услуги в одном сервисе»
+
+Also decided: «Начать зарабатывать» becomes a one-card carousel below 768 (comp `14132:113931`).
+The carousel implementation was generalised from stories-specific to `initCarousel(block)` and is
+now instantiated for both `referral-stories` and `referral-steps`. No breakpoint logic in JS —
+it measures visible cards, so CSS card widths alone decide whether a rail appears.
+
+⚠ `14154:121720` («Кому рекомендовать GATE» on mobile) renders as a heading plus a blank card.
+Under investigation; if genuinely empty in the comp it must NOT be invented.

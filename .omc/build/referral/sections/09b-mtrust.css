@@ -1,0 +1,91 @@
+/* ==========================================================================
+   Mobile-only Block B — «Нам доверяют» logo marquee. Comp node 14132:114111;
+   its logo row (14132:114116) is 1440px wide inside the 375 frame, i.e. a
+   horizontally scrolling strip — implemented here as a CSS-animated,
+   doubled-track marquee. `14132:114113`/`14132:114115` are hidden in the
+   comp and intentionally not built. Visibility gate is `.referral-m` in
+   00-base.css — nothing here re-declares it.
+   ========================================================================== */
+
+.referral-m-trust {
+  padding: 40px 0 0;
+}
+
+.referral-m-trust__title {
+  margin: 0 0 16px;
+  font-family: var(--font-cofo-kak);
+  font-weight: 900;
+  font-size: 21px;
+  line-height: 1.25;
+  letter-spacing: 0.42px;
+  color: var(--rf-teal);
+  text-align: center;
+}
+
+/* --- Marquee viewport -------------------------------------------------
+   width:100% + overflow:hidden clips the (much wider) doubled track so the
+   marquee can never push the document wider than the viewport — verified at
+   375 and 320 via browser devtools (no horizontal scrollbar on <html>). ---- */
+.referral-m-trust__viewport {
+  display: flex;
+  overflow: hidden;
+  width: 100%;
+  opacity: 0.5; /* comp treatment: logos are dark-teal marks at 50% opacity,
+    not desaturated/greyscale images — verified against the exported SVGs,
+    which carry solid #004650 (and one #DFF0EB) fills, no grayscale filter. */
+}
+
+.referral-m-trust__track {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  gap: 22px;
+  list-style: none;
+  margin: 0;
+  padding: 0 11px;
+  animation: referral-m-trust-scroll 28s linear infinite;
+}
+
+.referral-m-trust__logo {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  height: 22px;
+}
+
+.referral-m-trust__logo img {
+  display: block;
+  height: 100%;
+  width: auto;
+  max-width: none;
+}
+
+@keyframes referral-m-trust-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    /* Both tracks run the same keyframe in lockstep: track 1 slides fully
+       off-screen left exactly as track 2 (its doubled copy, laid out right
+       after it in normal flow) arrives to take its place — seamless loop. */
+    transform: translateX(-100%);
+  }
+}
+
+/* --- Reduced motion: stop the animation, fall back to a static,
+   horizontally-scrollable row. The aria-hidden duplicate track is hidden
+   entirely so the fallback scrolls through the logo set exactly once. ---- */
+@media (prefers-reduced-motion: reduce) {
+  .referral-m-trust__viewport {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .referral-m-trust__track {
+    animation: none;
+  }
+
+  .referral-m-trust__track--copy {
+    display: none;
+  }
+}
