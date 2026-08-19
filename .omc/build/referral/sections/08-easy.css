@@ -1,0 +1,175 @@
+/* ==========================================================================
+   Unit 08 — "Рекомендовать GATE легко"
+   Full-width dark-teal panel, 3 feature cards, pink pill CTA.
+   ========================================================================== */
+
+.referral-easy {
+  background: var(--rf-teal);
+  border-radius: 32px;
+  padding-block: 64px;
+  overflow: hidden;
+}
+
+.referral-easy__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  text-align: center;
+}
+
+.referral-easy__h2 {
+  color: var(--rf-bright-teal);
+}
+
+.referral-easy__h2-accent {
+  color: var(--rf-lemon);
+}
+
+.referral-easy__subcopy {
+  max-width: 780px;
+  margin: 0 0 32px;
+  font-family: var(--font-inter);
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 1.5;
+  color: var(--rf-bright-teal);
+}
+
+.referral-easy__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  width: 100%;
+}
+
+.referral-easy__card {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 32px;
+  background: rgba(242, 254, 251, 0.08);
+  border-radius: 20px;
+  text-align: left;
+}
+
+.referral-easy__card-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.referral-easy__icon {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+}
+
+.referral-easy__card-title {
+  margin: 0;
+  font-family: var(--font-inter);
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 1.2;
+  color: var(--rf-bright-teal);
+}
+
+.referral-easy__list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.referral-easy__list li {
+  position: relative;
+  padding-left: 20px;
+  font-family: var(--font-inter);
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.44;
+  color: var(--rf-bright-teal);
+}
+
+.referral-easy__list li::before {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 0.65em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--rf-bright-teal);
+}
+
+.referral-easy__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 32px;
+  padding: 18px 36px;
+  border-radius: 999px;
+  background: var(--rf-pink);
+  color: var(--rf-bright-teal);
+  font-family: var(--font-inter);
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 1;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: filter 0.2s ease;
+}
+
+.referral-easy__cta:hover,
+.referral-easy__cta:focus-visible {
+  filter: brightness(1.08);
+}
+
+.referral-easy__cta:focus-visible {
+  outline: 2px solid var(--rf-bright-teal);
+  outline-offset: 3px;
+}
+
+/* --- Responsive ------------------------------------------------------------ */
+
+/* NO COMP — inferred */
+@media (max-width: 1024px) {
+  .referral-easy__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* NO COMP — inferred */
+@media (max-width: 768px) {
+  .referral-easy {
+    border-radius: 24px;
+    padding-block: 48px;
+  }
+
+  .referral-easy__subcopy {
+    font-size: 18px;
+  }
+
+  .referral-easy__card {
+    padding: 24px;
+  }
+}
+
+/* NO COMP — inferred */
+@media (max-width: 480px) {
+  .referral-easy {
+    border-radius: 16px;
+    padding-block: 40px;
+  }
+
+  .referral-easy__card-title {
+    font-size: 22px;
+  }
+
+  .referral-easy__cta {
+    width: 100%;
+    padding: 16px 24px;
+  }
+}

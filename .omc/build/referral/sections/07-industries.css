@@ -1,0 +1,294 @@
+/* ==========================================================================
+   Unit 07 — «Кому рекомендовать GATE» (node 14086:111503)
+   GEOMETRY.md only captured the outer panel for this node before the Figma
+   quota died (56,90 1328x1885, i.e. the panel fills the full content
+   column) — no card-level x/y was recorded. Row wide/narrow orientation
+   below is verified against s7.png pixel proportions instead (see report):
+   row1 energy(wide,photo)/industry(narrow,pale); row2 IT(narrow,dark)/
+   construction(wide,pale); row3 pharma(narrow,pale)/trade(wide,photo);
+   row4 consulting(equal,pale)/sport(equal,dark) — matches spec table exactly.
+   ========================================================================== */
+
+.referral-industries {
+  padding-block: 96px;
+}
+
+.referral-industries__heading {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.referral-industries__accent {
+  color: var(--rf-pink);
+}
+
+.referral-industries__panel {
+  background: #fff;
+  border-radius: 32px;
+  padding: 40px;
+  box-shadow: var(--rf-shadow-2);
+}
+
+/* --- (a) "Компаниям, которые:" checklist card ------------------------------ */
+
+.referral-industries__intro {
+  background: linear-gradient(135deg, var(--rf-teal) 0%, #002830 100%);
+  border-radius: 24px;
+  padding: 40px 48px;
+  color: #fff;
+}
+
+.referral-industries__intro-title {
+  font-family: var(--font-inter);
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 1.3;
+  color: #fff;
+  margin: 0 0 24px;
+}
+
+.referral-industries__checklist {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px 48px;
+}
+
+.referral-industries__check-col {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.referral-industries__check-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.referral-industries__check-icon {
+  flex: 0 0 auto;
+  width: 20px;
+  height: 20px;
+  margin-top: 2px;
+}
+
+.referral-industries__check-item span {
+  font-family: var(--font-inter);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.4;
+  color: #fff;
+}
+
+/* --- (b) "Актуальные отрасли" asymmetric grid ------------------------------ */
+
+.referral-industries__grid-heading {
+  text-align: center;
+  margin: 56px 0 32px;
+}
+
+.referral-industries__grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 24px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.referral-industries__card {
+  position: relative;
+  border-radius: 20px;
+  padding: 28px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-height: 220px;
+}
+
+/* Row pattern per spec: row1 wide/narrow, row2 narrow/wide, row3 narrow/wide,
+   row4 equal/equal. Wide ~7/12, narrow ~5/12, equal 6/6. */
+.referral-industries__card--wide { grid-column: span 7; }
+.referral-industries__card--narrow { grid-column: span 5; }
+.referral-industries__card--equal { grid-column: span 6; }
+
+.referral-industries__card--pale {
+  background: var(--rf-bright-teal);
+}
+
+.referral-industries__card--dark {
+  background: linear-gradient(135deg, var(--rf-teal) 0%, #002830 100%);
+}
+
+.referral-industries__card--photo {
+  color: #fff;
+  justify-content: flex-end;
+  min-height: 280px;
+}
+
+.referral-industries__card-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.referral-industries__card--photo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 20, 24, .15) 0%, rgba(0, 20, 24, .8) 100%);
+  z-index: 1;
+}
+
+.referral-industries__card-icon {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #fff;
+  margin-bottom: 8px;
+}
+
+.referral-industries__card-icon img {
+  width: 22px;
+  height: 22px;
+}
+
+.referral-industries__card-title {
+  position: relative;
+  z-index: 2;
+  font-family: var(--font-cofo-kak);
+  font-weight: 900;
+  font-size: 22px;
+  line-height: 1.2;
+  letter-spacing: .5px;
+  color: var(--rf-teal);
+  margin: 0;
+}
+
+.referral-industries__card--dark .referral-industries__card-title,
+.referral-industries__card--photo .referral-industries__card-title {
+  color: #fff;
+}
+
+.referral-industries__card-body {
+  position: relative;
+  z-index: 2;
+  font-family: var(--font-inter);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.4;
+  color: var(--rf-gray-2);
+  margin: 0;
+}
+
+.referral-industries__card--dark .referral-industries__card-body,
+.referral-industries__card--photo .referral-industries__card-body {
+  color: rgba(255, 255, 255, .85);
+}
+
+/* --- Responsive ------------------------------------------------------------ */
+
+/* NO COMP — inferred */
+@media (max-width: 1200px) {
+  .referral-industries__intro {
+    padding: 32px 36px;
+  }
+}
+
+/* NO COMP — inferred */
+@media (max-width: 1024px) {
+  .referral-industries__panel {
+    padding: 32px;
+  }
+
+  .referral-industries__checklist {
+    gap: 16px 32px;
+  }
+}
+
+/* NO COMP — inferred */
+@media (max-width: 768px) {
+  .referral-industries {
+    padding-block: 64px;
+  }
+
+  .referral-industries__panel {
+    padding: 24px;
+    border-radius: 24px;
+  }
+
+  .referral-industries__intro {
+    padding: 24px;
+    border-radius: 20px;
+  }
+
+  .referral-industries__checklist {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .referral-industries__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .referral-industries__card--wide,
+  .referral-industries__card--narrow,
+  .referral-industries__card--equal {
+    grid-column: span 1;
+  }
+
+  .referral-industries__card--photo {
+    min-height: 240px;
+  }
+}
+
+/* NO COMP — inferred */
+@media (max-width: 640px) {
+  .referral-industries__intro-title {
+    font-size: 21px;
+  }
+
+  .referral-industries__card-title {
+    font-size: 20px;
+  }
+}
+
+/* NO COMP — inferred */
+@media (max-width: 480px) {
+  .referral-industries {
+    padding-block: 48px;
+  }
+
+  .referral-industries__panel {
+    padding: 16px;
+  }
+
+  .referral-industries__intro {
+    padding: 20px;
+  }
+
+  .referral-industries__card {
+    padding: 20px;
+    min-height: auto;
+  }
+
+  .referral-industries__card--photo {
+    min-height: 200px;
+  }
+
+  .referral-industries__card-title {
+    font-size: 18px;
+  }
+}

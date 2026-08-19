@@ -1,0 +1,7 @@
+{
+  "tool_name": "PowerShell",
+  "tool_input_preview": "{\"command\":\"cd C:\\\\projects\\\\abelar1884.github.io; & .\\\\.omc\\\\build\\\\referral\\\\verify.ps1\",\"description\":\"Run acceptance gates\"}",
+  "error": "Exit code 1\n=== STRUCTURAL (document-wide) ===\nPASS  exactly one <h1>\nPASS  every <img> has alt (40 imgs)\nPASS  stylesheet order template -> about -> referral\nPASS  about.css carries the shared-chrome comment\nPASS  GSAP SRI hash present\nPASS  GSAP SRI hash is NOT index.html's stale one\nPASS  template.js loads before referral.js\nPASS  no about-* classes\nPASS  no #aeroclub-logo / #about-section-title-expert\nPASS  no about-faq / js-faq- (about.js collision guard)\nPASS  js/about.js NOT loaded\n\n=== E...",
+  "timestamp": "2026-08-19T08:00:44.720Z",
+  "retry_count": 1
+}

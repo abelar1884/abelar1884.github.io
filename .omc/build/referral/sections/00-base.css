@@ -1,0 +1,138 @@
+/* ==========================================================================
+   Unit 00 — base: body background override, tokens, container, chrome overlay,
+   shared display-heading helpers.
+   ========================================================================== */
+
+/* Overrides template.css:6623 body{background:#05070e}. Same specificity
+   (0,0,0,1 vs 0,0,0,1) as about.css:5 body{background-color:#f4f4f6}; wins by
+   load order (referral.css is linked last, per shell-head.html). Verified by
+   reading template.css:6623 and about.css:5 — both are bare `body` selectors,
+   no ids/classes, so cascade order alone decides. */
+body {
+  background-color: #f4f4f6;
+}
+
+.referral {
+  --rf-teal: #004650;
+  --rf-pink: #FF467C;
+  --rf-emerald: #A6E4D3;
+  --rf-lemon: #F1F44F;
+  --rf-bright-teal: #F2FEFB;
+  --rf-gray-1: #414141;
+  --rf-gray-2: #737373;
+  --rf-gray-3: #A1A1AA;
+  --rf-shadow-2:
+    0 9px 20px rgba(0, 9, 10, .10),
+    0 36px 36px rgba(0, 9, 10, .09),
+    0 80px 48px rgba(0, 9, 10, .05),
+    0 143px 57px rgba(0, 9, 10, .01),
+    0 223px 62px rgba(0, 9, 10, 0);
+}
+
+/* --- Container ------------------------------------------------------------ */
+
+.referral__container {
+  max-width: 1440px;
+  margin-inline: auto;
+  padding-inline: 56px;
+  box-sizing: border-box;
+}
+
+/* --- Chrome overlay: navbar sits inside the teal hero panel ---------------
+   Own rule (NOT borrowed from .about-hero__header) — same specificity as
+   about.css:.about-hero__header, but referral.css loads after about.css, so
+   this rule wins on load order alone. Modeled on css/about.css:18-27.
+   Verified: .referral-hero (see unit 01) establishes position:relative same
+   as .about-hero does at about.css:224, so this absolute overlay is
+   positioned against the hero panel, not the viewport — checked against the
+   about.css precedent before writing this rule. */
+.referral-hero__header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  padding: 32px 56px 16px;
+}
+
+/* --- Shared display-heading helpers ---------------------------------------
+   Use on every section's <h2>: class="referral__h2", with the coloured run
+   wrapped in <span class="referral__h2-accent">. Accent colour is NOT set
+   here (light sections use --rf-pink, dark sections use --rf-lemon) — set
+   `color` on the accent span locally per section, per SPEC's two-tone rule. */
+.referral__h2 {
+  font-family: var(--font-cofo-kak);
+  font-weight: 900;
+  font-size: 48px;
+  line-height: 1.1;
+  letter-spacing: 1px;
+  color: var(--rf-teal);
+  margin: 0;
+}
+
+.referral__h2-accent {
+  color: inherit;
+}
+
+.referral__h3 {
+  font-family: var(--font-cofo-kak);
+  font-weight: 900;
+  font-size: 32px;
+  line-height: 1.25;
+  letter-spacing: 2px;
+  color: var(--rf-teal);
+  margin: 0;
+}
+
+/* --- Responsive: container + display type --------------------------------- */
+
+/* NO COMP — inferred */
+@media (max-width: 768px) {
+  .referral__container {
+    padding-inline: 24px;
+  }
+
+  .referral__h2 {
+    font-size: 36px;
+  }
+}
+
+/* NO COMP — inferred */
+@media (max-width: 480px) {
+  .referral__container {
+    padding-inline: 16px;
+  }
+
+  .referral__h2 {
+    font-size: 31px;
+  }
+
+  .referral__h3 {
+    font-size: 26px;
+  }
+}
+
+/* --- Long-word breaking on narrow viewports -------------------------------
+   NO COMP — inferred. Russian display headings contain words long enough
+   ("Реферальная", "зарабатывать", "Присоединяйтесь") that their min-content
+   width exceeds a 375px viewport, which forced document-level horizontal
+   overflow. Allow them to break rather than push the page wide. Applied only
+   at <=640 so desktop line-breaking is untouched. */
+@media (max-width: 640px) {
+  .referral h1,
+  .referral h2,
+  .referral h3,
+  .referral__h2,
+  .referral__h2-accent,
+  .referral__h3 {
+    /* `anywhere` rather than `break-word`: only `anywhere` reduces the element's
+       MIN-CONTENT size. With `break-word` these headings are flex/grid items whose
+       width still resolves to min-content (380px for "Реферальная" at 34px), which
+       pushed the document to 396px on a 375px viewport. */
+    overflow-wrap: anywhere;
+    hyphens: auto;
+    /* let the heading shrink below min-content inside a flex column */
+    min-width: 0;
+    max-width: 100%;
+  }
+}

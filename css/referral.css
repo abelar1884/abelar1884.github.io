@@ -1,0 +1,2027 @@
+/* ===========================================================================
+   referral.css — GATE referral landing page
+   ASSEMBLED from .omc/build/referral/sections/*.css — edit those fragments and
+   re-run assembly rather than editing this file directly.
+   Load order: template.css -> about.css (shared chrome) -> this file.
+   =========================================================================== */
+
+/* ====================== 00-base.css ====================== */
+/* ==========================================================================
+   Unit 00 — base: body background override, tokens, container, chrome overlay,
+   shared display-heading helpers.
+   ========================================================================== */
+
+/* Overrides template.css:6623 body{background:#05070e}. Same specificity
+   (0,0,0,1 vs 0,0,0,1) as about.css:5 body{background-color:#f4f4f6}; wins by
+   load order (referral.css is linked last, per shell-head.html). Verified by
+   reading template.css:6623 and about.css:5 — both are bare `body` selectors,
+   no ids/classes, so cascade order alone decides. */
+body {
+  background-color: #f4f4f6;
+}
+
+.referral {
+  --rf-teal: #004650;
+  --rf-pink: #FF467C;
+  --rf-emerald: #A6E4D3;
+  --rf-lemon: #F1F44F;
+  --rf-bright-teal: #F2FEFB;
+  --rf-gray-1: #414141;
+  --rf-gray-2: #737373;
+  --rf-gray-3: #A1A1AA;
+  --rf-shadow-2:
+    0 9px 20px rgba(0, 9, 10, .10),
+    0 36px 36px rgba(0, 9, 10, .09),
+    0 80px 48px rgba(0, 9, 10, .05),
+    0 143px 57px rgba(0, 9, 10, .01),
+    0 223px 62px rgba(0, 9, 10, 0);
+}
+
+/* --- Container ------------------------------------------------------------ */
+
+.referral__container {
+  max-width: 1440px;
+  margin-inline: auto;
+  padding-inline: 56px;
+  box-sizing: border-box;
+}
+
+/* --- Chrome overlay: navbar sits inside the teal hero panel ---------------
+   Own rule (NOT borrowed from .about-hero__header) — same specificity as
+   about.css:.about-hero__header, but referral.css loads after about.css, so
+   this rule wins on load order alone. Modeled on css/about.css:18-27.
+   Verified: .referral-hero (see unit 01) establishes position:relative same
+   as .about-hero does at about.css:224, so this absolute overlay is
+   positioned against the hero panel, not the viewport — checked against the
+   about.css precedent before writing this rule. */
+.referral-hero__header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  padding: 32px 56px 16px;
+}
+
+/* --- Shared display-heading helpers ---------------------------------------
+   Use on every section's <h2>: class="referral__h2", with the coloured run
+   wrapped in <span class="referral__h2-accent">. Accent colour is NOT set
+   here (light sections use --rf-pink, dark sections use --rf-lemon) — set
+   `color` on the accent span locally per section, per SPEC's two-tone rule. */
+.referral__h2 {
+  font-family: var(--font-cofo-kak);
+  font-weight: 900;
+  font-size: 48px;
+  line-height: 1.1;
+  letter-spacing: 1px;
+  color: var(--rf-teal);
+  margin: 0;
+}
+
+.referral__h2-accent {
+  color: inherit;
+}
+
+.referral__h3 {
+  font-family: var(--font-cofo-kak);
+  font-weight: 900;
+  font-size: 32px;
+  line-height: 1.25;
+  letter-spacing: 2px;
+  color: var(--rf-teal);
+  margin: 0;
+}
+
+/* --- Responsive: container + display type --------------------------------- */
+
+/* NO COMP — inferred */
+@media (max-width: 768px) {
+  .referral__container {
+    padding-inline: 24px;
+  }
+
+  .referral__h2 {
+    font-size: 36px;
+  }
+}
+
+/* NO COMP — inferred */
+@media (max-width: 480px) {
+  .referral__container {
+    padding-inline: 16px;
+  }
+
+  .referral__h2 {
+    font-size: 31px;
+  }
+
+  .referral__h3 {
+    font-size: 26px;
+  }
+}
+
+/* --- Long-word breaking on narrow viewports -------------------------------
+   NO COMP — inferred. Russian display headings contain words long enough
+   ("Реферальная", "зарабатывать", "Присоединяйтесь") that their min-content
+   width exceeds a 375px viewport, which forced document-level horizontal
+   overflow. Allow them to break rather than push the page wide. Applied only
+   at <=640 so desktop line-breaking is untouched. */
+@media (max-width: 640px) {
+  .referral h1,
+  .referral h2,
+  .referral h3,
+  .referral__h2,
+  .referral__h2-accent,
+  .referral__h3 {
+    /* `anywhere` rather than `break-word`: only `anywhere` reduces the element's
+       MIN-CONTENT size. With `break-word` these headings are flex/grid items whose
+       width still resolves to min-content (380px for "Реферальная" at 34px), which
+       pushed the document to 396px on a 375px viewport. */
+    overflow-wrap: anywhere;
+    hyphens: auto;
+    /* let the heading shrink below min-content inside a flex column */
+    min-width: 0;
+    max-width: 100%;
+  }
+}
+
+/* ====================== 01-hero.css ====================== */
+/* ==========================================================================
+   Unit 01 — hero. Continues the .referral-hero section opened in
+   shell-head.html (which also holds .referral-hero__header, styled in
+   00-base.css). This file establishes position:relative on .referral-hero
+   itself, per the comment in 00-base.css.
+   ========================================================================== */
+
+.referral-hero {
+  position: relative;
+  min-height: 640px;
+  background: linear-gradient(191deg, var(--rf-teal) 22.86%, #009FB6 233.38%);
+  border-radius: 0 0 64px 64px;
+  padding-bottom: 40px;
+}
+
+/* --- Two-column body: text + collage --------------------------------------
+   CSS Grid so both columns shrink together with the viewport — the second
+   track has a min/max clamp instead of a fixed px width, so no 1200/1024
+   breakpoint is needed to prevent overflow; the grid math handles it. ---- */
+
+.referral-hero__body {
+  padding-top: 179px;
+  display: grid;
+  grid-template-columns: 1fr minmax(240px, 511px);
+  align-items: start;
+  gap: 40px;
+}
+
+.referral-hero__content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 40px;
+  max-width: 742px;
+  min-width: 0;
+}
+
+.referral-hero__title {
+  margin: 0;
+  font-family: var(--font-cofo-kak);
+  font-weight: 900;
+  font-size: 64px;
+  line-height: 1.15;
+  letter-spacing: 2.56px;
+  color: #fff;
+}
+
+.referral-hero__subcopy {
+  margin: 0;
+  max-width: 728px;
+  font-family: var(--font-inter);
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 1.5;
+  color: var(--rf-bright-teal);
+}
+
+.referral-hero__accent {
+  font-family: var(--font-cofo-kak);
+  font-weight: 900;
+  color: var(--rf-lemon);
+}
+
+.referral-hero__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 56px;
+  padding: 0 40px;
+  border-radius: 999px;
+  background: var(--rf-pink);
+  color: #fff;
+  font-family: var(--font-inter);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.4;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.referral-hero__cta:hover,
+.referral-hero__cta:focus-visible {
+  background: #e63a6c;
+}
+
+/* --- Photo collage -------------------------------------------------------
+   Genuinely overlapping collage (per SPEC exemption) — fluid, not fixed-px.
+   The wrapper is a normal grid column sized by aspect-ratio (511:412, the
+   collage group's own footprint from GEOMETRY.md, node 14094:112499). Each
+   photo is positioned in PERCENT, derived by subtracting the group's origin
+   (833,145) from its absolute coords and dividing by 511 wide / 412 tall:
+     circle 1039,145 186x186 -> (206,0)   -> left 40.31% top 0%     w 36.40% h 45.15%
+     large   833,200 245x245 -> (0,55)    -> left 0%     top 13.35% w 47.95% h 59.47%
+     wide    972,376 300x181 -> (139,231) -> left 27.20% top 56.07% w 58.71% h 43.93%
+     square 1176,251 168x168 -> (343,106) -> left 67.12% top 25.73% w 32.88% h 40.78%
+   Percent positioning means the whole collage scales with its container at
+   any width — no breakpoint needed to keep it inside the viewport. -------- */
+
+.referral-hero__collage {
+  position: relative;
+  width: 100%;
+  max-width: 511px;
+  aspect-ratio: 511 / 412;
+  margin-top: -34px; /* NO COMP — inferred: nudges the collage's 145px design
+    top back in line with the 179px text-column top now that both share one
+    grid row start; 179 - 145 = 34. */
+}
+
+.referral-hero__photo {
+  position: absolute;
+  display: block;
+  object-fit: cover;
+  box-shadow: var(--rf-shadow-2);
+}
+
+.referral-hero__photo--circle {
+  left: 40.31%;
+  top: 0%;
+  width: 36.40%;
+  height: 45.15%;
+  border-radius: 50%;
+}
+
+.referral-hero__photo--large {
+  left: 0%;
+  top: 13.35%;
+  width: 47.95%;
+  height: 59.47%;
+  border-radius: 24px;
+}
+
+.referral-hero__photo--wide {
+  left: 27.2%;
+  top: 56.07%;
+  width: 58.71%;
+  height: 43.93%;
+  border-radius: 24px;
+}
+
+.referral-hero__photo--square {
+  left: 67.12%;
+  top: 25.73%;
+  width: 32.88%;
+  height: 40.78%;
+  border-radius: 13px;
+}
+
+/* --- Responsive ------------------------------------------------------- */
+
+/* NO COMP — inferred */
+@media (max-width: 1024px) {
+  .referral-hero {
+    min-height: 0;
+    padding-bottom: 48px;
+  }
+
+  .referral-hero__body {
+    padding-top: 140px;
+    grid-template-columns: 1fr minmax(200px, 380px);
+    gap: 24px;
+  }
+
+  .referral-hero__collage {
+    margin-top: 0;
+  }
+}
+
+/* NO COMP — inferred: stack text above collage, collage centred and capped,
+   still visible (not hidden) at phone/tablet widths. */
+@media (max-width: 768px) {
+  .referral-hero {
+    border-radius: 0 0 40px 40px;
+  }
+
+  .referral-hero__body {
+    padding-top: 160px;
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .referral-hero__title {
+    font-size: 44px;
+    letter-spacing: 1.5px;
+  }
+
+  .referral-hero__subcopy {
+    font-size: 18px;
+  }
+
+  .referral-hero__cta {
+    width: 100%;
+  }
+
+  .referral-hero__collage {
+    max-width: 420px;
+    margin-inline: auto;
+    margin-top: 0;
+  }
+}
+
+/* NO COMP — inferred */
+@media (max-width: 480px) {
+  .referral-hero__body {
+    padding-top: 150px;
+  }
+
+  .referral-hero__title {
+    font-size: 34px;
+  }
+
+  .referral-hero__subcopy {
+    font-size: 16px;
+  }
+
+  .referral-hero__cta {
+    height: 52px;
+    padding: 0 24px;
+  }
+
+  .referral-hero__collage {
+    max-width: 320px;
+  }
+}
+
+/* ====================== 02-commission.css ====================== */
+/* ==========================================================================
+   Unit 02 — commission. Lower half of s2_calc.png ONLY: heading + two
+   percentage cards. The income calculator above it is a separate unit and
+   is intentionally NOT built here.
+   ========================================================================== */
+
+.referral-commission {
+  padding-block: 64px;
+}
+
+.referral-commission__heading {
+  margin: 0 0 24px;
+  /* Figma's heading node 14086:110710 is 1440x62 — 62px is exactly two lines at
+     24px/1.3, i.e. the copy wraps to 2 lines across the FULL frame width. A 984px
+     cap pushed "GATE" onto a third line. */
+  max-width: 1140px;
+  margin-inline: auto;
+  text-align: center;
+  font-family: var(--font-inter);
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 1.3;
+  color: var(--rf-gray-1);
+}
+
+.referral-commission__cards {
+  display: flex;
+  gap: 54px;
+}
+
+.referral-commission__card {
+  display: flex;
+  align-items: stretch;
+  flex: 1 1 0;
+  min-width: 0;
+  border-radius: 24px;
+  overflow: hidden;
+  background: linear-gradient(191deg, var(--rf-teal) 22.86%, #009FB6 233.38%);
+}
+
+.referral-commission__photo {
+  flex: 0 0 45%;
+  width: 45%;
+  object-fit: cover;
+}
+
+.referral-commission__panel {
+  display: flex;
+  flex: 1 1 0;
+  min-width: 0;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+  padding: 24px 24px 24px 32px;
+}
+
+.referral-commission__percent {
+  margin: 0;
+  font-family: var(--font-cofo-kak);
+  font-weight: 900;
+  font-size: 80px;
+  line-height: 1.2;
+  letter-spacing: 1.6px;
+  color: var(--rf-lemon);
+}
+
+.referral-commission__desc {
+  margin: 0;
+  font-family: var(--font-inter);
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 1.3;
+  color: #fff;
+}
+
+/* --- Responsive ------------------------------------------------------- */
+
+/* NO COMP — inferred */
+@media (max-width: 1024px) {
+  .referral-commission__percent {
+    font-size: 56px;
+  }
+
+  .referral-commission__desc {
+    font-size: 20px;
+  }
+}
+
+/* NO COMP — inferred */
+@media (max-width: 768px) {
+  .referral-commission {
+    padding-block: 48px;
+  }
+
+  .referral-commission__heading {
+    font-size: 20px;
+  }
+
+  .referral-commission__break {
+    display: none;
+  }
+
+  .referral-commission__cards {
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .referral-commission__card {
+    flex-direction: column;
+  }
+
+  .referral-commission__photo {
+    flex: 0 0 200px;
+    width: 100%;
+    height: 200px;
+  }
+
+  .referral-commission__panel {
+    padding: 24px;
+  }
+}
+
+/* NO COMP — inferred */
+@media (max-width: 480px) {
+  .referral-commission__heading {
+    font-size: 18px;
+  }
+
+  .referral-commission__percent {
+    font-size: 44px;
+  }
+
+  .referral-commission__desc {
+    font-size: 16px;
+  }
+}
+
+/* ====================== 03-benefits.css ====================== */
+/* ==========================================================================
+   Unit 03 — «Почему это выгодно» (benefits)
+   ========================================================================== */
+
+.referral-benefits {
+  padding-block: 96px;
+}
+
+.referral-benefits__title {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.referral-benefits__accent {
+  color: var(--rf-pink);
+}
+
+.referral-benefits__grid {
+  display: grid;
+  grid-template-columns: 654fr 642fr;
+  gap: 32px;
+  align-items: stretch;
+}
+
+/* --- Left: tall dark-teal hero card ---------------------------------------- */
+
+.referral-benefits__hero {
+  position: relative;
+  height: 100%;
+  min-height: 480px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-radius: 24px;
+  background-color: var(--rf-teal);
+  padding: 40px;
+  box-sizing: border-box;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.referral-benefits__hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("../assets/images/referral/bg-ruble-pattern.svg");
+  background-repeat: repeat;
+  background-size: 120px auto;
+  opacity: 0.12;
+  z-index: -1;
+}
+
+.referral-benefits__hero-top {
+  display: flex;
+}
+
+.referral-benefits__badge {
+  width: 255px;
+  height: 255px;
+  border-radius: 50%;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.referral-benefits__badge-icon {
+  width: 188px;
+  height: 188px;
+}
+
+.referral-benefits__hero-bottom {
+  max-width: 420px;
+}
+
+.referral-benefits__hero-title {
+  color: #fff;
+  margin-bottom: 16px;
+}
+
+.referral-benefits__hero-text {
+  font-family: var(--font-inter);
+  font-size: 18px;
+  line-height: 1.44;
+  color: #fff;
+  margin: 0;
+}
+
+/* --- Right: three stacked light cards --------------------------------------- */
+
+.referral-benefits__list {
+  display: flex;
+  flex-direction: column;
+  gap: 21px;
+}
+
+.referral-benefits__card {
+  border-radius: 20px;
+  background-color: var(--rf-bright-teal);
+  padding: 32px 40px;
+  box-sizing: border-box;
+}
+
+.referral-benefits__card-head {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.referral-benefits__icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.referral-benefits__icon img {
+  width: 28px;
+  height: 28px;
+}
+
+.referral-benefits__card-title {
+  font-family: var(--font-cofo-kak);
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 1.3;
+  color: var(--rf-teal);
+  margin: 0;
+}
+
+.referral-benefits__card-text {
+  font-family: var(--font-inter);
+  font-size: 18px;
+  line-height: 1.44;
+  color: var(--rf-gray-1);
+  margin: 0;
+}
+
+/* --- Responsive ------------------------------------------------------------- */
+
+/* NO COMP — inferred */
+@media (max-width: 1200px) {
+  .referral-benefits__card-title {
+    font-size: 22px;
+  }
+}
+
+/* NO COMP — inferred */
+@media (max-width: 1024px) {
+  .referral-benefits {
+    padding-block: 72px;
+  }
+
+  .referral-benefits__hero {
+    min-height: 420px;
+    padding: 32px;
+  }
+
+  .referral-benefits__badge {
+    width: 140px;
+    height: 140px;
+  }
+
+  .referral-benefits__badge-icon {
+    width: 80px;
+    height: 80px;
+  }
+}
+
+/* NO COMP — inferred */
+@media (max-width: 768px) {
+  .referral-benefits {
+    padding-block: 56px;
+  }
+
+  .referral-benefits__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .referral-benefits__hero {
+    min-height: 0;
+  }
+
+  .referral-benefits__hero-bottom {
+    max-width: 100%;
+  }
+
+  .referral-benefits__title {
+    margin-bottom: 32px;
+  }
+}
+
+/* NO COMP — inferred */
+@media (max-width: 480px) {
+  .referral-benefits {
+    padding-block: 40px;
+  }
+
+  .referral-benefits__hero {
+    padding: 24px;
+  }
+
+  .referral-benefits__badge {
+    width: 112px;
+    height: 112px;
+  }
+
+  .referral-benefits__badge-icon {
+    width: 64px;
+    height: 64px;
+  }
+
+  .referral-benefits__card {
+    padding: 24px;
+  }
+
+  .referral-benefits__card-head {
+    flex-wrap: wrap;
+  }
+
+  .referral-benefits__card-title {
+    font-size: 20px;
+  }
+
+  .referral-benefits__card-text {
+    font-size: 16px;
+  }
+}
+
+/* ====================== 04-who.css ====================== */
+/* ==========================================================================
+   Unit 04 — «Кто может стать партнером?» (who)
+   ========================================================================== */
+
+.referral-who {
+  padding-block: 96px;
+}
+
+.referral-who__title {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.referral-who__accent {
+  color: var(--rf-pink);
+}
+
+.referral-who__card {
+  display: grid;
+  grid-template-columns: 723fr 605fr;
+  align-items: stretch;
+  border-radius: 24px;
+  background-color: var(--rf-bright-teal);
+  overflow: hidden;
+}
+
+.referral-who__content {
+  display: flex;
+  flex-direction: column;
+  padding: 56px 48px 56px 40px;
+  box-sizing: border-box;
+}
+
+.referral-who__list {
+  list-style: none;
+  margin: 0 0 32px;
+  padding: 0;
+}
+
+.referral-who__item {
+  padding-block: 24px;
+  border-top: 1px solid rgba(0, 70, 80, 0.12);
+}
+
+.referral-who__item:first-child {
+  padding-top: 0;
+  border-top: none;
+}
+
+.referral-who__item-title {
+  font-family: var(--font-inter);
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1.3;
+  color: var(--rf-teal);
+  margin: 0 0 8px;
+}
+
+.referral-who__item-text {
+  font-family: var(--font-inter);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.4;
+  color: var(--rf-gray-2);
+  margin: 0;
+}
+
+.referral-who__note {
+  font-family: var(--font-inter);
+  font-size: 16px;
+  line-height: 1.4;
+  color: #fff;
+  background-color: var(--rf-teal);
+  border-radius: 12px;
+  padding: 24px;
+  margin: auto 0 0;
+}
+
+.referral-who__media {
+  width: 100%;
+  height: 100%;
+  min-height: 400px;
+  object-fit: cover;
+  display: block;
+}
+
+/* --- Responsive ------------------------------------------------------------- */
+
+/* NO COMP — inferred */
+@media (max-width: 1200px) {
+  .referral-who__content {
+    padding: 40px 32px;
+  }
+}
+
+/* NO COMP — inferred */
+@media (max-width: 1024px) {
+  .referral-who {
+    padding-block: 72px;
+  }
+
+  .referral-who__card {
+    grid-template-columns: 1fr;
+  }
+
+  .referral-who__media {
+    min-height: 320px;
+    order: -1;
+  }
+}
+
+/* NO COMP — inferred */
+@media (max-width: 768px) {
+  .referral-who {
+    padding-block: 56px;
+  }
+
+  .referral-who__title {
+    margin-bottom: 32px;
+  }
+
+  .referral-who__content {
+    padding: 32px 24px;
+  }
+
+  .referral-who__item-title {
+    font-size: 18px;
+  }
+}
+
+/* NO COMP — inferred */
+@media (max-width: 480px) {
+  .referral-who {
+    padding-block: 40px;
+  }
+
+  .referral-who__content {
+    padding: 24px 16px;
+  }
+
+  .referral-who__media {
+    min-height: 240px;
+  }
+
+  .referral-who__item {
+    padding-block: 16px;
+  }
+
+  .referral-who__note {
+    padding: 16px;
+  }
+}
+
+/* ====================== 05-stories.css ====================== */
+/* ==========================================================================
+   Unit 05 — «Истории партнеров». Geometry from get_design_context on
+   14086:110932: section is a 40px-gap column with 56px inline padding; cards
+   are white, radius 24, padding 32px top/bottom, 32px left / 24px right, with
+   a 352px content column; dots are 12px circles at rgba(0,70,80,.25) with the
+   active one a 28x12 pill in solid --rf-teal.
+   ========================================================================== */
+
+.referral-stories {
+  padding-block: 60px;
+}
+
+.referral-stories__title {
+  /* Unlike every other section heading, this one is single-tone dark teal in the
+     comp — no pink/lemon accent run. Do not add one. */
+  margin: 0 0 40px;
+  text-align: center;
+}
+
+/* --- Carousel ------------------------------------------------------------ */
+
+.referral-stories__carousel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.referral-stories__track {
+  display: flex;
+  align-items: stretch;
+  gap: 24px;
+  width: 100%;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;             /* the dot rail is the affordance */
+  -ms-overflow-style: none;
+}
+
+.referral-stories__track::-webkit-scrollbar {
+  display: none;
+}
+
+.referral-stories__track:focus-visible {
+  outline: 2px solid var(--rf-pink);
+  outline-offset: 4px;
+  border-radius: 24px;
+}
+
+/* --- Card --------------------------------------------------------------- */
+
+.referral-stories__card {
+  position: relative;
+  flex: 0 0 auto;
+  /* three cards + two 24px gaps inside the 1328px content column */
+  width: calc((100% - 48px) / 3);
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 32px 24px 32px 32px;
+  border-radius: 24px;
+  background: #fff;
+  overflow: hidden;
+  scroll-snap-align: start;
+}
+
+/* Card 2 carries a decorative rotated ₽ watermark at 5% opacity (node
+   14086:110966). Rendered as a background layer rather than 26 <img> tags. */
+.referral-stories__card--pattern::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("../assets/images/referral/bg-ruble-pattern.svg");
+  background-repeat: repeat;
+  background-size: 260px auto;
+  opacity: 0.05;
+  transform: rotate(15deg) scale(1.6);
+  transform-origin: center;
+  pointer-events: none;
+}
+
+.referral-stories__card > * {
+  position: relative;               /* above the watermark */
+  z-index: 1;
+}
+
+.referral-stories__person {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.referral-stories__avatar {
+  flex: 0 0 auto;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.referral-stories__name {
+  margin: 0;
+  font-family: var(--font-inter);
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 1.25;
+  letter-spacing: 0.32px;
+  color: #000;
+}
+
+.referral-stories__headline {
+  margin: 0;
+  font-family: var(--font-cofo-kak);
+  font-weight: 900;
+  font-size: 16px;
+  line-height: 1.4;
+  letter-spacing: 0.32px;
+  color: var(--rf-teal);
+}
+
+.referral-stories__accent {
+  color: var(--rf-pink);
+}
+
+.referral-stories__body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.referral-stories__body p {
+  margin: 0;
+  font-family: var(--font-inter);
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 1.25;
+  letter-spacing: 0.24px;
+  color: #000;
+}
+
+/* --- Dot rail (built by js/referral.js) --------------------------------- */
+
+.referral-stories__dots {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.referral-stories__dots[hidden] {
+  display: none;
+}
+
+/* Defensive: when the measured page count is 1 the script empties the rail, but the
+   rail element itself stays in the flow and the carousel's 24px gap still applies,
+   leaving dead space under the cards at >=1024. Collapse it on :empty so the layout
+   is correct regardless of whether the script's `hidden` flag is set. */
+.referral-stories__dots:empty {
+  display: none;
+}
+
+.referral-stories__dot {
+  width: 12px;
+  height: 12px;
+  padding: 0;
+  border: 0;
+  border-radius: 6px;
+  background: rgba(0, 70, 80, 0.25);
+  cursor: pointer;
+  transition: width 0.2s ease, background-color 0.2s ease;
+}
+
+.referral-stories__dot[aria-current="true"] {
+  width: 28px;
+  background: var(--rf-teal);
+}
+
+.referral-stories__dot:focus-visible {
+  outline: 2px solid var(--rf-pink);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .referral-stories__dot {
+    transition: none;
+  }
+}
+
+/* --- Responsive --------------------------------------------------------- */
+
+/* NO COMP — inferred: 2 cards visible, matching the JS reference table. */
+@media (max-width: 1023px) {
+  .referral-stories__card {
+    width: calc((100% - 24px) / 2);
+  }
+}
+
+/* NO COMP — inferred: 1 card visible below 768, so the rail becomes the
+   primary means of paging through all four stories. */
+@media (max-width: 767px) {
+  .referral-stories {
+    padding-block: 40px;
+  }
+
+  .referral-stories__title {
+    margin-bottom: 28px;
+  }
+
+  .referral-stories__card {
+    width: 100%;
+    padding: 24px 20px;
+  }
+}
+
+/* ====================== 06-steps.css ====================== */
+/* ==========================================================================
+   Unit 06 — «Начать зарабатывать с GATE просто» (node 14086:111174)
+   ========================================================================== */
+
+.referral-steps {
+  padding-block: 96px;
+}
+
+.referral-steps__heading {
+  text-align: center;
+}
+
+.referral-steps__accent {
+  color: var(--rf-pink);
+}
+
+/* --- 3-step progress row ---------------------------------------------------
+   Flex row: circles are fixed-size flex items, rules are flex-grow items
+   between them. This keeps the line behind/between the circles without any
+   absolute positioning.
+   Geometry (GEOMETRY.md, node 14086:111187 vs root 14086:111174): progress
+   row is 952px wide inside the 1328px content column (centred, not full
+   width) — circles at x=0/452/904 (48px each), rule 1 spans x=68..432 (a
+   20px gap off each circle), rule 2 the mirror. */
+.referral-steps__progress {
+  display: flex;
+  align-items: center;
+  width: 952px;
+  max-width: 100%;
+  margin: 64px auto 40px;
+}
+
+.referral-steps__circle {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 1px solid var(--rf-pink);
+  background: transparent;
+  font-family: var(--font-inter);
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1;
+  color: var(--rf-teal);
+}
+
+.referral-steps__circle--dashed {
+  border-style: dashed;
+}
+
+.referral-steps__line {
+  flex: 1 1 auto;
+  height: 1px;
+  background: var(--rf-gray-3);
+  margin-inline: 20px;
+}
+
+/* --- Step cards ------------------------------------------------------------ */
+
+.referral-steps__list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.referral-steps__card {
+  background: var(--rf-bright-teal);
+  border-radius: 20px;
+  padding: 32px 28px;
+  text-align: center;
+}
+
+.referral-steps__card-title {
+  font-family: var(--font-inter);
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1.3;
+  color: var(--rf-teal);
+  margin: 0 0 12px;
+}
+
+.referral-steps__card-body {
+  font-family: var(--font-inter);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.4;
+  color: var(--rf-gray-2);
+  margin: 0;
+}
+
+/* --- Responsive ------------------------------------------------------------ */
+
+/* NO COMP — inferred */
+@media (max-width: 1024px) {
+  .referral-steps__list {
+    gap: 20px;
+  }
+
+  .referral-steps__card {
+    padding: 28px 22px;
+  }
+}
+
+/* NO COMP — inferred */
+@media (max-width: 768px) {
+  .referral-steps {
+    padding-block: 64px;
+  }
+
+  .referral-steps__list {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .referral-steps__progress {
+    margin: 40px auto 32px;
+  }
+}
+
+/* NO COMP — inferred */
+@media (max-width: 640px) {
+  .referral-steps__circle {
+    width: 48px;
+    height: 48px;
+    font-size: 18px;
+  }
+}
+
+/* NO COMP — inferred */
+@media (max-width: 480px) {
+  .referral-steps {
+    padding-block: 48px;
+  }
+
+  .referral-steps__circle {
+    width: 40px;
+    height: 40px;
+    font-size: 15px;
+  }
+
+  .referral-steps__card {
+    padding: 24px 18px;
+  }
+
+  .referral-steps__card-title {
+    font-size: 18px;
+  }
+}
+
+/* ====================== 07-industries.css ====================== */
+/* ==========================================================================
+   Unit 07 — «Кому рекомендовать GATE» (node 14086:111503)
+   GEOMETRY.md only captured the outer panel for this node before the Figma
+   quota died (56,90 1328x1885, i.e. the panel fills the full content
+   column) — no card-level x/y was recorded. Row wide/narrow orientation
+   below is verified against s7.png pixel proportions instead (see report):
+   row1 energy(wide,photo)/industry(narrow,pale); row2 IT(narrow,dark)/
+   construction(wide,pale); row3 pharma(narrow,pale)/trade(wide,photo);
+   row4 consulting(equal,pale)/sport(equal,dark) — matches spec table exactly.
+   ========================================================================== */
+
+.referral-industries {
+  padding-block: 96px;
+}
+
+.referral-industries__heading {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.referral-industries__accent {
+  color: var(--rf-pink);
+}
+
+.referral-industries__panel {
+  background: #fff;
+  border-radius: 32px;
+  padding: 40px;
+  box-shadow: var(--rf-shadow-2);
+}
+
+/* --- (a) "Компаниям, которые:" checklist card ------------------------------ */
+
+.referral-industries__intro {
+  background: linear-gradient(135deg, var(--rf-teal) 0%, #002830 100%);
+  border-radius: 24px;
+  padding: 40px 48px;
+  color: #fff;
+}
+
+.referral-industries__intro-title {
+  font-family: var(--font-inter);
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 1.3;
+  color: #fff;
+  margin: 0 0 24px;
+}
+
+.referral-industries__checklist {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px 48px;
+}
+
+.referral-industries__check-col {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.referral-industries__check-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.referral-industries__check-icon {
+  flex: 0 0 auto;
+  width: 20px;
+  height: 20px;
+  margin-top: 2px;
+}
+
+.referral-industries__check-item span {
+  font-family: var(--font-inter);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.4;
+  color: #fff;
+}
+
+/* --- (b) "Актуальные отрасли" asymmetric grid ------------------------------ */
+
+.referral-industries__grid-heading {
+  text-align: center;
+  margin: 56px 0 32px;
+}
+
+.referral-industries__grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 24px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.referral-industries__card {
+  position: relative;
+  border-radius: 20px;
+  padding: 28px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-height: 220px;
+}
+
+/* Row pattern per spec: row1 wide/narrow, row2 narrow/wide, row3 narrow/wide,
+   row4 equal/equal. Wide ~7/12, narrow ~5/12, equal 6/6. */
+.referral-industries__card--wide { grid-column: span 7; }
+.referral-industries__card--narrow { grid-column: span 5; }
+.referral-industries__card--equal { grid-column: span 6; }
+
+.referral-industries__card--pale {
+  background: var(--rf-bright-teal);
+}
+
+.referral-industries__card--dark {
+  background: linear-gradient(135deg, var(--rf-teal) 0%, #002830 100%);
+}
+
+.referral-industries__card--photo {
+  color: #fff;
+  justify-content: flex-end;
+  min-height: 280px;
+}
+
+.referral-industries__card-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.referral-industries__card--photo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 20, 24, .15) 0%, rgba(0, 20, 24, .8) 100%);
+  z-index: 1;
+}
+
+.referral-industries__card-icon {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #fff;
+  margin-bottom: 8px;
+}
+
+.referral-industries__card-icon img {
+  width: 22px;
+  height: 22px;
+}
+
+.referral-industries__card-title {
+  position: relative;
+  z-index: 2;
+  font-family: var(--font-cofo-kak);
+  font-weight: 900;
+  font-size: 22px;
+  line-height: 1.2;
+  letter-spacing: .5px;
+  color: var(--rf-teal);
+  margin: 0;
+}
+
+.referral-industries__card--dark .referral-industries__card-title,
+.referral-industries__card--photo .referral-industries__card-title {
+  color: #fff;
+}
+
+.referral-industries__card-body {
+  position: relative;
+  z-index: 2;
+  font-family: var(--font-inter);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.4;
+  color: var(--rf-gray-2);
+  margin: 0;
+}
+
+.referral-industries__card--dark .referral-industries__card-body,
+.referral-industries__card--photo .referral-industries__card-body {
+  color: rgba(255, 255, 255, .85);
+}
+
+/* --- Responsive ------------------------------------------------------------ */
+
+/* NO COMP — inferred */
+@media (max-width: 1200px) {
+  .referral-industries__intro {
+    padding: 32px 36px;
+  }
+}
+
+/* NO COMP — inferred */
+@media (max-width: 1024px) {
+  .referral-industries__panel {
+    padding: 32px;
+  }
+
+  .referral-industries__checklist {
+    gap: 16px 32px;
+  }
+}
+
+/* NO COMP — inferred */
+@media (max-width: 768px) {
+  .referral-industries {
+    padding-block: 64px;
+  }
+
+  .referral-industries__panel {
+    padding: 24px;
+    border-radius: 24px;
+  }
+
+  .referral-industries__intro {
+    padding: 24px;
+    border-radius: 20px;
+  }
+
+  .referral-industries__checklist {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .referral-industries__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .referral-industries__card--wide,
+  .referral-industries__card--narrow,
+  .referral-industries__card--equal {
+    grid-column: span 1;
+  }
+
+  .referral-industries__card--photo {
+    min-height: 240px;
+  }
+}
+
+/* NO COMP — inferred */
+@media (max-width: 640px) {
+  .referral-industries__intro-title {
+    font-size: 21px;
+  }
+
+  .referral-industries__card-title {
+    font-size: 20px;
+  }
+}
+
+/* NO COMP — inferred */
+@media (max-width: 480px) {
+  .referral-industries {
+    padding-block: 48px;
+  }
+
+  .referral-industries__panel {
+    padding: 16px;
+  }
+
+  .referral-industries__intro {
+    padding: 20px;
+  }
+
+  .referral-industries__card {
+    padding: 20px;
+    min-height: auto;
+  }
+
+  .referral-industries__card--photo {
+    min-height: 200px;
+  }
+
+  .referral-industries__card-title {
+    font-size: 18px;
+  }
+}
+
+/* ====================== 08-easy.css ====================== */
+/* ==========================================================================
+   Unit 08 — "Рекомендовать GATE легко"
+   Full-width dark-teal panel, 3 feature cards, pink pill CTA.
+   ========================================================================== */
+
+.referral-easy {
+  background: var(--rf-teal);
+  border-radius: 32px;
+  padding-block: 64px;
+  overflow: hidden;
+}
+
+.referral-easy__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  text-align: center;
+}
+
+.referral-easy__h2 {
+  color: var(--rf-bright-teal);
+}
+
+.referral-easy__h2-accent {
+  color: var(--rf-lemon);
+}
+
+.referral-easy__subcopy {
+  max-width: 780px;
+  margin: 0 0 32px;
+  font-family: var(--font-inter);
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 1.5;
+  color: var(--rf-bright-teal);
+}
+
+.referral-easy__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  width: 100%;
+}
+
+.referral-easy__card {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 32px;
+  background: rgba(242, 254, 251, 0.08);
+  border-radius: 20px;
+  text-align: left;
+}
+
+.referral-easy__card-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.referral-easy__icon {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+}
+
+.referral-easy__card-title {
+  margin: 0;
+  font-family: var(--font-inter);
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 1.2;
+  color: var(--rf-bright-teal);
+}
+
+.referral-easy__list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.referral-easy__list li {
+  position: relative;
+  padding-left: 20px;
+  font-family: var(--font-inter);
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.44;
+  color: var(--rf-bright-teal);
+}
+
+.referral-easy__list li::before {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 0.65em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--rf-bright-teal);
+}
+
+.referral-easy__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 32px;
+  padding: 18px 36px;
+  border-radius: 999px;
+  background: var(--rf-pink);
+  color: var(--rf-bright-teal);
+  font-family: var(--font-inter);
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 1;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: filter 0.2s ease;
+}
+
+.referral-easy__cta:hover,
+.referral-easy__cta:focus-visible {
+  filter: brightness(1.08);
+}
+
+.referral-easy__cta:focus-visible {
+  outline: 2px solid var(--rf-bright-teal);
+  outline-offset: 3px;
+}
+
+/* --- Responsive ------------------------------------------------------------ */
+
+/* NO COMP — inferred */
+@media (max-width: 1024px) {
+  .referral-easy__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* NO COMP — inferred */
+@media (max-width: 768px) {
+  .referral-easy {
+    border-radius: 24px;
+    padding-block: 48px;
+  }
+
+  .referral-easy__subcopy {
+    font-size: 18px;
+  }
+
+  .referral-easy__card {
+    padding: 24px;
+  }
+}
+
+/* NO COMP — inferred */
+@media (max-width: 480px) {
+  .referral-easy {
+    border-radius: 16px;
+    padding-block: 40px;
+  }
+
+  .referral-easy__card-title {
+    font-size: 22px;
+  }
+
+  .referral-easy__cta {
+    width: 100%;
+    padding: 16px 24px;
+  }
+}
+
+/* ====================== 09-cta.css ====================== */
+/* ==========================================================================
+   Unit 09 — CTA banner (node 14086:111774, s10.png — teal-toned photo variant).
+   Full-bleed photo, dark left-side gradient scrim, left-aligned white heading.
+   ========================================================================== */
+
+.referral-cta {
+  padding-block: 40px;
+}
+
+.referral-cta__banner {
+  position: relative;
+  height: 379px;
+  border-radius: 24px;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.referral-cta__bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center right;
+}
+
+.referral-cta__scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(0, 9, 10, 0.85) 0%, rgba(0, 9, 10, 0.55) 45%, rgba(0, 9, 10, 0) 75%);
+  z-index: 1;
+}
+
+.referral-cta__content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 32px;
+  height: 100%;
+  padding: 48px 56px;
+  justify-content: center;
+  max-width: 620px;
+}
+
+.referral-cta__title {
+  margin: 0;
+  font-family: var(--font-cofo-kak);
+  font-weight: 900;
+  font-size: 40px;
+  line-height: 1.15;
+  letter-spacing: 1px;
+  color: var(--rf-bright-teal);
+}
+
+.referral-cta__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px 36px;
+  border-radius: 999px;
+  background: var(--rf-pink);
+  color: var(--rf-bright-teal);
+  font-family: var(--font-inter);
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 1;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: filter 0.2s ease;
+}
+
+.referral-cta__button:hover,
+.referral-cta__button:focus-visible {
+  filter: brightness(1.08);
+}
+
+.referral-cta__button:focus-visible {
+  outline: 2px solid var(--rf-bright-teal);
+  outline-offset: 3px;
+}
+
+/* --- Responsive ------------------------------------------------------------ */
+
+/* NO COMP — inferred */
+@media (max-width: 768px) {
+  .referral-cta__banner {
+    height: 320px;
+    border-radius: 20px;
+  }
+
+  .referral-cta__content {
+    padding: 32px;
+    max-width: 100%;
+  }
+
+  .referral-cta__title {
+    font-size: 30px;
+  }
+}
+
+/* NO COMP — inferred */
+@media (max-width: 480px) {
+  .referral-cta__banner {
+    height: 360px;
+  }
+
+  .referral-cta__scrim {
+    background: linear-gradient(180deg, rgba(0, 9, 10, 0.35) 0%, rgba(0, 9, 10, 0.85) 65%, rgba(0, 9, 10, 0.92) 100%);
+  }
+
+  .referral-cta__content {
+    padding: 24px;
+    justify-content: flex-end;
+  }
+
+  .referral-cta__title {
+    font-size: 24px;
+  }
+
+  .referral-cta__button {
+    width: 100%;
+  }
+}
+
+/* ====================== 10-faq.css ====================== */
+/* ==========================================================================
+   Unit 10 — FAQ "Часто задаваемые вопросы" (node 14086:111838, s11_footer.png
+   — filename says "footer", this is the FAQ; no footer exists in this design).
+   Ships all-collapsed, chevrons down, independent toggles — deliberate
+   deviation from the comp, which draws every item expanded with chevrons up.
+   Chevron is a pure-CSS glyph (border/transform): icon-chevron.svg does not
+   exist yet per team-lead (Figma asset export blocked on quota), and a
+   two-line chevron is trivial geometry that doesn't warrant an SVG asset.
+   ========================================================================== */
+
+.referral-faq {
+  background: var(--rf-teal);
+  border-radius: 32px 32px 0 0;
+  padding: 64px 0 96px;
+}
+
+.referral-faq__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+}
+
+.referral-faq__h2 {
+  color: var(--rf-bright-teal);
+  text-align: center;
+}
+
+.referral-faq__list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  max-width: 920px;
+}
+
+.referral-faq__item {
+  border-radius: 20px;
+  background: var(--rf-bright-teal);
+  overflow: hidden;
+}
+
+.referral-faq__question-wrap {
+  margin: 0;
+  font-weight: normal;
+}
+
+.referral-faq__question {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  width: 100%;
+  padding: 24px;
+  border: none;
+  background: none;
+  font-family: var(--font-inter);
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 1.3;
+  color: var(--rf-gray-1);
+  text-align: left;
+  cursor: pointer;
+}
+
+.referral-faq__chevron {
+  flex-shrink: 0;
+  width: 12px;
+  height: 12px;
+  border-right: 2px solid var(--rf-teal);
+  border-bottom: 2px solid var(--rf-teal);
+  transform: rotate(45deg);
+  transition: transform 0.2s ease;
+  margin-top: -4px;
+}
+
+.referral-faq__question[aria-expanded="true"] .referral-faq__chevron {
+  transform: rotate(-135deg);
+  margin-top: 4px;
+}
+
+.referral-faq__answer {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 0 24px 24px;
+}
+
+.referral-faq__answer[hidden] {
+  display: none;
+}
+
+.referral-faq__answer p,
+.referral-faq__answer ul {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-inter);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.4;
+  color: var(--rf-gray-2);
+}
+
+.referral-faq__answer ul {
+  padding-left: 20px;
+}
+
+.referral-faq__answer li {
+  list-style: disc;
+}
+
+/* --- Responsive ------------------------------------------------------------ */
+
+/* NO COMP — inferred */
+@media (max-width: 768px) {
+  .referral-faq {
+    border-radius: 24px 24px 0 0;
+    padding: 48px 0 64px;
+  }
+
+  .referral-faq__question {
+    padding: 20px;
+    font-size: 18px;
+  }
+
+  .referral-faq__answer {
+    padding: 0 20px 20px;
+  }
+}
+
+/* NO COMP — inferred */
+@media (max-width: 480px) {
+  .referral-faq {
+    border-radius: 16px 16px 0 0;
+    padding: 40px 0 48px;
+  }
+
+  .referral-faq__list {
+    gap: 12px;
+  }
+
+  .referral-faq__question {
+    padding: 16px;
+    font-size: 16px;
+  }
+
+  .referral-faq__answer {
+    padding: 0 16px 16px;
+  }
+
+  .referral-faq__answer p,
+  .referral-faq__answer ul {
+    font-size: 14px;
+  }
+}

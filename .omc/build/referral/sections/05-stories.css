@@ -1,0 +1,213 @@
+/* ==========================================================================
+   Unit 05 — «Истории партнеров». Geometry from get_design_context on
+   14086:110932: section is a 40px-gap column with 56px inline padding; cards
+   are white, radius 24, padding 32px top/bottom, 32px left / 24px right, with
+   a 352px content column; dots are 12px circles at rgba(0,70,80,.25) with the
+   active one a 28x12 pill in solid --rf-teal.
+   ========================================================================== */
+
+.referral-stories {
+  padding-block: 60px;
+}
+
+.referral-stories__title {
+  /* Unlike every other section heading, this one is single-tone dark teal in the
+     comp — no pink/lemon accent run. Do not add one. */
+  margin: 0 0 40px;
+  text-align: center;
+}
+
+/* --- Carousel ------------------------------------------------------------ */
+
+.referral-stories__carousel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.referral-stories__track {
+  display: flex;
+  align-items: stretch;
+  gap: 24px;
+  width: 100%;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;             /* the dot rail is the affordance */
+  -ms-overflow-style: none;
+}
+
+.referral-stories__track::-webkit-scrollbar {
+  display: none;
+}
+
+.referral-stories__track:focus-visible {
+  outline: 2px solid var(--rf-pink);
+  outline-offset: 4px;
+  border-radius: 24px;
+}
+
+/* --- Card --------------------------------------------------------------- */
+
+.referral-stories__card {
+  position: relative;
+  flex: 0 0 auto;
+  /* three cards + two 24px gaps inside the 1328px content column */
+  width: calc((100% - 48px) / 3);
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 32px 24px 32px 32px;
+  border-radius: 24px;
+  background: #fff;
+  overflow: hidden;
+  scroll-snap-align: start;
+}
+
+/* Card 2 carries a decorative rotated ₽ watermark at 5% opacity (node
+   14086:110966). Rendered as a background layer rather than 26 <img> tags. */
+.referral-stories__card--pattern::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("../assets/images/referral/bg-ruble-pattern.svg");
+  background-repeat: repeat;
+  background-size: 260px auto;
+  opacity: 0.05;
+  transform: rotate(15deg) scale(1.6);
+  transform-origin: center;
+  pointer-events: none;
+}
+
+.referral-stories__card > * {
+  position: relative;               /* above the watermark */
+  z-index: 1;
+}
+
+.referral-stories__person {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.referral-stories__avatar {
+  flex: 0 0 auto;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.referral-stories__name {
+  margin: 0;
+  font-family: var(--font-inter);
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 1.25;
+  letter-spacing: 0.32px;
+  color: #000;
+}
+
+.referral-stories__headline {
+  margin: 0;
+  font-family: var(--font-cofo-kak);
+  font-weight: 900;
+  font-size: 16px;
+  line-height: 1.4;
+  letter-spacing: 0.32px;
+  color: var(--rf-teal);
+}
+
+.referral-stories__accent {
+  color: var(--rf-pink);
+}
+
+.referral-stories__body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.referral-stories__body p {
+  margin: 0;
+  font-family: var(--font-inter);
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 1.25;
+  letter-spacing: 0.24px;
+  color: #000;
+}
+
+/* --- Dot rail (built by js/referral.js) --------------------------------- */
+
+.referral-stories__dots {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.referral-stories__dots[hidden] {
+  display: none;
+}
+
+/* Defensive: when the measured page count is 1 the script empties the rail, but the
+   rail element itself stays in the flow and the carousel's 24px gap still applies,
+   leaving dead space under the cards at >=1024. Collapse it on :empty so the layout
+   is correct regardless of whether the script's `hidden` flag is set. */
+.referral-stories__dots:empty {
+  display: none;
+}
+
+.referral-stories__dot {
+  width: 12px;
+  height: 12px;
+  padding: 0;
+  border: 0;
+  border-radius: 6px;
+  background: rgba(0, 70, 80, 0.25);
+  cursor: pointer;
+  transition: width 0.2s ease, background-color 0.2s ease;
+}
+
+.referral-stories__dot[aria-current="true"] {
+  width: 28px;
+  background: var(--rf-teal);
+}
+
+.referral-stories__dot:focus-visible {
+  outline: 2px solid var(--rf-pink);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .referral-stories__dot {
+    transition: none;
+  }
+}
+
+/* --- Responsive --------------------------------------------------------- */
+
+/* NO COMP — inferred: 2 cards visible, matching the JS reference table. */
+@media (max-width: 1023px) {
+  .referral-stories__card {
+    width: calc((100% - 24px) / 2);
+  }
+}
+
+/* NO COMP — inferred: 1 card visible below 768, so the rail becomes the
+   primary means of paging through all four stories. */
+@media (max-width: 767px) {
+  .referral-stories {
+    padding-block: 40px;
+  }
+
+  .referral-stories__title {
+    margin-bottom: 28px;
+  }
+
+  .referral-stories__card {
+    width: 100%;
+    padding: 24px 20px;
+  }
+}

@@ -1,0 +1,154 @@
+/* ==========================================================================
+   Unit 06 — «Начать зарабатывать с GATE просто» (node 14086:111174)
+   ========================================================================== */
+
+.referral-steps {
+  padding-block: 96px;
+}
+
+.referral-steps__heading {
+  text-align: center;
+}
+
+.referral-steps__accent {
+  color: var(--rf-pink);
+}
+
+/* --- 3-step progress row ---------------------------------------------------
+   Flex row: circles are fixed-size flex items, rules are flex-grow items
+   between them. This keeps the line behind/between the circles without any
+   absolute positioning.
+   Geometry (GEOMETRY.md, node 14086:111187 vs root 14086:111174): progress
+   row is 952px wide inside the 1328px content column (centred, not full
+   width) — circles at x=0/452/904 (48px each), rule 1 spans x=68..432 (a
+   20px gap off each circle), rule 2 the mirror. */
+.referral-steps__progress {
+  display: flex;
+  align-items: center;
+  width: 952px;
+  max-width: 100%;
+  margin: 64px auto 40px;
+}
+
+.referral-steps__circle {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 1px solid var(--rf-pink);
+  background: transparent;
+  font-family: var(--font-inter);
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1;
+  color: var(--rf-teal);
+}
+
+.referral-steps__circle--dashed {
+  border-style: dashed;
+}
+
+.referral-steps__line {
+  flex: 1 1 auto;
+  height: 1px;
+  background: var(--rf-gray-3);
+  margin-inline: 20px;
+}
+
+/* --- Step cards ------------------------------------------------------------ */
+
+.referral-steps__list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.referral-steps__card {
+  background: var(--rf-bright-teal);
+  border-radius: 20px;
+  padding: 32px 28px;
+  text-align: center;
+}
+
+.referral-steps__card-title {
+  font-family: var(--font-inter);
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1.3;
+  color: var(--rf-teal);
+  margin: 0 0 12px;
+}
+
+.referral-steps__card-body {
+  font-family: var(--font-inter);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.4;
+  color: var(--rf-gray-2);
+  margin: 0;
+}
+
+/* --- Responsive ------------------------------------------------------------ */
+
+/* NO COMP — inferred */
+@media (max-width: 1024px) {
+  .referral-steps__list {
+    gap: 20px;
+  }
+
+  .referral-steps__card {
+    padding: 28px 22px;
+  }
+}
+
+/* NO COMP — inferred */
+@media (max-width: 768px) {
+  .referral-steps {
+    padding-block: 64px;
+  }
+
+  .referral-steps__list {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .referral-steps__progress {
+    margin: 40px auto 32px;
+  }
+}
+
+/* NO COMP — inferred */
+@media (max-width: 640px) {
+  .referral-steps__circle {
+    width: 48px;
+    height: 48px;
+    font-size: 18px;
+  }
+}
+
+/* NO COMP — inferred */
+@media (max-width: 480px) {
+  .referral-steps {
+    padding-block: 48px;
+  }
+
+  .referral-steps__circle {
+    width: 40px;
+    height: 40px;
+    font-size: 15px;
+  }
+
+  .referral-steps__card {
+    padding: 24px 18px;
+  }
+
+  .referral-steps__card-title {
+    font-size: 18px;
+  }
+}

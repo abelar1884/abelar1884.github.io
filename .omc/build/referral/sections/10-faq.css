@@ -1,0 +1,155 @@
+/* ==========================================================================
+   Unit 10 — FAQ "Часто задаваемые вопросы" (node 14086:111838, s11_footer.png
+   — filename says "footer", this is the FAQ; no footer exists in this design).
+   Ships all-collapsed, chevrons down, independent toggles — deliberate
+   deviation from the comp, which draws every item expanded with chevrons up.
+   Chevron is a pure-CSS glyph (border/transform): icon-chevron.svg does not
+   exist yet per team-lead (Figma asset export blocked on quota), and a
+   two-line chevron is trivial geometry that doesn't warrant an SVG asset.
+   ========================================================================== */
+
+.referral-faq {
+  background: var(--rf-teal);
+  border-radius: 32px 32px 0 0;
+  padding: 64px 0 96px;
+}
+
+.referral-faq__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+}
+
+.referral-faq__h2 {
+  color: var(--rf-bright-teal);
+  text-align: center;
+}
+
+.referral-faq__list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  max-width: 920px;
+}
+
+.referral-faq__item {
+  border-radius: 20px;
+  background: var(--rf-bright-teal);
+  overflow: hidden;
+}
+
+.referral-faq__question-wrap {
+  margin: 0;
+  font-weight: normal;
+}
+
+.referral-faq__question {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  width: 100%;
+  padding: 24px;
+  border: none;
+  background: none;
+  font-family: var(--font-inter);
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 1.3;
+  color: var(--rf-gray-1);
+  text-align: left;
+  cursor: pointer;
+}
+
+.referral-faq__chevron {
+  flex-shrink: 0;
+  width: 12px;
+  height: 12px;
+  border-right: 2px solid var(--rf-teal);
+  border-bottom: 2px solid var(--rf-teal);
+  transform: rotate(45deg);
+  transition: transform 0.2s ease;
+  margin-top: -4px;
+}
+
+.referral-faq__question[aria-expanded="true"] .referral-faq__chevron {
+  transform: rotate(-135deg);
+  margin-top: 4px;
+}
+
+.referral-faq__answer {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 0 24px 24px;
+}
+
+.referral-faq__answer[hidden] {
+  display: none;
+}
+
+.referral-faq__answer p,
+.referral-faq__answer ul {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-inter);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.4;
+  color: var(--rf-gray-2);
+}
+
+.referral-faq__answer ul {
+  padding-left: 20px;
+}
+
+.referral-faq__answer li {
+  list-style: disc;
+}
+
+/* --- Responsive ------------------------------------------------------------ */
+
+/* NO COMP — inferred */
+@media (max-width: 768px) {
+  .referral-faq {
+    border-radius: 24px 24px 0 0;
+    padding: 48px 0 64px;
+  }
+
+  .referral-faq__question {
+    padding: 20px;
+    font-size: 18px;
+  }
+
+  .referral-faq__answer {
+    padding: 0 20px 20px;
+  }
+}
+
+/* NO COMP — inferred */
+@media (max-width: 480px) {
+  .referral-faq {
+    border-radius: 16px 16px 0 0;
+    padding: 40px 0 48px;
+  }
+
+  .referral-faq__list {
+    gap: 12px;
+  }
+
+  .referral-faq__question {
+    padding: 16px;
+    font-size: 16px;
+  }
+
+  .referral-faq__answer {
+    padding: 0 16px 16px;
+  }
+
+  .referral-faq__answer p,
+  .referral-faq__answer ul {
+    font-size: 14px;
+  }
+}

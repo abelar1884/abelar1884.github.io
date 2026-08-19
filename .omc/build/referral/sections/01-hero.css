@@ -1,0 +1,223 @@
+/* ==========================================================================
+   Unit 01 — hero. Continues the .referral-hero section opened in
+   shell-head.html (which also holds .referral-hero__header, styled in
+   00-base.css). This file establishes position:relative on .referral-hero
+   itself, per the comment in 00-base.css.
+   ========================================================================== */
+
+.referral-hero {
+  position: relative;
+  min-height: 640px;
+  background: linear-gradient(191deg, var(--rf-teal) 22.86%, #009FB6 233.38%);
+  border-radius: 0 0 64px 64px;
+  padding-bottom: 40px;
+}
+
+/* --- Two-column body: text + collage --------------------------------------
+   CSS Grid so both columns shrink together with the viewport — the second
+   track has a min/max clamp instead of a fixed px width, so no 1200/1024
+   breakpoint is needed to prevent overflow; the grid math handles it. ---- */
+
+.referral-hero__body {
+  padding-top: 179px;
+  display: grid;
+  grid-template-columns: 1fr minmax(240px, 511px);
+  align-items: start;
+  gap: 40px;
+}
+
+.referral-hero__content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 40px;
+  max-width: 742px;
+  min-width: 0;
+}
+
+.referral-hero__title {
+  margin: 0;
+  font-family: var(--font-cofo-kak);
+  font-weight: 900;
+  font-size: 64px;
+  line-height: 1.15;
+  letter-spacing: 2.56px;
+  color: #fff;
+}
+
+.referral-hero__subcopy {
+  margin: 0;
+  max-width: 728px;
+  font-family: var(--font-inter);
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 1.5;
+  color: var(--rf-bright-teal);
+}
+
+.referral-hero__accent {
+  font-family: var(--font-cofo-kak);
+  font-weight: 900;
+  color: var(--rf-lemon);
+}
+
+.referral-hero__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 56px;
+  padding: 0 40px;
+  border-radius: 999px;
+  background: var(--rf-pink);
+  color: #fff;
+  font-family: var(--font-inter);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.4;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.referral-hero__cta:hover,
+.referral-hero__cta:focus-visible {
+  background: #e63a6c;
+}
+
+/* --- Photo collage -------------------------------------------------------
+   Genuinely overlapping collage (per SPEC exemption) — fluid, not fixed-px.
+   The wrapper is a normal grid column sized by aspect-ratio (511:412, the
+   collage group's own footprint from GEOMETRY.md, node 14094:112499). Each
+   photo is positioned in PERCENT, derived by subtracting the group's origin
+   (833,145) from its absolute coords and dividing by 511 wide / 412 tall:
+     circle 1039,145 186x186 -> (206,0)   -> left 40.31% top 0%     w 36.40% h 45.15%
+     large   833,200 245x245 -> (0,55)    -> left 0%     top 13.35% w 47.95% h 59.47%
+     wide    972,376 300x181 -> (139,231) -> left 27.20% top 56.07% w 58.71% h 43.93%
+     square 1176,251 168x168 -> (343,106) -> left 67.12% top 25.73% w 32.88% h 40.78%
+   Percent positioning means the whole collage scales with its container at
+   any width — no breakpoint needed to keep it inside the viewport. -------- */
+
+.referral-hero__collage {
+  position: relative;
+  width: 100%;
+  max-width: 511px;
+  aspect-ratio: 511 / 412;
+  margin-top: -34px; /* NO COMP — inferred: nudges the collage's 145px design
+    top back in line with the 179px text-column top now that both share one
+    grid row start; 179 - 145 = 34. */
+}
+
+.referral-hero__photo {
+  position: absolute;
+  display: block;
+  object-fit: cover;
+  box-shadow: var(--rf-shadow-2);
+}
+
+.referral-hero__photo--circle {
+  left: 40.31%;
+  top: 0%;
+  width: 36.40%;
+  height: 45.15%;
+  border-radius: 50%;
+}
+
+.referral-hero__photo--large {
+  left: 0%;
+  top: 13.35%;
+  width: 47.95%;
+  height: 59.47%;
+  border-radius: 24px;
+}
+
+.referral-hero__photo--wide {
+  left: 27.2%;
+  top: 56.07%;
+  width: 58.71%;
+  height: 43.93%;
+  border-radius: 24px;
+}
+
+.referral-hero__photo--square {
+  left: 67.12%;
+  top: 25.73%;
+  width: 32.88%;
+  height: 40.78%;
+  border-radius: 13px;
+}
+
+/* --- Responsive ------------------------------------------------------- */
+
+/* NO COMP — inferred */
+@media (max-width: 1024px) {
+  .referral-hero {
+    min-height: 0;
+    padding-bottom: 48px;
+  }
+
+  .referral-hero__body {
+    padding-top: 140px;
+    grid-template-columns: 1fr minmax(200px, 380px);
+    gap: 24px;
+  }
+
+  .referral-hero__collage {
+    margin-top: 0;
+  }
+}
+
+/* NO COMP — inferred: stack text above collage, collage centred and capped,
+   still visible (not hidden) at phone/tablet widths. */
+@media (max-width: 768px) {
+  .referral-hero {
+    border-radius: 0 0 40px 40px;
+  }
+
+  .referral-hero__body {
+    padding-top: 160px;
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .referral-hero__title {
+    font-size: 44px;
+    letter-spacing: 1.5px;
+  }
+
+  .referral-hero__subcopy {
+    font-size: 18px;
+  }
+
+  .referral-hero__cta {
+    width: 100%;
+  }
+
+  .referral-hero__collage {
+    max-width: 420px;
+    margin-inline: auto;
+    margin-top: 0;
+  }
+}
+
+/* NO COMP — inferred */
+@media (max-width: 480px) {
+  .referral-hero__body {
+    padding-top: 150px;
+  }
+
+  .referral-hero__title {
+    font-size: 34px;
+  }
+
+  .referral-hero__subcopy {
+    font-size: 16px;
+  }
+
+  .referral-hero__cta {
+    height: 52px;
+    padding: 0 24px;
+  }
+
+  .referral-hero__collage {
+    max-width: 320px;
+  }
+}

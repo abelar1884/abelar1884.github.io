@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Реферальная программа — GATE</title>
+  <meta name="description" content="Партнерская программа GATE: рекомендуйте сервис для командировок и получайте вознаграждение до 500 000 ₽.">
+  <link rel="stylesheet" href="css/template.css">
+  <!-- about.css is loaded here as the SHARED CHROME stylesheet (.site-header*, .site-footer*, .top-offset*) — not as about-page styling -->
+  <link rel="stylesheet" href="css/about.css">
+  <link rel="stylesheet" href="css/referral.css">
+  <!-- NOTE: this integrity hash intentionally DIFFERS from index.html:9.
+       index.html carries sha512-Qrpii3... which no longer matches what cdnjs
+       serves for gsap 3.15.0, so the browser BLOCKS the script there and
+       js/template.js throws 'gsap is not loaded' -> the mobile nav is dead.
+       The hash below is the real current digest, verified against the served
+       bytes. index.html has the same latent bug and needs the same fix. -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.15.0/gsap.min.js" integrity="sha512-oJ8QbaQThQoJZ7oEv+29jfPM6CcP+zUxh3PKJs1vyOhx0UraUrE7PQgeItu3dOuCJyrzWpoYMsVjkkPEBzbUqw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+</head>
+<body>
+
+<main class="referral">
+  <section class="referral-hero" aria-labelledby="referral-hero-title">
+
+    <header class="site-header referral-hero__header">
+      <nav class="site-header__nav" aria-label="Главная навигация">
+        <a href="/" class="site-header__logo-link" aria-label="GATE">
+          <img src="assets/images/about/logo-light.svg" alt="GATE" class="site-header__logo">
+        </a>
+
+        <div class="site-header__ctas">
+          <a href="https://go.gate.ru/demo" class="site-header__btn site-header__btn--ghost">Заказать демонстрацию</a>
+          <a href="https://go.gate.ru/signup" class="site-header__btn site-header__btn--primary">Подключиться бесплатно</a>
+        </div>
+
+        <button type="button" class="site-header__burger js-mobile-nav-open" aria-label="Открыть меню" aria-controls="mobile-nav-dialog" aria-expanded="false">
+          <svg class="site-header__burger-icon site-header__burger-icon--open" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16"></path>
+          </svg>
+          <svg class="site-header__burger-icon site-header__burger-icon--close" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path stroke-linecap="round" d="M6 6l12 12M18 6l-12 12"></path>
+          </svg>
+        </button>
+
+        <div class="site-header__mobile-menu" hidden>
+          <a href="https://go.gate.ru/demo" class="site-header__btn site-header__btn--ghost">Заказать демонстрацию</a>
+          <a href="https://go.gate.ru/signup" class="site-header__btn site-header__btn--primary">Подключиться бесплатно</a>
+        </div>
+      </nav>
+    </header>
+    <div id="mobile-nav-dialog" class="js-mobile-nav fixed invisible inset-0 z-200 lg:hidden" role="dialog" aria-modal="true" aria-hidden="false" aria-label="Мобильное меню">
+      <button type="button" class="js-mobile-nav-backdrop absolute inset-0 border-0 bg-[#05070e]/65" aria-label="Закрыть меню" tabindex="-1"></button>
+
+      <div class="js-mobile-nav-panel relative z-10 flex w-full flex-col overflow-hidden bg-white px-2.5 pt-4 pb-6 shadow-[0_0_0_1px_rgba(0,0,0,0.06)] sm:px-6">
+        <div class="js-mobile-nav-stagger flex min-h-0 flex-1 flex-col justify-between gap-4">
+          <div class="js-mobile-nav-stagger-item flex shrink-0 items-center justify-between">
+            <a href="/" class="inline-flex items-center py-1">
+              <img src="assets/images/logo.svg" alt="GATE" class="h-8 w-auto" width="81" height="32">
+            </a>
+            <button type="button" class="js-mobile-nav-close inline-flex size-6 items-center justify-center rounded-full bg-[#004650] text-white transition hover:bg-[#003540]" aria-label="Закрыть меню">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="size-5" aria-hidden="true">
+                <path stroke-linecap="round" d="M8 8l8 8m0-8L8 16"></path>
+              </svg>
+            </button>
+          </div>
+          <div class="js-mobile-nav-stagger-item flex shrink-0 gap-2 pt-2">
+            <a href="https://go.gate.ru/demo" class="flex h-10 min-h-10 flex-1 cursor-pointer items-center justify-center rounded-[36px] border border-[#ff467c] bg-transparent text-sm leading-[1.4] text-[#ff467c] transition hover:bg-[#ff467c]/10">
+              Заказать демонстрацию
+            </a>
+          </div>
+          <div class="js-mobile-nav-stagger-item flex shrink-0 gap-2 pt-2">
+            <a href="https://go.gate.ru/signup" class="flex h-10 min-h-10 flex-1 cursor-pointer items-center justify-center rounded-[36px] site-header__btn--primary bg-transparent text-sm leading-[1.4] text-[#ff467c] transition hover:bg-[#ff467c]/10">
+              Подключиться бесплатно
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== 01-hero.html ===== -->
+    <div class="referral-hero__body referral__container">
+      <div class="referral-hero__content">
+        <h1 id="referral-hero-title" class="referral-hero__title">Реферальная программа</h1>
+        <p class="referral-hero__subcopy">
+          Получайте <span class="referral-hero__accent">до 500 000 ₽</span> за каждого нового клиента, который пришёл в GATE по вашей рекомендации
+        </p>
+        <a href="https://go.gate.ru/signup" class="referral-hero__cta">Стать партнером</a>
+      </div>
+
+      <div class="referral-hero__collage">
+        <img
+          src="assets/images/referral/hero-collage-2.png"
+          alt="Партнёр GATE — мужчина в кепке за рабочим столом дома"
+          class="referral-hero__photo referral-hero__photo--circle"
+        >
+        <img
+          src="assets/images/referral/hero-collage-3.png"
+          alt="Партнёр GATE — женщина в зелёном свитере"
+          class="referral-hero__photo referral-hero__photo--large"
+        >
+        <img
+          src="assets/images/referral/hero-collage-1.png"
+          alt="Партнёр GATE — женщина у книжной полки"
+          class="referral-hero__photo referral-hero__photo--wide"
+        >
+        <img
+          src="assets/images/referral/hero-collage-4.png"
+          alt="Партнёр GATE — мужчина со скрещенными руками у окна"
+          class="referral-hero__photo referral-hero__photo--square"
+        >
+      </div>
+    </div>
+  </section>
+
+    <!-- ===== 02-commission.html ===== -->
+<section class="referral-commission" aria-labelledby="referral-commission-title">
+  <div class="referral__container">
+    <h2 id="referral-commission-title" class="referral-commission__heading">
+      Получайте партнерское вознаграждение за оплаченные<br class="referral-commission__break">
+      и реализованные командировки новых клиентов, которых вы привели в GATE
+    </h2>
+
+    <div class="referral-commission__cards">
+      <article class="referral-commission__card">
+        <img
+          src="assets/images/referral/card-2pct-placeholder.png"
+          alt="Гость с чемоданом у стойки регистрации отеля"
+          class="referral-commission__photo"
+        >
+        <div class="referral-commission__panel">
+          <p class="referral-commission__percent">2%</p>
+          <p class="referral-commission__desc">от бронирований отелей и квартир</p>
+        </div>
+      </article>
+
+      <article class="referral-commission__card">
+        <img
+          src="assets/images/referral/card-15pct-placeholder.png"
+          alt="Женщина с посадочным талоном в зале аэропорта"
+          class="referral-commission__photo"
+        >
+        <div class="referral-commission__panel">
+          <p class="referral-commission__percent">15%</p>
+          <p class="referral-commission__desc">от сервисных сборов по авиа — и ж/д билетам</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+    <!-- ===== 03-benefits.html ===== -->
+<section class="referral-benefits" aria-labelledby="referral-benefits-title">
+  <div class="referral__container">
+    <h2 class="referral__h2 referral-benefits__title" id="referral-benefits-title">
+      Почему это <span class="referral__h2-accent referral-benefits__accent">выгодно</span>
+    </h2>
+
+    <div class="referral-benefits__grid">
+      <div class="referral-benefits__hero">
+        <div class="referral-benefits__hero-top">
+          <div class="referral-benefits__badge">
+            <img src="assets/images/referral/icon-ruble.svg" alt="" class="referral-benefits__badge-icon">
+          </div>
+        </div>
+        <div class="referral-benefits__hero-bottom">
+          <h3 class="referral__h3 referral-benefits__hero-title">Реальные деньги, а не бонусы</h3>
+          <p class="referral-benefits__hero-text">Получайте до 500 000 ₽ за каждого нового привлечённого клиента. Прозрачные отчёты и регулярные выплаты</p>
+        </div>
+      </div>
+
+      <div class="referral-benefits__list">
+        <article class="referral-benefits__card">
+          <div class="referral-benefits__card-head">
+            <div class="referral-benefits__icon">
+              <img src="assets/images/referral/icon-limitless.svg" alt="">
+            </div>
+            <h4 class="referral-benefits__card-title">Без ограничений по размеру вознаграждения</h4>
+          </div>
+          <p class="referral-benefits__card-text">Чем больше клиентов — тем выше доход. Если по вашей рекомендации к GATE подключились две и более компании, объемы их бронирований суммируются при расчете партнерского вознаграждения</p>
+        </article>
+
+        <article class="referral-benefits__card">
+          <div class="referral-benefits__card-head">
+            <div class="referral-benefits__icon">
+              <img src="assets/images/referral/icon-dashboard.svg" alt="">
+            </div>
+            <h4 class="referral-benefits__card-title">Личный кабинет партнера</h4>
+          </div>
+          <p class="referral-benefits__card-text">Создайте реферальную ссылку, отслеживайте переходы, привлеченных клиентов, начисления и выплаты в одном месте</p>
+        </article>
+
+        <article class="referral-benefits__card">
+          <div class="referral-benefits__card-head">
+            <div class="referral-benefits__icon">
+              <img src="assets/images/referral/icon-thumbsup.svg" alt="">
+            </div>
+            <h4 class="referral-benefits__card-title">Легко рекомендовать</h4>
+          </div>
+          <p class="referral-benefits__card-text">Регистрация за минуту, простые условия, технологичный продукт</p>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+    <!-- ===== 04-who.html ===== -->
+<section class="referral-who" aria-labelledby="referral-who-title">
+  <div class="referral__container">
+    <h2 class="referral__h2 referral-who__title" id="referral-who-title">
+      Кто может стать <span class="referral__h2-accent referral-who__accent">партнером?</span>
+    </h2>
+
+    <div class="referral-who__card">
+      <div class="referral-who__content">
+        <ul class="referral-who__list">
+          <li class="referral-who__item">
+            <h3 class="referral-who__item-title">Руководители и собственники бизнеса</h3>
+            <p class="referral-who__item-text">Рекомендуйте GATE коллегам, партнерам и другим компаниям, которым важно сделать организацию командировок проще и эффективнее</p>
+          </li>
+          <li class="referral-who__item">
+            <h3 class="referral-who__item-title">Бухгалтеры, HR-специалисты, тревел-менеджеры</h3>
+            <p class="referral-who__item-text">А также специалисты по закупкам, консультанты и другие профессионалы, работающие с корпоративными клиентами</p>
+          </li>
+          <li class="referral-who__item">
+            <h3 class="referral-who__item-title">Пользователи GATE</h3>
+            <p class="referral-who__item-text">Если вы уже пользуетесь сервисом и знаете преимущества сервиса, рекомендуйте его другим компаниям и получайте партнерское вознаграждение</p>
+          </li>
+          <li class="referral-who__item">
+            <h3 class="referral-who__item-title">Владельцы интернет-ресурсов</h3>
+            <p class="referral-who__item-text">Сайты, блоги, Telegram-каналы, профессиональные сообщества и другие онлайн-площадки. Делитесь рекомендациями GATE и получайте дополнительный доход</p>
+          </li>
+        </ul>
+
+        <p class="referral-who__note">Стать партнёром GATE могут физические лица, самозанятые, индивидуальные предприниматели и юридические лица</p>
+      </div>
+
+      <img src="assets/images/referral/partner-portrait-placeholder.png" alt="Партнер программы GATE" class="referral-who__media">
+    </div>
+  </div>
+</section>
+
+    <!-- ===== 05-stories.html ===== -->
+  <section class="referral-stories" aria-labelledby="referral-stories-title">
+    <div class="referral__container">
+      <h2 class="referral__h2 referral-stories__title" id="referral-stories-title">Истории партнеров</h2>
+
+      <!-- Carousel DOM matches the contract documented at the top of js/referral.js:
+           .referral-stories__carousel > .referral-stories__track > .referral-stories__card
+           The dot rail is built dynamically by that script from the MEASURED visible-card
+           count, so adding a 4th card below needs no JS or CSS change. -->
+      <div class="referral-stories__carousel">
+        <div class="referral-stories__track" tabindex="0" role="group" aria-label="Истории партнеров">
+
+          <article class="referral-stories__card">
+            <div class="referral-stories__person">
+              <img class="referral-stories__avatar" src="assets/images/referral/story-avatar-1.png" alt="Анна, HR-директор" width="48" height="48">
+              <p class="referral-stories__name">Анна, HR-директор</p>
+            </div>
+            <p class="referral-stories__headline">Накопила <span class="referral-stories__accent">300 000 ₽</span> на семейный отпуск</p>
+            <div class="referral-stories__body">
+              <p>Анна порекомендовала GATE нескольким знакомым HR и руководителям. Компании начали пользоваться сервисом, а вознаграждение Анна решила откладывать.</p>
+              <p>Через полгода накопилось 300 000 ₽ — как раз на долгожданный отпуск с семьёй</p>
+            </div>
+          </article>
+
+          <article class="referral-stories__card referral-stories__card--pattern">
+            <div class="referral-stories__person">
+              <img class="referral-stories__avatar" src="assets/images/referral/story-avatar-2.png" alt="Михаил, собственник бизнеса" width="48" height="48">
+              <p class="referral-stories__name">Михаил, собственник бизнеса</p>
+            </div>
+            <p class="referral-stories__headline">Заработал <span class="referral-stories__accent">больше 1 млн ₽</span> на рекомендациях</p>
+            <div class="referral-stories__body">
+              <p>Михаил занимается внешнеэкономической деятельностью, сам пользуется GATE и часто общается с другими предпринимателями.</p>
+              <p>За год несколько компаний стали постоянными клиентами сервиса по его рекомендации, а вознаграждение за их командировки превысило 1 млн ₽</p>
+            </div>
+          </article>
+
+          <article class="referral-stories__card">
+            <div class="referral-stories__person">
+              <img class="referral-stories__avatar" src="assets/images/referral/story-avatar-3.png" alt="Екатерина, бухгалтер" width="48" height="48">
+              <p class="referral-stories__name">Екатерина, бухгалтер</p>
+            </div>
+            <p class="referral-stories__headline">Получила 150 000 ₽ <span class="referral-stories__accent">и купила новый iPhone</span></p>
+            <div class="referral-stories__body">
+              <p>Екатерина работает с командировочными документами и знает, сколько времени занимает оформление. Она рассказала о GATE знакомым бухгалтерам из других компаний.</p>
+              <p>Несколько компаний подключились к сервису, а Екатерина за несколько месяцев получила 150 000 ₽ партнёрского вознаграждения и купила новый iPhone</p>
+            </div>
+          </article>
+
+          <!-- TODO 4th testimonial: the design's dot rail (node 14086:111039) draws FOUR dots,
+               so a fourth story is intended but its copy does not exist anywhere in the Figma
+               file. Copy one <article class="referral-stories__card"> block above, swap the
+               avatar (story-avatar-4), name, headline and two body paragraphs. The dot rail
+               recomputes itself — nothing else needs touching. -->
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+    <!-- ===== 06-steps.html ===== -->
+<section class="referral-steps" aria-labelledby="referral-steps-heading">
+  <div class="referral__container">
+    <h2 id="referral-steps-heading" class="referral__h2 referral-steps__heading">
+      <span class="referral-steps__accent">Начать зарабатывать</span><br>
+      с GATE просто
+    </h2>
+
+    <div class="referral-steps__progress" aria-hidden="true">
+      <span class="referral-steps__circle referral-steps__circle--dashed">1</span>
+      <span class="referral-steps__line"></span>
+      <span class="referral-steps__circle">2</span>
+      <span class="referral-steps__line"></span>
+      <span class="referral-steps__circle">3</span>
+    </div>
+
+    <ol class="referral-steps__list">
+      <li class="referral-steps__card">
+        <h3 class="referral-steps__card-title">Зарегистрируйтесь<br>и рекомендуйте GATE</h3>
+        <p class="referral-steps__card-body">Получите персональную реферальную ссылку в личном кабинете партнёра. Рекомендуйте GATE знакомым, коллегам, партнёрам и клиентам</p>
+      </li>
+      <li class="referral-steps__card">
+        <h3 class="referral-steps__card-title">Новый клиент бронирует<br>командировки через GATE</h3>
+        <p class="referral-steps__card-body">Компания регистрируется в GATE по вашей ссылке, оформляет и оплачивает командировки</p>
+      </li>
+      <li class="referral-steps__card">
+        <h3 class="referral-steps__card-title">Вы получаете<br>вознаграждение</h3>
+        <p class="referral-steps__card-body">За оплаченные командировки клиентов, которые пришли в GATE по вашей рекомендации</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+    <!-- ===== 07-industries.html ===== -->
+<section class="referral-industries" aria-labelledby="referral-industries-heading">
+  <div class="referral__container">
+    <h2 id="referral-industries-heading" class="referral__h2 referral-industries__heading">
+      Кому рекомендовать <span class="referral-industries__accent">GATE</span>
+    </h2>
+
+    <div class="referral-industries__panel">
+      <div class="referral-industries__intro">
+        <h3 class="referral-industries__intro-title">Компаниям, которые:</h3>
+
+        <div class="referral-industries__checklist">
+          <ul class="referral-industries__check-col">
+            <li class="referral-industries__check-item">
+              <img class="referral-industries__check-icon" src="assets/images/referral/icon-check.svg" alt="">
+              <span>Организуют более 10 командировок в месяц</span>
+            </li>
+            <li class="referral-industries__check-item">
+              <img class="referral-industries__check-icon" src="assets/images/referral/icon-check.svg" alt="">
+              <span>Имеют филиалы, региональные офисы или зарубежные представительства</span>
+            </li>
+            <li class="referral-industries__check-item">
+              <img class="referral-industries__check-icon" src="assets/images/referral/icon-check.svg" alt="">
+              <span>Активно развивают бизнес и расширяют географию присутствия</span>
+            </li>
+            <li class="referral-industries__check-item">
+              <img class="referral-industries__check-icon" src="assets/images/referral/icon-check.svg" alt="">
+              <span>Регулярно отправляют сотрудников на объекты, производства, стройплощадки и к клиентам</span>
+            </li>
+          </ul>
+
+          <ul class="referral-industries__check-col">
+            <li class="referral-industries__check-item">
+              <img class="referral-industries__check-icon" src="assets/images/referral/icon-check.svg" alt="">
+              <span>Работают с ВЭД, в том числе с Китаем и странами БРИКС</span>
+            </li>
+            <li class="referral-industries__check-item">
+              <img class="referral-industries__check-icon" src="assets/images/referral/icon-check.svg" alt="">
+              <span>Организуют деловые мероприятия, форумы, конференции, гастроли или концертную деятельность</span>
+            </li>
+            <li class="referral-industries__check-item">
+              <img class="referral-industries__check-icon" src="assets/images/referral/icon-check.svg" alt="">
+              <span>Реализуют проекты в разных городах и регионах с участием распределённых команд</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <h3 class="referral__h3 referral-industries__grid-heading">Актуальные отрасли</h3>
+
+      <ul class="referral-industries__grid">
+        <li class="referral-industries__card referral-industries__card--wide referral-industries__card--photo">
+          <img class="referral-industries__card-bg" src="assets/images/referral/industry-energy-placeholder.png" alt="">
+          <span class="referral-industries__card-icon"><img src="assets/images/referral/ind-energy.svg" alt=""></span>
+          <h4 class="referral-industries__card-title">Энергетика и нефтегазовая отрасль</h4>
+          <p class="referral-industries__card-body">Командировки на объекты и производственные площадки в разных регионах</p>
+        </li>
+        <li class="referral-industries__card referral-industries__card--narrow referral-industries__card--pale">
+          <span class="referral-industries__card-icon"><img src="assets/images/referral/ind-industry.svg" alt=""></span>
+          <h4 class="referral-industries__card-title">Промышленность и производство</h4>
+          <p class="referral-industries__card-body">Командировки на предприятия, производственные площадки, к поставщикам и партнёрам</p>
+        </li>
+
+        <li class="referral-industries__card referral-industries__card--narrow referral-industries__card--dark">
+          <span class="referral-industries__card-icon"><img src="assets/images/referral/ind-it.svg" alt=""></span>
+          <h4 class="referral-industries__card-title">ИТ и телекоммуникации</h4>
+          <p class="referral-industries__card-body">Распределенные команды, внедрения, работа на площадках клиентов и партнеров.</p>
+        </li>
+        <li class="referral-industries__card referral-industries__card--wide referral-industries__card--pale">
+          <span class="referral-industries__card-icon"><img src="assets/images/referral/ind-construction.svg" alt=""></span>
+          <h4 class="referral-industries__card-title">Строительство и девелопмент</h4>
+          <p class="referral-industries__card-body">Поездки на объекты, между регионами и проектными площадками.</p>
+        </li>
+
+        <li class="referral-industries__card referral-industries__card--narrow referral-industries__card--pale">
+          <span class="referral-industries__card-icon"><img src="assets/images/referral/ind-pharma.svg" alt=""></span>
+          <h4 class="referral-industries__card-title">Фармацевтика и медицина</h4>
+          <p class="referral-industries__card-body">Командировки на предприятия, производственные площадки, к поставщикам и партнёрам</p>
+        </li>
+        <li class="referral-industries__card referral-industries__card--wide referral-industries__card--photo">
+          <img class="referral-industries__card-bg" src="assets/images/referral/industry-trade-placeholder.jpg" alt="">
+          <span class="referral-industries__card-icon"><img src="assets/images/referral/ind-trade.svg" alt=""></span>
+          <h4 class="referral-industries__card-title">Торговля и компании с ВЭД</h4>
+          <p class="referral-industries__card-body">Переговоры с поставщиками и партнерами, международные поездки, в том числе в Китай и страны БРИКС</p>
+        </li>
+
+        <li class="referral-industries__card referral-industries__card--equal referral-industries__card--pale">
+          <span class="referral-industries__card-icon"><img src="assets/images/referral/ind-consulting.svg" alt=""></span>
+          <h4 class="referral-industries__card-title">Консалтинг и профессиональные услуги</h4>
+          <p class="referral-industries__card-body">Регулярные поездки проектных команд и встречи с клиентами.</p>
+        </li>
+        <li class="referral-industries__card referral-industries__card--equal referral-industries__card--dark">
+          <span class="referral-industries__card-icon"><img src="assets/images/referral/ind-sport.svg" alt=""></span>
+          <h4 class="referral-industries__card-title">Спорт, культура и событийная индустрия</h4>
+          <p class="referral-industries__card-body">Турниры, гастроли, концерты, фестивали, форумы и другие групповые поездки.</p>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+    <!-- ===== 08-easy.html ===== -->
+<section class="referral-easy" aria-labelledby="referral-easy-title">
+  <div class="referral__container referral-easy__container">
+    <h2 id="referral-easy-title" class="referral__h2 referral-easy__h2">
+      Рекомендовать <span class="referral__h2-accent referral-easy__h2-accent">GATE</span> легко
+    </h2>
+    <p class="referral-easy__subcopy">Мы делаем организацию командировок простой, прозрачной и управляемой</p>
+
+    <div class="referral-easy__grid">
+      <div class="referral-easy__card">
+        <div class="referral-easy__card-head">
+          <img class="referral-easy__icon" src="assets/images/referral/icon-expertise.svg" alt="" width="40" height="40">
+          <h3 class="referral-easy__card-title">Экспертиза</h3>
+        </div>
+        <ul class="referral-easy__list">
+          <li>30+ лет в деловом туризме</li>
+          <li>24/7 экспертное сопровождение</li>
+          <li>3 000+ клиентов уже доверяют сервису</li>
+        </ul>
+      </div>
+
+      <div class="referral-easy__card">
+        <div class="referral-easy__card-head">
+          <img class="referral-easy__icon" src="assets/images/referral/icon-convenience.svg" alt="" width="40" height="40">
+          <h3 class="referral-easy__card-title">Удобство</h3>
+        </div>
+        <ul class="referral-easy__list">
+          <!-- 🔴 "Подлючение" reproduced verbatim from the Figma render — misspelled in the
+               source design (missing "к"). Flagged to the lead as a copy bug for the client
+               to decide; not silently corrected here. -->
+          <li>Подлючение за минуту, без абонентской платы и скрытых комиссий</li>
+          <li>Выгодные цены от прямых поставщиков</li>
+          <li>Авиа-, ж/д билеты, отели и квартиры в одном сервисе</li>
+        </ul>
+      </div>
+
+      <div class="referral-easy__card">
+        <div class="referral-easy__card-head">
+          <img class="referral-easy__icon" src="assets/images/referral/icon-automation.png" alt="" width="40" height="40">
+          <h3 class="referral-easy__card-title">Автоматизация</h3>
+        </div>
+        <ul class="referral-easy__list">
+          <li>Тревел-политика и контроль расходов</li>
+          <li>API-интеграция с 1С</li>
+          <li>Закрывающие по ЭДО</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- TODO: destination URL not specified in design -->
+    <a class="referral-easy__cta" href="#">Скачать презентацию для партнера</a>
+  </div>
+</section>
+
+    <!-- ===== 09-cta.html ===== -->
+<section class="referral-cta" aria-labelledby="referral-cta-title">
+  <div class="referral__container">
+    <div class="referral-cta__banner">
+      <img class="referral-cta__bg" src="assets/images/referral/cta-bg-placeholder.png" alt="" width="1328" height="379">
+      <div class="referral-cta__scrim"></div>
+      <div class="referral-cta__content">
+        <h2 id="referral-cta-title" class="referral-cta__title">Присоединяйтесь к реферальной программе GATE</h2>
+        <a class="referral-cta__button" href="https://go.gate.ru/signup">Стать партнером</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+    <!-- ===== 10-faq.html ===== -->
+<section class="referral-faq" aria-labelledby="referral-faq-title">
+  <div class="referral__container referral-faq__container">
+    <h2 id="referral-faq-title" class="referral__h2 referral-faq__h2">Часто задаваемые вопросы</h2>
+
+    <!-- 🔴 GEOMETRY.md confirms 8 Accordian instances in this subtree (14086:111843-111850);
+         the render (s11_footer.png) and BRIEF.md's "known items" list account for exactly 7.
+         Item 8 (14086:111850, y=1372, h=269 — the tallest instance, taller than item 1) falls
+         entirely below the screenshot's clipped edge, and get_metadata does not expose text
+         inside component instances, so neither the question nor answer text is recoverable
+         from available sources (Figma MCP quota exhausted, get_design_context unavailable).
+         Not built here rather than inventing copy — see report to team-lead. -->
+    <div class="referral-faq__list">
+
+      <div class="referral-faq__item">
+        <h3 class="referral-faq__question-wrap">
+          <button type="button" class="referral-faq__question" aria-expanded="false" aria-controls="referral-faq-panel-1" id="referral-faq-trigger-1">
+            <span>Что такое реферальная программа GATE?</span>
+            <span class="referral-faq__chevron" aria-hidden="true"></span>
+          </button>
+        </h3>
+        <div class="referral-faq__answer" id="referral-faq-panel-1" role="region" aria-labelledby="referral-faq-trigger-1" hidden>
+          <p>Это партнерская программа, которая позволяет получать денежное вознаграждение за рекомендации GATE новым клиентам.</p>
+          <p>Вы регистрируетесь в программе, получаете персональную реферальную ссылку и делитесь ею с потенциальными клиентами. Если компания, которая ранее не являлась клиентом GATE, зарегистрируется по вашей ссылке, начнет пользоваться сервисом и оформлять командировки, вы будете получать партнерское вознаграждение в соответствии с условиями реферальной программы.</p>
+        </div>
+      </div>
+
+      <div class="referral-faq__item">
+        <h3 class="referral-faq__question-wrap">
+          <button type="button" class="referral-faq__question" aria-expanded="false" aria-controls="referral-faq-panel-2" id="referral-faq-trigger-2">
+            <span>Как стать партнером?</span>
+            <span class="referral-faq__chevron" aria-hidden="true"></span>
+          </button>
+        </h3>
+        <div class="referral-faq__answer" id="referral-faq-panel-2" role="region" aria-labelledby="referral-faq-trigger-2" hidden>
+          <p>Зарегистрируйтесь в реферальной программе — это займет всего несколько минут.</p>
+          <p>После регистрации вы получите доступ в личный кабинет партнера, где сможете создавать реферальные ссылки, отслеживать привлеченных клиентов, начисления и выплаты.</p>
+        </div>
+      </div>
+
+      <div class="referral-faq__item">
+        <h3 class="referral-faq__question-wrap">
+          <button type="button" class="referral-faq__question" aria-expanded="false" aria-controls="referral-faq-panel-3" id="referral-faq-trigger-3">
+            <span>Кто может стать партнером?</span>
+            <span class="referral-faq__chevron" aria-hidden="true"></span>
+          </button>
+        </h3>
+        <div class="referral-faq__answer" id="referral-faq-panel-3" role="region" aria-labelledby="referral-faq-trigger-3" hidden>
+          <p>Стать партнером GATE могут:</p>
+          <ul>
+            <li>физические лица;</li>
+            <li>самозанятые;</li>
+            <li>индивидуальные предприниматели;</li>
+            <li>юридические лица.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="referral-faq__item">
+        <h3 class="referral-faq__question-wrap">
+          <button type="button" class="referral-faq__question" aria-expanded="false" aria-controls="referral-faq-panel-4" id="referral-faq-trigger-4">
+            <span>За каких клиентов начисляется вознаграждение?</span>
+            <span class="referral-faq__chevron" aria-hidden="true"></span>
+          </button>
+        </h3>
+        <div class="referral-faq__answer" id="referral-faq-panel-4" role="region" aria-labelledby="referral-faq-trigger-4" hidden>
+          <p>Вознаграждение начисляется за новых клиентов, которые ранее не были зарегистрированы в сервисе GATE, зарегистрировались по вашей реферальной ссылке и начали пользоваться сервисом в соответствии с условиями реферальной программы.</p>
+        </div>
+      </div>
+
+      <div class="referral-faq__item">
+        <h3 class="referral-faq__question-wrap">
+          <button type="button" class="referral-faq__question" aria-expanded="false" aria-controls="referral-faq-panel-5" id="referral-faq-trigger-5">
+            <span>Как начисляется вознаграждение?</span>
+            <span class="referral-faq__chevron" aria-hidden="true"></span>
+          </button>
+        </h3>
+        <div class="referral-faq__answer" id="referral-faq-panel-5" role="region" aria-labelledby="referral-faq-trigger-5" hidden>
+          <p>Вознаграждение начисляется:</p>
+          <ul>
+            <li>по отелям — после завершения проживания;</li>
+            <li>по авиа- и железнодорожным билетам — по оплаченным заказам.</li>
+          </ul>
+          <p>Начисление производится ежемесячно в соответствии с условиями реферальной программы.</p>
+          <p>Вознаграждение начисляется в течение 12 месяцев с даты регистрации привлеченного клиента.</p>
+        </div>
+      </div>
+
+      <div class="referral-faq__item">
+        <h3 class="referral-faq__question-wrap">
+          <button type="button" class="referral-faq__question" aria-expanded="false" aria-controls="referral-faq-panel-6" id="referral-faq-trigger-6">
+            <span>Где можно отслеживать начисления и выплаты?</span>
+            <span class="referral-faq__chevron" aria-hidden="true"></span>
+          </button>
+        </h3>
+        <div class="referral-faq__answer" id="referral-faq-panel-6" role="region" aria-labelledby="referral-faq-trigger-6" hidden>
+          <p>В личном кабинете партнера. Там отображаются привлеченные клиенты, начисления, доступная к выплате сумма и история выплат.</p>
+        </div>
+      </div>
+
+      <div class="referral-faq__item">
+        <h3 class="referral-faq__question-wrap">
+          <button type="button" class="referral-faq__question" aria-expanded="false" aria-controls="referral-faq-panel-7" id="referral-faq-trigger-7">
+            <span>Можно ли рекомендовать GATE своей компании или связанному бизнесу?</span>
+            <span class="referral-faq__chevron" aria-hidden="true"></span>
+          </button>
+        </h3>
+        <div class="referral-faq__answer" id="referral-faq-panel-7" role="region" aria-labelledby="referral-faq-trigger-7" hidden>
+          <p>Да. Вы можете привлечь в качестве клиента аффилированную с вами компанию, если она соответствует условиям реферальной программы.</p>
+        </div>
+      </div>
+
+      <div class="referral-faq__item">
+        <h3 class="referral-faq__question-wrap">
+          <button type="button" class="referral-faq__question" aria-expanded="false" aria-controls="referral-faq-panel-8" id="referral-faq-trigger-8">
+            <span>Как увеличить доход в реферальной программе?</span>
+            <span class="referral-faq__chevron" aria-hidden="true"></span>
+          </button>
+        </h3>
+        <div class="referral-faq__answer" id="referral-faq-panel-8" role="region" aria-labelledby="referral-faq-trigger-8" hidden>
+          <p>Размер вашего дохода зависит от количества привлеченных клиентов и объема их оплаченных командировок.</p>
+          <p>Чтобы увеличить вознаграждение:</p>
+          <ul>
+            <li>рекомендуйте GATE большему количеству новых клиентов;</li>
+            <li>привлекайте компании, которые регулярно организуют командировки;</li>
+            <li>рекомендуйте сервис компаниям с большим объемом бронирований.</li>
+          </ul>
+          <p>Для постоянных и крупных партнеров могут действовать индивидуальные условия сотрудничества.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-footer__heading">
+      <h2 class="site-footer__title">
+        <span class="desktop">Организуйте деловые <br>поездки эффективнее</span>
+        <span class="mobile">Деловые поездки </span>
+      </h2>
+      <p class="site-footer__subtitle">
+        <span class="desktop">Получите доступ к технологиям и экспертизе лидера бизнес-тревел</span>
+        <span class="mobile">
+          — это новые города, встречи и возможности. А рутину мы убрали под капот
+        </span>
+      </p>
+    </div>
+
+    <div class="site-footer__links">
+      <nav class="site-footer__col" aria-label="Навигация">
+        <a href="index.html">Главная</a>
+        <a href="index.html">О Компании</a>
+      </nav>
+      <nav class="site-footer__col" aria-label="Документы">
+        <a href="https://go.gate.ru/confidence" target="_blank" rel="noopener">Политика конфиденциальности</a>
+        <a href="https://go.gate.ru/offer" target="_blank" rel="noopener">Оферта</a>
+        <a href="https://go.gate.ru/knowledge" target="_blank" rel="noopener">База знаний</a>
+      </nav>
+      <div class="site-footer__col">
+        <a href="tel:+79014682344">+7 901 468 23 44</a>
+        <a href="mailto:partners@gate.ru">partners@gate.ru</a>
+        <span>121614, ул. Крылатская, д. 17, к. 2, 1 эт</span>
+      </div>
+
+      <div class="site-footer__ctas">
+        <a href="https://go.gate.ru/auth" class="site-header__btn site-header__btn--ghost">Войти</a>
+        <a href="https://go.gate.ru/signup" class="site-header__btn site-header__btn--primary">Подключиться</a>
+      </div>
+    </div>
+
+    <div class="site-footer__bottom">
+      <a href="/" class="site-footer__logo-link" aria-label="GATE">
+        <img src="assets/images/about/logo-light.svg" alt="GATE" class="site-footer__logo">
+      </a>
+      <div class="site-footer__social">
+        <a href="https://vk.com/" target="_blank" rel="noopener" aria-label="ВКонтакте">
+          <img src="assets/images/about/icon-vk.svg" alt="">
+        </a>
+        <a href="https://t.me/" target="_blank" rel="noopener" aria-label="Telegram">
+          <img src="assets/images/about/icon-telegram.svg" alt="">
+        </a>
+      </div>
+      <p class="site-footer__copyright">© 2026 ООО «ГЕЙТ» Все права защищены</p>
+    </div>
+  </footer>
+
+<script src="js/template.js"></script>
+<script src="js/referral.js"></script>
+</body>
+</html>

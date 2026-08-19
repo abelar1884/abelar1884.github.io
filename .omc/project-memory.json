@@ -1,0 +1,168 @@
+{
+  "version": "1.0.0",
+  "lastScanned": 1787120309751,
+  "projectRoot": "C:\\projects\\abelar1884.github.io",
+  "techStack": {
+    "languages": [
+      {
+        "name": "JavaScript/TypeScript",
+        "version": null,
+        "confidence": "high",
+        "markers": [
+          "package.json"
+        ]
+      }
+    ],
+    "frameworks": [],
+    "packageManager": "npm",
+    "runtime": null
+  },
+  "build": {
+    "buildCommand": null,
+    "testCommand": "npm test",
+    "lintCommand": null,
+    "devCommand": null,
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1"
+    }
+  },
+  "conventions": {
+    "namingStyle": null,
+    "importStyle": null,
+    "testPattern": null,
+    "fileOrganization": null
+  },
+  "structure": {
+    "isMonorepo": false,
+    "workspaces": [],
+    "mainDirectories": [
+      "assets"
+    ],
+    "gitBranches": {
+      "defaultBranch": "main",
+      "branchingStrategy": null
+    }
+  },
+  "customNotes": [],
+  "directoryMap": {
+    "assets": {
+      "path": "assets",
+      "purpose": "Static assets",
+      "fileCount": 0,
+      "lastAccessed": 1787120309735,
+      "keyFiles": []
+    },
+    "css": {
+      "path": "css",
+      "purpose": null,
+      "fileCount": 5,
+      "lastAccessed": 1787120309735,
+      "keyFiles": [
+        "about.css",
+        "article.css",
+        "index.css",
+        "support.css",
+        "template.css"
+      ]
+    },
+    "fonts": {
+      "path": "fonts",
+      "purpose": null,
+      "fileCount": 4,
+      "lastAccessed": 1787120309740,
+      "keyFiles": [
+        "cofo-kak-black.otf",
+        "UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa0ZL7W0Q5n-wU.woff2",
+        "UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7W0Q5nw.woff2",
+        "UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa25L7W0Q5n-wU.woff2"
+      ]
+    },
+    "js": {
+      "path": "js",
+      "purpose": null,
+      "fileCount": 4,
+      "lastAccessed": 1787120309740,
+      "keyFiles": [
+        "about.js",
+        "gallery.js",
+        "template.js",
+        "toc.js"
+      ]
+    }
+  },
+  "hotPaths": [
+    {
+      "path": "assets/images/referral/ASSETS.md",
+      "accessCount": 5,
+      "lastAccessed": 1787126273839,
+      "type": "file"
+    },
+    {
+      "path": "index.html",
+      "accessCount": 1,
+      "lastAccessed": 1787122935634,
+      "type": "file"
+    },
+    {
+      "path": "css/about.css",
+      "accessCount": 1,
+      "lastAccessed": 1787123132762,
+      "type": "file"
+    },
+    {
+      "path": "js/about.js",
+      "accessCount": 1,
+      "lastAccessed": 1787123304216,
+      "type": "file"
+    },
+    {
+      "path": "js/referral.js",
+      "accessCount": 1,
+      "lastAccessed": 1787123336630,
+      "type": "file"
+    },
+    {
+      "path": "preview67-full.png",
+      "accessCount": 1,
+      "lastAccessed": 1787123353744,
+      "type": "file"
+    },
+    {
+      "path": "preview67-full2.png",
+      "accessCount": 1,
+      "lastAccessed": 1787123386310,
+      "type": "file"
+    },
+    {
+      "path": "unit03_preview.png",
+      "accessCount": 1,
+      "lastAccessed": 1787125389845,
+      "type": "file"
+    },
+    {
+      "path": "unit07_icons.png",
+      "accessCount": 1,
+      "lastAccessed": 1787125851243,
+      "type": "file"
+    },
+    {
+      "path": "unit07_icons2.png",
+      "accessCount": 1,
+      "lastAccessed": 1787125920078,
+      "type": "file"
+    },
+    {
+      "path": "unit07_check.png",
+      "accessCount": 1,
+      "lastAccessed": 1787125998294,
+      "type": "file"
+    },
+    {
+      "path": "unit08_icons.png",
+      "accessCount": 1,
+      "lastAccessed": 1787126048178,
+      "type": "file"
+    }
+  ],
+  "userDirectives": []
+}

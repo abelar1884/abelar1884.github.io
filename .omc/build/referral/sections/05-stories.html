@@ -1,0 +1,57 @@
+  <section class="referral-stories" aria-labelledby="referral-stories-title">
+    <div class="referral__container">
+      <h2 class="referral__h2 referral-stories__title" id="referral-stories-title">Истории партнеров</h2>
+
+      <!-- Carousel DOM matches the contract documented at the top of js/referral.js:
+           .referral-stories__carousel > .referral-stories__track > .referral-stories__card
+           The dot rail is built dynamically by that script from the MEASURED visible-card
+           count, so adding a 4th card below needs no JS or CSS change. -->
+      <div class="referral-stories__carousel">
+        <div class="referral-stories__track" tabindex="0" role="group" aria-label="Истории партнеров">
+
+          <article class="referral-stories__card">
+            <div class="referral-stories__person">
+              <img class="referral-stories__avatar" src="assets/images/referral/story-avatar-1.png" alt="Анна, HR-директор" width="48" height="48">
+              <p class="referral-stories__name">Анна, HR-директор</p>
+            </div>
+            <p class="referral-stories__headline">Накопила <span class="referral-stories__accent">300 000 ₽</span> на семейный отпуск</p>
+            <div class="referral-stories__body">
+              <p>Анна порекомендовала GATE нескольким знакомым HR и руководителям. Компании начали пользоваться сервисом, а вознаграждение Анна решила откладывать.</p>
+              <p>Через полгода накопилось 300 000 ₽ — как раз на долгожданный отпуск с семьёй</p>
+            </div>
+          </article>
+
+          <article class="referral-stories__card referral-stories__card--pattern">
+            <div class="referral-stories__person">
+              <img class="referral-stories__avatar" src="assets/images/referral/story-avatar-2.png" alt="Михаил, собственник бизнеса" width="48" height="48">
+              <p class="referral-stories__name">Михаил, собственник бизнеса</p>
+            </div>
+            <p class="referral-stories__headline">Заработал <span class="referral-stories__accent">больше 1 млн ₽</span> на рекомендациях</p>
+            <div class="referral-stories__body">
+              <p>Михаил занимается внешнеэкономической деятельностью, сам пользуется GATE и часто общается с другими предпринимателями.</p>
+              <p>За год несколько компаний стали постоянными клиентами сервиса по его рекомендации, а вознаграждение за их командировки превысило 1 млн ₽</p>
+            </div>
+          </article>
+
+          <article class="referral-stories__card">
+            <div class="referral-stories__person">
+              <img class="referral-stories__avatar" src="assets/images/referral/story-avatar-3.png" alt="Екатерина, бухгалтер" width="48" height="48">
+              <p class="referral-stories__name">Екатерина, бухгалтер</p>
+            </div>
+            <p class="referral-stories__headline">Получила 150 000 ₽ <span class="referral-stories__accent">и купила новый iPhone</span></p>
+            <div class="referral-stories__body">
+              <p>Екатерина работает с командировочными документами и знает, сколько времени занимает оформление. Она рассказала о GATE знакомым бухгалтерам из других компаний.</p>
+              <p>Несколько компаний подключились к сервису, а Екатерина за несколько месяцев получила 150 000 ₽ партнёрского вознаграждения и купила новый iPhone</p>
+            </div>
+          </article>
+
+          <!-- TODO 4th testimonial: the design's dot rail (node 14086:111039) draws FOUR dots,
+               so a fourth story is intended but its copy does not exist anywhere in the Figma
+               file. Copy one <article class="referral-stories__card"> block above, swap the
+               avatar (story-avatar-4), name, headline and two body paragraphs. The dot rail
+               recomputes itself — nothing else needs touching. -->
+
+        </div>
+      </div>
+    </div>
+  </section>
