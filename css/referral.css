@@ -1000,6 +1000,14 @@ body {
   object-fit: cover;
 }
 
+/* Cards 4-6 have no real portrait in the design — node 14053:110220 uses one shared
+   grey placeholder circle for every avatar. Rendered as a real <img> (not a CSS shape)
+   so swapping in a photo is a src change with no rule edits. alt="" because a generic
+   grey circle carries no information. */
+.referral-stories__avatar--placeholder {
+  background: #d9d9d9;
+}
+
 .referral-stories__name {
   margin: 0;
   font-family: var(--font-inter);
@@ -1097,7 +1105,7 @@ body {
 }
 
 /* NO COMP — inferred: 1 card visible below 768, so the rail becomes the
-   primary means of paging through all four stories. */
+   primary means of paging through all six stories. */
 @media (max-width: 767px) {
   .referral-stories {
     padding-block: 40px;

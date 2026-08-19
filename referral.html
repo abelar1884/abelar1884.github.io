@@ -247,8 +247,10 @@
 
       <!-- Carousel DOM matches the contract documented at the top of js/referral.js:
            .referral-stories__carousel > .referral-stories__track > .referral-stories__card
-           The dot rail is built dynamically by that script from the MEASURED visible-card
-           count, so adding a 4th card below needs no JS or CSS change. -->
+           SIX cards. Cards 1-3 from node 14086:110932 (the page frame), cards 4-6 from
+           node 14053:110220 (the full story set). The dot rail is built dynamically from
+           the MEASURED visible-card count, so adding or removing a card needs no JS or
+           CSS change: 6 cards / 3 visible = 2 pages at desktop, 3 at 768, 6 at mobile. -->
       <div class="referral-stories__carousel">
         <div class="referral-stories__track" tabindex="0" role="group" aria-label="Истории партнеров">
 
@@ -288,11 +290,48 @@
             </div>
           </article>
 
-          <!-- TODO 4th testimonial: the design's dot rail (node 14086:111039) draws FOUR dots,
-               so a fourth story is intended but its copy does not exist anywhere in the Figma
-               file. Copy one <article class="referral-stories__card"> block above, swap the
-               avatar (story-avatar-4), name, headline and two body paragraphs. The dot rail
-               recomputes itself — nothing else needs touching. -->
+          <!-- Cards 4-6 come from node 14053:110220, which holds the full six-story set.
+               NOTE: in that node every avatar is the same placeholder grey circle
+               (Ellipse 392, #D9D9D9) — there are no real photos for Алексей / Ольга / Мария
+               anywhere in the file, so they use story-avatar-placeholder.svg. Swap in real
+               portraits when they exist; cards 1-3 already use their real photos. -->
+
+          <article class="referral-stories__card">
+            <div class="referral-stories__person">
+              <img class="referral-stories__avatar referral-stories__avatar--placeholder" src="assets/images/referral/story-avatar-placeholder.svg" alt="" width="48" height="48">
+              <p class="referral-stories__name">Алексей, консультант</p>
+            </div>
+            <p class="referral-stories__headline">Заработал 300 000 ₽ <br><span class="referral-stories__accent">и закрыл автокредит</span></p>
+            <div class="referral-stories__body">
+              <p>Алексей работает с корпоративными клиентами и рекомендует GATE компаниям, которые часто организуют командировки.</p>
+              <p>За полгода Алексей получил 300 000 ₽ и направил их на досрочное погашение автокредита.</p>
+            </div>
+          </article>
+
+          <article class="referral-stories__card">
+            <div class="referral-stories__person">
+              <img class="referral-stories__avatar referral-stories__avatar--placeholder" src="assets/images/referral/story-avatar-placeholder.svg" alt="" width="48" height="48">
+              <p class="referral-stories__name">Ольга, тревел-менеджер</p>
+            </div>
+            <p class="referral-stories__headline">Получила <span class="referral-stories__accent">240 000 ₽</span> <br>за полгода</p>
+            <div class="referral-stories__body">
+              <p>Ольга хорошо знает рынок делового туризма и много общается с коллегами из других компаний.</p>
+              <p>Она стала рассказывать о GATE тем, кому сервис может быть полезен в ежедневной работе.</p>
+              <p>Несколько компаний подключились, а за полгода Ольга получила 240 000 ₽ партнерского вознаграждения.</p>
+            </div>
+          </article>
+
+          <article class="referral-stories__card">
+            <div class="referral-stories__person">
+              <img class="referral-stories__avatar referral-stories__avatar--placeholder" src="assets/images/referral/story-avatar-placeholder.svg" alt="" width="48" height="48">
+              <p class="referral-stories__name">Мария, автор Telegram-канала</p>
+            </div>
+            <p class="referral-stories__headline"><span class="referral-stories__accent">Более 100 000 ₽</span><br>за первые месяцы</p>
+            <div class="referral-stories__body">
+              <p>Мария делится с подписчиками полезными сервисами для бизнеса. В одной из публикаций она рассказала о GATE и разместила реферальную ссылку.</p>
+              <p>Несколько компаний зарегистрировались и начали пользоваться сервисом, а за первые месяцы Мария получила более 100 000 ₽ партнерского вознаграждения.</p>
+            </div>
+          </article>
 
         </div>
       </div>

@@ -5,11 +5,15 @@
   fragments; the lead assembled `referral.html` + `css/referral.css`. Zero merge conflicts across
   6 parallel workers on what would otherwise be two shared files.
 - Chrome strategy A0 held: `template.css` → `about.css` (shared chrome) → `referral.css`.
-- **All 12 units built.** Unit 05 (Истории партнеров) was built with the three real testimonials
-  that exist in the design rather than left as a hole; the carousel measures its page count at
-  runtime, so a 4th card is a copy-paste of one `<article>` block with no JS/CSS change (TODO marker
-  in the markup). Note the comp's dot rail draws FOUR dots, confirming a 4th story is intended —
-  its copy exists nowhere in the Figma file.
+- **All 12 units built.** Unit 05 (Истории партнеров) now carries the FULL SIX-story set: cards 1-3
+  from node 14086:110932 (the page frame), cards 4-6 (Алексей / Ольга / Мария) from node
+  14053:110220, which the user supplied later and which holds the complete set. The carousel
+  measures its page count at runtime, so growing 3 -> 6 cards needed no JS or CSS change:
+  verified 2 dots at 1440/1024, 3 at 768, 6 at <=480, with 6 distinct scroll positions ending
+  exactly at max scroll (no no-op dots).
+  Avatars: cards 1-3 use their real exported photos; cards 4-6 use `story-avatar-placeholder.svg`
+  because node 14053:110220 uses one shared grey placeholder circle for every avatar — no real
+  portraits for those three exist anywhere in the file.
 
 **Rejected**
 - Hiding the hero collage below 1200px (worker-3's first pass). Reverted: it deleted four of the
@@ -80,6 +84,6 @@ Rollback: `git clean` those paths. Nothing else to undo.
 7. Commission heading was capped at 984px, pushing "GATE" to a third line. Widened to 1140px.
 
 **Remaining**
-- 4th testimonial copy + avatar (optional; section ships correctly with 3).
+- Real portrait photos for Алексей / Ольга / Мария (cards 4-6 currently use a grey placeholder).
 - 5 watermarked stock placeholders must be replaced before production.
 - `index.html`'s stale GSAP SRI hash — one-line fix, awaiting the user's go-ahead.
