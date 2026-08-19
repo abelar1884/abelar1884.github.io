@@ -1,0 +1,62 @@
+  <section class="referral-calc" aria-labelledby="referral-calc-title">
+    <div class="referral__container">
+      <h2 class="referral__h2 referral-calc__title" id="referral-calc-title">Рассчитайте <span class="referral__h2-accent referral-calc__accent">свой доход</span></h2>
+
+      <div class="referral-calc__card">
+        <div class="referral-calc__controls">
+
+          <!-- Clients: native range input so keyboard, touch and AT support come for free -->
+          <div class="referral-calc__control referral-calc__control--clients">
+            <div class="referral-calc__label-row">
+              <label class="referral-calc__label" for="referral-calc-clients">Количество привлеченных клиентов:</label>
+              <output class="referral-calc__value" id="referral-calc-clients-value" for="referral-calc-clients">5</output>
+            </div>
+            <div class="referral-calc__slider-wrap">
+              <input
+                class="referral-calc__slider"
+                id="referral-calc-clients"
+                type="range"
+                min="1"
+                max="100"
+                step="1"
+                value="5"
+                aria-describedby="referral-calc-note">
+              <div class="referral-calc__scale" aria-hidden="true">
+                <span>1</span>
+                <span>100</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Business size: real radios, visually rendered as chips. Native radio group
+               gives arrow-key navigation and correct screen-reader semantics. -->
+          <fieldset class="referral-calc__control referral-calc__control--size">
+            <legend class="referral-calc__label">Размер бизнеса</legend>
+            <div class="referral-calc__chips">
+              <input class="referral-calc__radio" type="radio" name="referral-calc-size" id="referral-calc-size-small" value="small">
+              <label class="referral-calc__chip" for="referral-calc-size-small">Малый</label>
+
+              <input class="referral-calc__radio" type="radio" name="referral-calc-size" id="referral-calc-size-medium" value="medium">
+              <label class="referral-calc__chip" for="referral-calc-size-medium">Средний</label>
+
+              <input class="referral-calc__radio" type="radio" name="referral-calc-size" id="referral-calc-size-large" value="large" checked>
+              <label class="referral-calc__chip" for="referral-calc-size-large">Крупный</label>
+
+              <input class="referral-calc__radio" type="radio" name="referral-calc-size" id="referral-calc-size-holding" value="holding">
+              <label class="referral-calc__chip" for="referral-calc-size-holding">Холдинг</label>
+            </div>
+          </fieldset>
+        </div>
+
+        <!-- aria-live so the recomputed figure is announced, but polite so dragging the
+             slider does not spam a screen reader on every step -->
+        <div class="referral-calc__result" aria-live="polite">
+          <p class="referral-calc__result-label">Ваш потенциальный доход в год</p>
+          <p class="referral-calc__result-year" id="referral-calc-year">2 500 000 ₽</p>
+          <p class="referral-calc__result-month" id="referral-calc-month">/ ≈208 500 ₽ в месяц</p>
+        </div>
+      </div>
+
+      <p class="referral-calc__note" id="referral-calc-note">*Расчет приведен в качестве примера. Фактический размер вознаграждения зависит от объема и стоимости оплаченных командировок привлеченных клиентов.</p>
+    </div>
+  </section>

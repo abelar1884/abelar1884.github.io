@@ -1,0 +1,366 @@
+/* ==========================================================================
+   Unit 02 — «Рассчитайте свой доход» income calculator.
+   Geometry from get_design_context on 14086:112456: white card 878x343 r24;
+   left control column 369px, right 405px; slider track 369x4 r24 in
+   --rf-emerald with a 20px thumb; chips 96x28 r24, gap 7px; result panel
+   814x180 r16 in --rf-emerald with 64px CoFo Kak figure.
+   ========================================================================== */
+
+.referral-calc {
+  padding-block: 60px 28px;
+}
+
+.referral-calc__title {
+  margin: 0 0 40px;
+  text-align: center;
+}
+
+.referral-calc__accent {
+  color: var(--rf-pink);
+}
+
+.referral-calc__card {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 878px;
+  margin-inline: auto;
+  padding: 20px 32px 32px;
+  border-radius: 24px;
+  background: #fff;
+}
+
+/* --- Controls row -------------------------------------------------------- */
+
+.referral-calc__controls {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 32px;
+  margin-bottom: 20px;
+}
+
+.referral-calc__control {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.referral-calc__control--clients {
+  flex: 0 1 369px;
+}
+
+.referral-calc__control--size {
+  flex: 0 1 405px;
+}
+
+.referral-calc__label {
+  display: block;
+  padding: 0;
+  font-family: var(--font-inter);
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 1.3;
+  color: var(--rf-teal);
+}
+
+.referral-calc__label-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 4px;
+}
+
+.referral-calc__value {
+  flex: 0 0 auto;
+  font-family: var(--font-cofo-kak);
+  font-weight: 900;
+  font-size: 32px;
+  line-height: 1.25;
+  letter-spacing: 0.64px;
+  color: var(--rf-pink);
+  font-variant-numeric: tabular-nums;   /* stops the row shifting as digits change */
+}
+
+/* --- Slider -------------------------------------------------------------
+   Styled native <input type="range">. The filled portion is painted with a
+   --fill custom property that the JS updates, so the emerald track shows
+   progress without an extra element. ------------------------------------ */
+
+.referral-calc__slider-wrap {
+  padding-top: 6px;
+}
+
+.referral-calc__slider {
+  -webkit-appearance: none;
+  appearance: none;
+  display: block;
+  width: 100%;
+  height: 20px;                      /* room for the thumb */
+  margin: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+/* track — WebKit */
+.referral-calc__slider::-webkit-slider-runnable-track {
+  height: 4px;
+  border-radius: 24px;
+  background: linear-gradient(
+    to right,
+    var(--rf-teal) 0 var(--rf-calc-fill, 4%),
+    var(--rf-emerald) var(--rf-calc-fill, 4%) 100%
+  );
+}
+
+.referral-calc__slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  margin-top: -8px;                  /* centre the 20px thumb on the 4px track */
+  border: 0;
+  border-radius: 50%;
+  background: var(--rf-pink);
+  box-shadow: 0 1px 4px rgba(0, 9, 10, 0.25);
+}
+
+/* track — Firefox */
+.referral-calc__slider::-moz-range-track {
+  height: 4px;
+  border-radius: 24px;
+  background: var(--rf-emerald);
+}
+
+.referral-calc__slider::-moz-range-progress {
+  height: 4px;
+  border-radius: 24px;
+  background: var(--rf-teal);
+}
+
+.referral-calc__slider::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--rf-pink);
+  box-shadow: 0 1px 4px rgba(0, 9, 10, 0.25);
+}
+
+.referral-calc__slider:focus-visible {
+  outline: 2px solid var(--rf-pink);
+  outline-offset: 6px;
+  border-radius: 24px;
+}
+
+.referral-calc__scale {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-inter);
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 1.4;
+  color: #000;
+  opacity: 0.2;
+}
+
+/* --- Business-size chips ------------------------------------------------ */
+
+.referral-calc__chips {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 7px;
+  margin-top: 7px;
+}
+
+/* Radios drive state; they are removed from paint but kept focusable so the
+   native radio group keyboard behaviour (arrow keys) still works. */
+.referral-calc__radio {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+.referral-calc__chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 96px;
+  height: 28px;
+  padding: 5px 18px;
+  border-radius: 24px;
+  background: rgba(197, 197, 197, 0.5);
+  font-family: var(--font-inter);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.3;
+  color: var(--rf-teal);
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.referral-calc__chip:hover {
+  background: rgba(197, 197, 197, 0.75);
+}
+
+.referral-calc__radio:checked + .referral-calc__chip {
+  background: var(--rf-pink);
+  font-weight: 500;
+  color: #fff;
+}
+
+/* opacity .7 in the comp applies to the UNSELECTED label text only */
+.referral-calc__radio:not(:checked) + .referral-calc__chip {
+  opacity: 0.7;
+}
+
+.referral-calc__radio:focus-visible + .referral-calc__chip {
+  outline: 2px solid var(--rf-pink);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .referral-calc__chip {
+    transition: none;
+  }
+}
+
+/* --- Result panel ------------------------------------------------------- */
+
+.referral-calc__result {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 17px;
+  min-height: 180px;
+  padding: 15px 24px 10px;
+  border-radius: 16px;
+  background: var(--rf-emerald);
+  color: var(--rf-teal);
+  text-align: center;
+}
+
+.referral-calc__result-label {
+  margin: 0;
+  font-family: var(--font-inter);
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 1.3;
+  letter-spacing: 0.32px;
+  text-transform: uppercase;
+}
+
+.referral-calc__result-year {
+  margin: 0;
+  font-family: var(--font-cofo-kak);
+  font-weight: 900;
+  font-size: 64px;
+  line-height: 1.25;
+  letter-spacing: 1.28px;
+  font-variant-numeric: tabular-nums;
+}
+
+.referral-calc__result-month {
+  margin: 0;
+  font-family: var(--font-inter);
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 1.44;
+  opacity: 0.7;
+  font-variant-numeric: tabular-nums;
+}
+
+.referral-calc__note {
+  max-width: 878px;
+  margin: 10px auto 0;
+  font-family: var(--font-inter);
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 1.3;
+  text-align: center;
+  color: var(--rf-teal);
+  opacity: 0.7;
+}
+
+/* --- Responsive --------------------------------------------------------- */
+
+/* NO COMP — inferred: stack the two controls once 369+405+32 no longer fits. */
+@media (max-width: 900px) {
+  .referral-calc__controls {
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .referral-calc__control--clients,
+  .referral-calc__control--size {
+    flex: 1 1 auto;
+    width: 100%;
+  }
+
+  .referral-calc__result-year {
+    font-size: 48px;
+  }
+}
+
+/* NO COMP — inferred */
+@media (max-width: 767px) {
+  .referral-calc {
+    padding-block: 40px 20px;
+  }
+
+  .referral-calc__title {
+    margin-bottom: 28px;
+  }
+
+  .referral-calc__card {
+    padding: 20px;
+  }
+
+  .referral-calc__label-row {
+    align-items: flex-start;
+  }
+
+  .referral-calc__value {
+    font-size: 28px;
+  }
+
+  .referral-calc__result-year {
+    font-size: 40px;
+    letter-spacing: 0.8px;
+  }
+
+  .referral-calc__result {
+    gap: 12px;
+    min-height: 0;
+    padding: 20px 16px;
+  }
+}
+
+/* NO COMP — inferred: four 96px chips + gaps exceed a 320-375px card, so let
+   them share two rows evenly rather than overflow. */
+@media (max-width: 479px) {
+  .referral-calc__chips {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .referral-calc__chip {
+    width: 100%;
+  }
+
+  .referral-calc__result-year {
+    font-size: 32px;
+  }
+}

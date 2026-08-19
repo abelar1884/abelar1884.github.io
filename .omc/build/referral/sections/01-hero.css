@@ -179,7 +179,8 @@
   }
 
   .referral-hero__title {
-    font-size: 44px;
+    /* Fluid: "Реферальная" is ~470px at 44px but the column is ~408px at 520. */
+    font-size: clamp(24px, 7vw, 44px);
     letter-spacing: 1.5px;
   }
 
@@ -205,7 +206,9 @@
   }
 
   .referral-hero__title {
-    font-size: 34px;
+    /* Fluid: "Реферальная" is 363px at 34px and the column is only 273px at a
+       320 viewport, so a fixed size forced a mid-word break. */
+    font-size: clamp(20px, 7vw, 34px);
   }
 
   .referral-hero__subcopy {

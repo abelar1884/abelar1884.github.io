@@ -247,9 +247,105 @@
     recompute();
   }
 
+  /* ------------------------------------------------------------------ */
+  /* Feature 3 — Income calculator (unit 02, .referral-calc)            */
+  /* ------------------------------------------------------------------ */
+  /*
+   * 🔴 BUSINESS RULES LIVE IN ONE PLACE — edit RATES_PER_CLIENT below and
+   * nothing else needs touching.
+   *
+   * Provenance of these numbers:
+   *   - `large` (Крупный) = 500 000 is DERIVED FROM THE DESIGN and verified:
+   *     the comp (Figma node 14086:112456) shows 5 clients + Крупный selected
+   *     producing "2 500 000 ₽", and 5 × 500 000 = 2 500 000. This one is solid.
+   *   - `small`, `medium`, `holding` are NOT specified anywhere in the Figma
+   *     file. They were chosen with the user so that no tier exceeds 500 000
+   *     per client, which keeps the hero's «до 500 000 ₽ за каждого нового
+   *     клиента» claim literally true. Holding is intentionally capped equal
+   *     to large for that reason.
+   *   - Replace all four with the real commercial rates when they are known.
+   *
+   * Monthly figure: the comp shows "≈208 500 ₽ в месяц" against a yearly
+   * 2 500 000. A plain /12 gives 208 333.33, so the design rounds to the
+   * nearest 500. Reproduced here so the default state matches the comp exactly.
+   */
+  var RATES_PER_CLIENT = {
+    small: 100000,
+    medium: 250000,
+    large: 500000, // verified against the comp
+    holding: 500000, // capped so nothing exceeds the hero's "до 500 000 ₽"
+  };
+
+  var MONTHLY_ROUND_TO = 500;
+
+  /* 1234567 -> "1 234 567" using U+00A0, matching the page's typography rule
+     (literal NBSP, never &nbsp;, never an ASCII space between digit groups). */
+  function formatRubles(amount) {
+    var digits = String(Math.round(amount));
+    var out = "";
+    for (var i = 0; i < digits.length; i++) {
+      if (i > 0 && (digits.length - i) % 3 === 0) out += " ";
+      out += digits.charAt(i);
+    }
+    return out;
+  }
+
+  function initCalculator() {
+    var root = document.querySelector(".referral-calc");
+    if (!root) return;
+
+    var slider = root.querySelector(".referral-calc__slider");
+    var clientsOut = root.querySelector("#referral-calc-clients-value");
+    var yearOut = root.querySelector("#referral-calc-year");
+    var monthOut = root.querySelector("#referral-calc-month");
+    var radios = Array.prototype.slice.call(
+      root.querySelectorAll(".referral-calc__radio")
+    );
+    if (!slider || !clientsOut || !yearOut || !monthOut || !radios.length) return;
+
+    function selectedRate() {
+      for (var i = 0; i < radios.length; i++) {
+        if (radios[i].checked) {
+          var rate = RATES_PER_CLIENT[radios[i].value];
+          if (typeof rate === "number") return rate;
+        }
+      }
+      return RATES_PER_CLIENT.large;
+    }
+
+    function recompute() {
+      var clients = parseInt(slider.value, 10);
+      if (isNaN(clients)) clients = parseInt(slider.min, 10) || 1;
+
+      var perYear = clients * selectedRate();
+      var perMonth =
+        Math.round(perYear / 12 / MONTHLY_ROUND_TO) * MONTHLY_ROUND_TO;
+
+      clientsOut.textContent = String(clients);
+      yearOut.textContent = formatRubles(perYear) + " ₽";
+      monthOut.textContent =
+        "/ ≈" + formatRubles(perMonth) + " ₽ в месяц";
+
+      // Paint the filled portion of the track (WebKit has no ::-moz-range-progress
+      // equivalent, so the fill is a gradient stop driven from here).
+      var min = parseFloat(slider.min) || 1;
+      var max = parseFloat(slider.max) || 100;
+      var pct = ((clients - min) / (max - min)) * 100;
+      slider.style.setProperty("--rf-calc-fill", pct + "%");
+    }
+
+    slider.addEventListener("input", recompute);
+    radios.forEach(function (radio) {
+      radio.addEventListener("change", recompute);
+    });
+
+    recompute();
+  }
+
   function init() {
     initFaqAccordion();
     initStoriesCarousel();
+    initCalculator();
   }
 
   if (document.readyState === "loading") {

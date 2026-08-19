@@ -152,6 +152,16 @@
 }
 
 /* NO COMP — inferred */
+/* NO COMP — inferred. The 654fr/642fr split keeps dividing below ~1024, which
+   crushed the left card to ~105px at an 800 viewport and forced the display h3
+   ("Реальные деньги, а не бонусы") to break mid-word. Collapse to one column
+   before that happens rather than letting the ratio squeeze it. */
+@media (max-width: 1023px) {
+  .referral-benefits__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media (max-width: 1024px) {
   .referral-benefits {
     padding-block: 72px;

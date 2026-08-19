@@ -51,13 +51,28 @@ chk "no #aeroclub-logo / #about-section-title-expert" (
 chk "no about-faq / js-faq- (about.js collision guard)" ($h -notmatch 'about-faq|js-faq-')
 chk "js/about.js NOT loaded" ($h -notmatch 'js/about\.js')
 
-Write-Host "`n=== EXCLUSIONS (authored region) ==="
-chk "calculator: heading absent"        ($body -notmatch 'Рассчитайте свой доход')
-chk "calculator: slider label absent"   ($body -notmatch 'Количество привлеченных клиентов')
-chk "calculator: chips label absent"    ($body -notmatch 'Размер бизнеса')
-chk "calculator: disclaimer absent"     ($body -notmatch 'Расчет приведен')
-chk "calculator: figure absent (separator-tolerant)" (
-  [regex]::Matches($body,"2[\s$nb]500[\s$nb]000").Count -eq 0 )
+Write-Host "`n=== CALCULATOR (decision REVERSED 2026-08-19: the block is now REQUIRED) ==="
+# These five gates originally asserted the calculator was ABSENT, per the initial
+# "without second block" instruction. The user later asked for the block to be built,
+# so the assertions are inverted rather than deleted — the gate list still encodes the
+# current intent, and the history of the reversal stays visible here.
+chk "calculator section present"        ($body -match 'referral-calc')
+chk "calculator: heading present"       ($body -match 'Рассчитайте')
+chk "calculator: slider label present"  ($body -match 'Количество привлеченных клиентов')
+chk "calculator: chips label present"   ($body -match 'Размер бизнеса')
+chk "calculator: disclaimer present"    ($body -match 'Расчет приведен')
+chk "calculator: all four business tiers present" (
+  ($body -match 'Малый') -and ($body -match 'Средний') -and
+  ($body -match 'Крупный') -and ($body -match 'Холдинг') )
+chk "calculator: default figure matches comp (5 x Крупный = 2 500 000)" (
+  [regex]::Matches($body,"2$nb" + "500$nb" + "000$nb₽").Count -eq 1 )
+chk "calculator: slider is a native range input (keyboard/AT support)" (
+  $body -match '<input[^>]*type="range"[^>]*min="1"[^>]*max="100"' )
+chk "calculator: chips are real radios in a fieldset (not divs)" (
+  ($body -match '<fieldset[^>]*referral-calc__control--size') -and
+  ([regex]::Matches($body,'type="radio"[^>]*name="referral-calc-size"').Count -eq 4) )
+chk "calculator: result region is aria-live" ($body -match 'referral-calc__result[^>]*aria-live')
+chk "calculator: business rates live in ONE named constant" ($js -match 'RATES_PER_CLIENT')
 chk "artifact 'под капот' absent from AUTHORED region (it is legitimate footer copy)" (
   $body -notmatch 'под капот' )
 chk "rejected partner variant absent" ($body -notmatch 'Руководители, тревел-менеджеры')

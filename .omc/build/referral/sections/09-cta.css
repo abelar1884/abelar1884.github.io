@@ -96,7 +96,9 @@
   }
 
   .referral-cta__title {
-    font-size: 30px;
+    /* Same reason as the <=480 rule below: a fixed size in the 481-768 band still
+       let "Присоединяйтесь" exceed the banner's inner width at ~560. */
+    font-size: clamp(16px, 4.4vw, 30px);
   }
 }
 
@@ -111,12 +113,17 @@
   }
 
   .referral-cta__content {
-    padding: 24px;
+    padding: 20px 16px;
     justify-content: flex-end;
   }
 
   .referral-cta__title {
-    font-size: 24px;
+    /* Fluid: "Присоединяйтесь" is the longest word on the page; at a fixed 24px
+       it exceeded the banner's inner width and broke mid-word. */
+    /* Ratio solved by measurement, not guessed: "Присоединяйтесь" (15 chars) needs
+       <=14.9px at a 320 viewport, <=18.8px at 375, <=21.6px at 414. 4.4vw sits under
+       that curve at every width, so the word never breaks mid-way. */
+    font-size: clamp(14px, 4.4vw, 24px);
   }
 
   .referral-cta__button {
