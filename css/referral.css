@@ -42,8 +42,11 @@ body {
 .referral__container {
   max-width: 1440px;
   margin-inline: auto;
-  padding-inline: 56px;
   box-sizing: border-box;
+}
+
+.referral__container_gap {
+  padding-bottom: 100px;
 }
 
 /* --- Chrome overlay: navbar sits inside the teal hero panel ---------------
@@ -90,6 +93,10 @@ body {
   letter-spacing: 2px;
   color: var(--rf-teal);
   margin: 0;
+}
+
+.referral section:not(:first-child):not(:last-child) {
+  padding: 0 56px 100px 56px;
 }
 
 /* --- Responsive: container + display type --------------------------------- */
@@ -172,6 +179,7 @@ body {
   grid-template-columns: 1fr minmax(240px, 511px);
   align-items: start;
   gap: 40px;
+  padding-inline: 56px;
 }
 
 .referral-hero__content {
@@ -214,7 +222,7 @@ body {
   align-items: center;
   justify-content: center;
   height: 56px;
-  padding: 0 40px;
+  padding: 0 72px;
   border-radius: 999px;
   background: var(--rf-pink);
   color: #fff;
@@ -377,10 +385,6 @@ body {
    is intentionally NOT built here.
    ========================================================================== */
 
-.referral-commission {
-  padding-block: 64px;
-}
-
 .referral-commission__heading {
   margin: 0 0 24px;
   /* Figma's heading node 14086:110710 is 1440x62 — 62px is exactly two lines at
@@ -412,9 +416,18 @@ body {
 }
 
 .referral-commission__photo {
-  flex: 0 0 45%;
-  width: 45%;
+  flex: 0 0 268px;
+  width: 268px;
   object-fit: cover;
+  border-radius: 24px;
+}
+
+.referral-commission__photo_left {
+  object-position: left;
+}
+
+.referral-commission__photo_right {
+  object-position: right;
 }
 
 .referral-commission__panel {
@@ -424,7 +437,7 @@ body {
   flex-direction: column;
   justify-content: center;
   gap: 4px;
-  padding: 24px 24px 24px 32px;
+  padding: 53px 24px 53px 32px;
 }
 
 .referral-commission__percent {
@@ -514,7 +527,7 @@ body {
    ========================================================================== */
 
 .referral-benefits {
-  padding-block: 96px;
+  padding-block: 0;
 }
 
 .referral-benefits__title {
@@ -543,22 +556,12 @@ body {
   flex-direction: column;
   justify-content: space-between;
   border-radius: 24px;
-  background-color: var(--rf-teal);
   padding: 40px;
   box-sizing: border-box;
   overflow: hidden;
   isolation: isolate;
-}
-
-.referral-benefits__hero::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image: url("../assets/images/referral/bg-ruble-pattern.svg");
-  background-repeat: repeat;
-  background-size: 120px auto;
-  opacity: 0.12;
-  z-index: -1;
+  background: url("/assets/images/referral/bg-ruble.jpg");
+  background-size: cover;
 }
 
 .referral-benefits__hero-top {
@@ -608,15 +611,14 @@ body {
 
 .referral-benefits__card {
   border-radius: 20px;
-  background-color: var(--rf-bright-teal);
+  background: linear-gradient(180deg, #DFECE9 0%, #EEEEEE 100%);
   padding: 32px 40px;
   box-sizing: border-box;
 }
 
 .referral-benefits__card-head {
   display: flex;
-  align-items: center;
-  gap: 16px;
+  gap: 12px;
   margin-bottom: 16px;
 }
 
@@ -767,7 +769,7 @@ body {
   grid-template-columns: 723fr 605fr;
   align-items: stretch;
   border-radius: 24px;
-  background-color: var(--rf-bright-teal);
+  background: linear-gradient(180deg, #DFECE9 0%, #EEEEEE 100%);
   overflow: hidden;
 }
 
@@ -829,6 +831,7 @@ body {
   min-height: 400px;
   object-fit: cover;
   display: block;
+  border-radius: 24px;
 }
 
 /* --- Responsive ------------------------------------------------------------- */
