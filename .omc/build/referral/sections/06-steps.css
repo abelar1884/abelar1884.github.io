@@ -1,16 +1,12 @@
 /* ==========================================================================
-   Unit 06 — «Начать зарабатывать с GATE просто» (desktop node 14086:111174,
-   mobile node 14132:113931). Markup contract (title/progress/carousel/track/
-   card/dots) set by the team-lead in 06-steps.html — this file styles
-   against it. `.referral-steps__dots` is injected at runtime by
-   js/referral.js; do not add it to markup.
+   Unit 06 — «Начать зарабатывать с GATE просто» (node 14086:111174)
    ========================================================================== */
 
 .referral-steps {
   padding-block: 96px;
 }
 
-.referral-steps__title {
+.referral-steps__heading {
   text-align: center;
 }
 
@@ -39,20 +35,20 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  border: 1px solid var(--rf-pink);
   background: transparent;
   font-family: var(--font-inter);
   font-weight: 700;
   font-size: 20px;
   line-height: 1;
   color: var(--rf-teal);
+  position: relative;
+  width: 56px;
+  height: 56px;
 }
 
 .referral-steps__circle--dashed {
   border-style: dashed;
+  border-color: var(--rf-gray-2);
 }
 
 .referral-steps__line {
@@ -62,10 +58,11 @@
   margin-inline: 20px;
 }
 
-/* --- Carousel: 3-up static row at desktop, 1-up scroller at mobile --------
-   Mirrors 05-stories.css's carousel pattern exactly, per the lead's brief:
-   the card-width rules alone determine desktop-vs-mobile behaviour, the JS
-   measures how many cards fit and derives the page count itself. */
+/* --- Step cards: 3-up static row at desktop, 1-up carousel at mobile ------
+   Mirrors the .referral-stories carousel pattern exactly: the card-width
+   rules alone decide the behaviour, js/referral.js measures how many cards
+   fit and derives the page count. `.referral-steps__dots` is injected by
+   that script - never put it in the markup. */
 
 .referral-steps__carousel {
   display: flex;
@@ -99,16 +96,21 @@
 }
 
 .referral-steps__card {
+  /* three cards + two 24px gaps inside the content column */
   flex: 0 0 auto;
-  /* three cards + two 24px gaps inside the content column, matching the
-     stories carousel's math exactly */
   width: calc((100% - 48px) / 3);
   min-width: 0;
-  background: var(--rf-bright-teal);
+  background: linear-gradient(180deg, #DFECE9 0%, #EEEEEE 100%);
   border-radius: 20px;
   padding: 32px 28px;
   text-align: center;
   scroll-snap-align: start;
+}
+
+/* Desktop keeps the single .referral-steps__progress row above the cards; the
+   per-slide marker is mobile-only (see the 768 block). */
+.referral-steps__marker {
+  display: none;
 }
 
 .referral-steps__card-title {
@@ -141,10 +143,9 @@
   display: none;
 }
 
-/* Defensive: same fix as the stories carousel needed — when the measured
-   page count is 1, the script empties the rail but the element stays in the
-   flow and the carousel's 24px gap still applies, leaving dead space under
-   the cards at desktop. */
+/* Defensive: same fix the stories rail needed - when the measured page count
+   is 1 the script empties the rail, but the element stays in flow and the
+   carousel's 24px gap would leave dead space under the row at desktop. */
 .referral-steps__dots:empty {
   display: none;
 }
@@ -178,58 +179,101 @@
 
 /* --- Responsive ------------------------------------------------------------ */
 
-/* NO COMP — inferred */
+/* NO COMP - inferred */
 @media (max-width: 1024px) {
   .referral-steps__card {
     padding: 28px 22px;
   }
 }
 
-/* Mobile comp (node 14132:113931). Real values, not inferred:
-   title 21px fixed, centred, mobile-only break is already baked into the
-   accent/plain span split the lead's markup carries over from desktop (no
-   change needed there — comp confirms accent = "Начать зарабатывать",
-   plain = "с GATE просто", matching the existing span split exactly).
-   Progress→title gap 24px, progress circles shrink to ~39px, connector line
-   colour is #D9D9D9 in the comp (not --rf-gray-3/#A1A1AA — a real, slightly
-   different mobile value). One card visible (100% width, carousel track),
-   card background is the mobile-only gradient (#DFECE9→#EEEEEE, matching
-   the pattern used across benefits/who/industries-intro on mobile — real
-   comp value, not --rf-bright-teal), radius 24px, padding 24px, title 20px
-   CENTRED (desktop is also centred already, no change), body 12px, colour
-   #000 (not --rf-gray-2). The comp's circle SVGs are actual ring/arc
-   graphics (partial progress rings) rather than a bordered-circle-with-
-   number — kept the existing simpler bordered-circle pattern since no ring
-   asset was exported (SPEC: workers don't export their own assets) and the
-   dashed-border-on-step-1 treatment already approximates the same intent. */
+/* Mobile comp, node 14132:113931 (real values, not inferred).
+   The comp is a horizontal track 1066px wide inside a 343px window: each slide
+   carries its own numbered marker whose centre sits on the card centre, with a
+   1.6px #D9D9D9 rule running out of it to both window edges. That is why the
+   desktop .referral-steps__progress row is swapped for a per-slide
+   .referral-steps__marker here rather than being merely restyled.
+   Measured: section gap 24px, marker 38.53px, marker->card gap 21px, card
+   radius 24, padding 24, title/body gap 6.4px, title 20/1.2/0.4px tracking,
+   body 12/1.5 #000, dots 12px with a 28px active pill. */
 @media (max-width: 768px) {
   .referral-steps {
     padding-block: 64px;
   }
 
-  .referral-steps__title {
-    font-size: 21px;
+  .referral-steps__heading {
+    text-align: center;
   }
 
+  /* Replaced by the per-slide marker below. */
   .referral-steps__progress {
-    margin: 24px auto 24px;
+    display: none;
   }
 
-  .referral-steps__circle {
-    width: 39px;
-    height: 39px;
-    font-size: 16px;
+  .referral-steps__carousel {
+    gap: 24px;
+    margin-top: 24px;
   }
 
-  .referral-steps__line {
-    background: #d9d9d9;
+  .referral-steps__track {
+    gap: 16px;
   }
 
   .referral-steps__card {
     width: 100%;
-    background: linear-gradient(180deg, #dfece9 0%, #eee 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 21px;
+    background: none;
+    border-radius: 0;
+    padding: 0;
+    /* clips the marker's connector rules at the slide edge so they cannot
+       inflate the track's scrollWidth and throw off the JS page maths */
+    overflow: hidden;
+  }
+
+  .referral-steps__marker {
+    display: block;
+    position: relative;
+    flex: 0 0 auto;
+    width: 39px;
+    height: 39px;
+    line-height: 0;
+  }
+
+  .referral-steps__marker img {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  /* the connector rules: out of the marker to both edges of the slide */
+  .referral-steps__marker::before,
+  .referral-steps__marker::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 100vw;
+    height: 1.6px;
+    background: #d9d9d9;
+  }
+
+  .referral-steps__marker::before {
+    right: 100%;
+    margin-right: 16px;
+  }
+
+  .referral-steps__marker::after {
+    left: 100%;
+    margin-left: 16px;
+  }
+
+  .referral-steps__panel {
+    width: 100%;
+    background: linear-gradient(180deg, #DFECE9 0%, #EEEEEE 100%);
     border-radius: 24px;
     padding: 24px;
+    text-align: center;
   }
 
   .referral-steps__card-title {
@@ -246,15 +290,9 @@
   }
 }
 
-/* NO COMP — inferred */
+/* NO COMP - inferred */
 @media (max-width: 480px) {
   .referral-steps {
     padding-block: 48px;
-  }
-
-  .referral-steps__circle {
-    width: 34px;
-    height: 34px;
-    font-size: 14px;
   }
 }

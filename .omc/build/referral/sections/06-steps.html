@@ -1,39 +1,64 @@
-  <section class="referral-steps" aria-labelledby="referral-steps-heading">
-    <div class="referral__container">
-      <h2 id="referral-steps-heading" class="referral__h2 referral-steps__heading">
-        <span class="referral-steps__accent">Начать зарабатывать</span><br>
-        с GATE просто
-      </h2>
+<section class="referral-steps" aria-labelledby="referral-steps-heading">
+  <div class="referral__container">
+    <h2 id="referral-steps-heading" class="referral__h2 referral-steps__heading">
+      <span class="referral-steps__accent">Начать зарабатывать</span><br>
+      с GATE просто
+    </h2>
 
-      <div class="referral-steps__progress" aria-hidden="true">
-        <span class="referral-steps__circle referral-steps__circle--dashed">1</span>
-        <span class="referral-steps__line"></span>
-        <span class="referral-steps__circle">2</span>
-        <span class="referral-steps__line"></span>
-        <span class="referral-steps__circle">3</span>
-      </div>
+    <div class="referral-steps__progress" aria-hidden="true">
+      <span class="referral-steps__circle">
+        <img src="/assets/images/referral/step-first.svg" alt="">
+      </span>
+      <span class="referral-steps__line"></span>
+      <span class="referral-steps__circle">
+        <img src="/assets/images/referral/step-second.svg" alt="">
+      </span>
+      <span class="referral-steps__line"></span>
+      <span class="referral-steps__circle">
+        <img src="/assets/images/referral/step-third.svg" alt="">
+      </span>
+    </div>
 
-      <!-- Carousel DOM per the contract at the top of js/referral.js. The <ol> IS the
-           track, so the steps keep their ordered-list semantics while still being the
-           scroll container. Below 768 the comp (14132:113931) shows one step at a time
-           with a dot rail; at desktop all three fit, the script computes a single page
-           and hides the rail, so the same markup serves both without a JS breakpoint.
-           .referral-steps__dots is injected at runtime — do not add it here. -->
-      <div class="referral-steps__carousel">
-        <ol class="referral-steps__track" tabindex="0" aria-label="Шаги: как начать зарабатывать с GATE">
-          <li class="referral-steps__card">
+    <!-- Carousel DOM per the contract at the top of js/referral.js. The <ol> IS
+         the track, so the steps keep ordered-list semantics while also being the
+         scroll container. Below 768 the comp (14132:113931) shows one step at a
+         time with a dot rail and the step's own numbered marker above the card;
+         at desktop all three fit, the script measures a single page and hides
+         the rail, so one markup serves both without a JS breakpoint.
+         .referral-steps__dots is injected at runtime - do not add it here.
+         .referral-steps__marker duplicates the numbers of .referral-steps__progress
+         on purpose: the comp moves the marker with the slide below 768, and both
+         are decorative (aria-hidden), so nothing is announced twice. -->
+    <div class="referral-steps__carousel">
+      <ol class="referral-steps__track" tabindex="0" aria-label="Шаги: как начать зарабатывать с GATE">
+        <li class="referral-steps__card">
+          <span class="referral-steps__marker" aria-hidden="true">
+            <img src="/assets/images/referral/step-first.svg" alt="" width="39" height="39">
+          </span>
+          <div class="referral-steps__panel">
             <h3 class="referral-steps__card-title">Зарегистрируйтесь<br>и рекомендуйте GATE</h3>
             <p class="referral-steps__card-body">Получите персональную реферальную ссылку в личном кабинете партнёра. Рекомендуйте GATE знакомым, коллегам, партнёрам и клиентам</p>
-          </li>
-          <li class="referral-steps__card">
+          </div>
+        </li>
+        <li class="referral-steps__card">
+          <span class="referral-steps__marker" aria-hidden="true">
+            <img src="/assets/images/referral/step-second.svg" alt="" width="39" height="39">
+          </span>
+          <div class="referral-steps__panel">
             <h3 class="referral-steps__card-title">Новый клиент бронирует<br>командировки через GATE</h3>
             <p class="referral-steps__card-body">Компания регистрируется в GATE по вашей ссылке, оформляет и оплачивает командировки</p>
-          </li>
-          <li class="referral-steps__card">
+          </div>
+        </li>
+        <li class="referral-steps__card">
+          <span class="referral-steps__marker" aria-hidden="true">
+            <img src="/assets/images/referral/step-third.svg" alt="" width="39" height="39">
+          </span>
+          <div class="referral-steps__panel">
             <h3 class="referral-steps__card-title">Вы получаете<br>вознаграждение</h3>
             <p class="referral-steps__card-body">За оплаченные командировки клиентов, которые пришли в GATE по вашей рекомендации</p>
-          </li>
-        </ol>
-      </div>
+          </div>
+        </li>
+      </ol>
     </div>
-  </section>
+  </div>
+</section>
