@@ -107,76 +107,6 @@ body {
   padding: 0 56px 100px 56px;
 }
 
-@media (max-width: 480px) {
-  .referral section:not(:first-child):not(:last-child) {
-    padding: 0 16px 80px 16px;
-  }
-}
-/* --- Responsive: container + display type --------------------------------- */
-
-/* NO COMP — inferred */
-@media (max-width: var(--rf-breakpoint-tablet)) {
-  .referral__container {
-    padding-inline: 24px;
-  }
-
-  .referral__h2 {
-    /* Fluid here too: at a fixed 36px, "рекомендовать" overflowed its box around
-       520px and broke mid-word. Measured ceiling is ~34px at 520. */
-    font-size: clamp(19px, 6.2vw, 36px);
-  }
-}
-
-/* NO COMP — inferred */
-@media (max-width: var(--rf-breakpoint-mobile)) {
-  .referral__container {
-    padding-inline: 16px;
-  }
-
-  .referral__h2 {
-    /* Fluid below 480 so long Russian display words ("Рассчитайте",
-       "Присоединяйтесь") shrink to fit instead of being broken mid-word by the
-       overflow-wrap:anywhere safety net further down this file. A fixed 31px
-       stopped shrinking and started hyphen-less mid-word breaks at <=390px. */
-    font-size: clamp(19px, 6.2vw, 31px);
-  }
-
-  .referral__h3 {
-    font-size: 26px;
-  }
-}
-
-/* --- Long-word breaking on narrow viewports -------------------------------
-   NO COMP — inferred. Russian display headings contain words long enough
-   ("Реферальная", "зарабатывать", "Присоединяйтесь") that their min-content
-   width exceeds a 375px viewport, which forced document-level horizontal
-   overflow. Allow them to break rather than push the page wide. Applied only
-   at <=640 so desktop line-breaking is untouched. */
-@media (max-width: 640px) {
-  .referral h1,
-  .referral h2,
-  .referral h3,
-  .referral__h2,
-  .referral__h2-accent,
-  .referral__h3 {
-    /* `anywhere` rather than `break-word`: only `anywhere` reduces the element's
-       MIN-CONTENT size. With `break-word` these headings are flex/grid items whose
-       width still resolves to min-content (380px for "Реферальная" at 34px), which
-       pushed the document to 396px on a 375px viewport. */
-    overflow-wrap: anywhere;
-    hyphens: auto;
-    /* let the heading shrink below min-content inside a flex column */
-    min-width: 0;
-    max-width: 100%;
-  }
-}
-
-@media (max-width: 480px) {
-  .referral__h2 {
-    font-size: 21px;
-  }
-}
-
 /* ====================== 01-hero.css ====================== */
 /* ==========================================================================
    Unit 01 — hero. Continues the .referral-hero section opened in
@@ -224,6 +154,7 @@ body {
   line-height: 1.15;
   letter-spacing: 2.56px;
   color: #fff;
+  z-index: 1;
 }
 
 .referral-hero__subcopy {
@@ -324,87 +255,6 @@ body {
   width: 32.88%;
   height: 40.78%;
   border-radius: 13px;
-}
-
-/* --- Responsive ------------------------------------------------------- */
-
-/* NO COMP — inferred */
-@media (max-width: 1024px) {
-  .referral-hero {
-    min-height: 0;
-    padding-bottom: 48px;
-  }
-
-  .referral-hero__body {
-    padding-top: 140px;
-    grid-template-columns: 1fr minmax(200px, 380px);
-    gap: 24px;
-  }
-
-  .referral-hero__collage {
-    margin-top: 0;
-  }
-}
-
-/* NO COMP — inferred: stack text above collage, collage centred and capped,
-   still visible (not hidden) at phone/tablet widths. */
-@media (max-width: 768px) {
-  .referral-hero {
-    border-radius: 0 0 40px 40px;
-  }
-
-  .referral-hero__body {
-    padding-top: 160px;
-    grid-template-columns: 1fr;
-    gap: 32px;
-  }
-
-  .referral-hero__title {
-    /* Fluid: "Реферальная" is ~470px at 44px but the column is ~408px at 520. */
-    font-size: clamp(24px, 7vw, 44px);
-    letter-spacing: 1.5px;
-  }
-
-  .referral-hero__subcopy {
-    font-size: 18px;
-  }
-
-  .referral-hero__cta {
-    width: 100%;
-  }
-
-  .referral-hero__collage {
-    max-width: 420px;
-    margin-inline: auto;
-    margin-top: 0;
-  }
-}
-
-/* NO COMP — inferred */
-@media (max-width: 480px) {
-  .referral-hero__body {
-    padding-top: 150px;
-    padding-inline: 16px;
-  }
-
-  .referral-hero__title {
-    /* Fluid: "Реферальная" is 363px at 34px and the column is only 273px at a
-       320 viewport, so a fixed size forced a mid-word break. */
-    font-size: clamp(20px, 7vw, 34px);
-  }
-
-  .referral-hero__subcopy {
-    font-size: 16px;
-  }
-
-  .referral-hero__cta {
-    height: 52px;
-    padding: 0 24px;
-  }
-
-  .referral-hero__collage {
-    max-width: 320px;
-  }
 }
 
 /* ====================== 02-calculator.css ====================== */
@@ -640,18 +490,6 @@ body {
   outline-offset: 3px;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .referral-calc__chip {
-    transition: none;
-  }
-}
-
-@media (max-width: var(--rf-breakpoint-mobile)) {
-  .referral-calc {
-    padding: 0;
-  }
-}
-
 /* --- Result panel ------------------------------------------------------- */
 
 .referral-calc__result {
@@ -708,95 +546,6 @@ body {
   text-align: center;
   color: var(--rf-teal);
   opacity: 0.7;
-}
-
-/* --- Responsive --------------------------------------------------------- */
-
-/* NO COMP — inferred: stack the two controls once 369+405+32 no longer fits. */
-@media (max-width: 900px) {
-  .referral-calc__controls {
-    flex-direction: column;
-    gap: 24px;
-  }
-
-  .referral-calc__control--clients,
-  .referral-calc__control--size {
-    flex: 1 1 auto;
-    width: 100%;
-  }
-
-  .referral-calc__result-year {
-    font-size: 48px;
-  }
-}
-
-/* NO COMP — inferred */
-@media (max-width: 767px) {
-  .referral-calc {
-    padding-block: 40px 20px;
-  }
-
-  .referral-calc__title {
-    margin-bottom: 28px;
-  }
-
-  .referral-calc__card {
-    padding: 20px;
-  }
-
-  .referral-calc__label-row {
-    align-items: flex-start;
-  }
-
-  .referral-calc__value {
-    font-size: 28px;
-  }
-
-  .referral-calc__result-year {
-    font-size: 40px;
-    letter-spacing: 0.8px;
-  }
-
-  .referral-calc__result {
-    gap: 12px;
-    min-height: 0;
-    padding: 20px 16px;
-  }
-}
-
-/* NO COMP — inferred: four 96px chips + gaps exceed a 320-375px card, so let
-   them share two rows evenly rather than overflow. */
-@media (max-width: 480px) {
-  .referral-calc__chips {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-  }
-
-  .referral-calc__chip {
-    width: 100%;
-    padding: 5px 0;
-    font-weight: 400 !important;
-  }
-
-  .referral-calc__result-year {
-    font-size: 28px;
-  }
-
-  .referral-calc__label {
-    font-size: 14px;
-  }
-
-  .referral-calc__result-label {
-    font-size: 12px;
-  }
-
-  .referral-calc__result-month {
-    font-size: 10px;
-  }
-
-  .referral-calc__note {
-    font-size: 8px;
-  }
 }
 
 /* ====================== 02b-commission.css ====================== */
@@ -880,68 +629,6 @@ body {
   color: #fff;
 }
 
-/* --- Responsive ------------------------------------------------------- */
-
-/* NO COMP — inferred */
-@media (max-width: 1024px) {
-  .referral-commission__percent {
-    font-size: 56px;
-  }
-
-  .referral-commission__desc {
-    font-size: 20px;
-  }
-}
-
-/* NO COMP — inferred */
-@media (max-width: 768px) {
-  .referral-commission {
-    padding-block: 48px;
-  }
-
-  .referral-commission__heading {
-    font-size: 20px;
-  }
-
-  .referral-commission__break {
-    display: none;
-  }
-
-  .referral-commission__cards {
-    flex-direction: column;
-    gap: 24px;
-  }
-
-  .referral-commission__card {
-
-  }
-
-  .referral-commission__photo {
-    flex: none;
-    width: 150px;
-    height: 144px;
-  }
-
-  .referral-commission__panel {
-    padding: 24px;
-  }
-}
-
-/* NO COMP — inferred */
-@media (max-width: 480px) {
-  .referral-commission__heading {
-    font-size: 16px;
-  }
-
-  .referral-commission__desc {
-    font-size: 12px;
-  }
-
-  .referral-commission__panel {
-    padding: 17px;
-  }
-}
-
 /* ====================== 03-benefits.css ====================== */
 /* ==========================================================================
    Unit 03 — «Почему это выгодно» (benefits)
@@ -1022,25 +709,6 @@ body {
   margin: 0;
 }
 
-@media (max-width: 480px) {
-  .referral-benefits__hero-top {
-    justify-content: center;
-  }
-
-  .referral-benefits__hero-bottom {
-    text-align: center;
-    margin-top: 70px;
-  }
-
-  .referral__h3 {
-    font-size: 24px;
-  }
-
-  .referral-benefits__hero-text {
-    font-size: 16px;
-  }
-}
-
 /* --- Right: three stacked light cards --------------------------------------- */
 
 .referral-benefits__list {
@@ -1093,118 +761,6 @@ body {
   line-height: 1.44;
   color: var(--rf-gray-1);
   margin: 0;
-}
-
-/* --- Responsive ------------------------------------------------------------- */
-
-/* NO COMP — inferred */
-@media (max-width: 1200px) {
-  .referral-benefits__card-title {
-    font-size: 22px;
-  }
-}
-
-/* NO COMP — inferred */
-/* NO COMP — inferred. The 654fr/642fr split keeps dividing below ~1024, which
-   crushed the left card to ~105px at an 800 viewport and forced the display h3
-   ("Реальные деньги, а не бонусы") to break mid-word. Collapse to one column
-   before that happens rather than letting the ratio squeeze it. */
-@media (max-width: 1023px) {
-  .referral-benefits__grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-@media (max-width: 1024px) {
-  .referral-benefits {
-    padding-block: 72px;
-  }
-
-  .referral-benefits__hero {
-    min-height: 420px;
-    padding: 32px;
-  }
-
-  .referral-benefits__badge {
-    width: 140px;
-    height: 140px;
-  }
-
-  .referral-benefits__badge-icon {
-    width: 80px;
-    height: 80px;
-  }
-}
-
-/* NO COMP — inferred */
-@media (max-width: 768px) {
-  .referral-benefits {
-    padding-block: 56px;
-  }
-
-  .referral-benefits__grid {
-    grid-template-columns: 1fr;
-  }
-
-  .referral-benefits__hero {
-    min-height: 0;
-  }
-
-  .referral-benefits__hero-bottom {
-    max-width: 100%;
-  }
-
-  .referral-benefits__title {
-    margin-bottom: 32px;
-  }
-}
-
-/* NO COMP — inferred */
-@media (max-width: 480px) {
-  .referral-benefits {
-    padding-block: 40px;
-  }
-
-  .referral-benefits__hero {
-    padding: 24px;
-  }
-
-  .referral-benefits__badge {
-    width: 112px;
-    height: 112px;
-  }
-
-  .referral-benefits__badge-icon {
-    width: 64px;
-    height: 64px;
-  }
-
-  .referral-benefits__card {
-    padding: 32px 24px;
-    text-align: center;
-  }
-
-  .referral-benefits__card-head {
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
-  .referral-benefits__card-title {
-    font-size: 18px;
-  }
-
-  .referral-benefits__card-text {
-    font-size: 16px;
-  }
-
-  .referral-benefits__icon {
-    width: 40px;
-    height: 40px;
-  }
-
-  .referral-benefits__list {
-    gap: 32px;
-  }
 }
 
 /* ====================== 04-who.css ====================== */
@@ -1292,78 +848,6 @@ body {
   object-fit: cover;
   display: block;
   border-radius: 24px;
-}
-
-/* --- Responsive ------------------------------------------------------------- */
-
-/* NO COMP — inferred */
-@media (max-width: 1200px) {
-  .referral-who__content {
-    padding: 40px 32px;
-  }
-}
-
-/* NO COMP — inferred */
-@media (max-width: 1024px) {
-  .referral-who {
-    padding-block: 72px;
-  }
-
-  .referral-who__card {
-    display: flex;
-    flex-direction: column-reverse;
-  }
-
-  .referral-who__media {
-    min-height: 320px;
-    order: -1;
-  }
-}
-
-/* NO COMP — inferred */
-@media (max-width: 768px) {
-  .referral-who {
-    padding-block: 56px;
-  }
-
-  .referral-who__title {
-    margin-bottom: 32px;
-  }
-
-  .referral-who__content {
-    padding: 32px 24px;
-  }
-
-  .referral-who__item-title {
-    font-size: 20px;
-  }
-}
-
-/* NO COMP — inferred */
-@media (max-width: 480px) {
-  .referral-who {
-    padding-block: 40px;
-  }
-
-  .referral-who__content {
-    padding: 24px 16px;
-  }
-
-  .referral-who__media {
-    min-height: 240px;
-  }
-
-  .referral-who__item {
-    padding-block: 16px;
-  }
-
-  .referral-who__note {
-    padding: 16px;
-  }
-
-  .referral-who__item-text, .referral-who__note {
-    font-size: 16px;
-  }
 }
 
 /* ====================== 05-stories.css ====================== */
@@ -1563,110 +1047,6 @@ body {
   outline-offset: 3px;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .referral-stories__dot {
-    transition: none;
-  }
-}
-
-/* --- Responsive --------------------------------------------------------- */
-
-/* NO COMP — inferred: 2 cards visible, matching the JS reference table. */
-@media (max-width: 1023px) {
-  .referral-stories__card {
-    width: calc((100% - 24px) / 2);
-  }
-}
-
-/* Mobile comp (node 14132:113835). Real values, not inferred, for the
-   ACTIVE card (14154:121598): one card per page below 768 with 21px of the
-   next one peeking past the right edge (cards 2-3 in the comp are the same
-   card at the same size, offset by the 8px gap - not separate target sizes),
-   rail plus swipe are the paging means.
-   Card radius ~19px (was 24), padding ~26/19/26/26 (was 24/20 uniform),
-   avatar shrinks to ~39px (was 48), name 13px (was 16), body copy 10px
-   (was 12); headline stays 16px, unchanged. The comp's track uses a FIXED
-   16px gutter (not the container's stepped 24px→16px ladder) — matches the
-   MOBILE-SPEC's "16px side gutters" baseline directly, so pin it rather
-   than inherit the wider 24px tier that applies 480-768px elsewhere.
-   The comp's per-card internal gap is actually two-tier (person↔text 13px,
-   headline↔body 7px); approximated here as a single blended 12px on
-   .referral-stories__card rather than restructuring the card into a nested
-   wrapper — close visually, flagged in the report. */
-@media (max-width: 767px) {
-  .referral-stories {
-    padding-block: 40px;
-  }
-
-  .referral-stories__title {
-    font-size: 21px;
-    margin-bottom: 28px;
-  }
-
-  .referral-stories__break {
-    display: inline;
-  }
-
-  /* Track needs a FIXED 16px gutter, so it escapes the section's own inline
-     padding with a matching negative margin and then applies its own 16px.
-     The gutter comes from `.referral section:not(:first-child):not(:last-child)`
-     in 00-base — 56px here, stepping to 16px at <=480 (the `.referral__container`
-     padding rules never apply: their media queries use var(), which is invalid).
-     The carousel is a centred flex column, so the track must also drop its
-     width:100% and stretch instead — with a definite width the negative
-     margins only shift the box sideways instead of widening it, which left
-     the card narrow and the right gutter oversized. */
-  .referral-stories__track {
-    width: auto;
-    align-self: stretch;
-    margin-inline: -56px;
-    padding-inline: 16px;
-    /* One card per page: the pitch (card + gap) must equal the track's
-       clientWidth, which is what js/referral.js scrolls by, so the gap has to
-       be twice the 16px gutter. With any other gap the pages drift and the
-       last card never reaches its snap position. */
-    gap: 8px;
-    /* Without this, `scroll-snap-align: start` snaps to the padding edge and
-       eats the left gutter, pinning the card to the screen edge. */
-    scroll-padding-inline: 16px;
-  }
-
-  .referral-stories__card {
-    /* Peek: the comp puts a 330px card in a 375px window with a 16px gutter and
-       an 8px gap, so 21px of the NEXT card stays visible past the right edge -
-       the affordance that tells you the row scrolls. 100% here is the track's
-       content box (viewport - 2x16), so `- 13px` leaves exactly that 21px.
-       The pitch (card + gap) is deliberately NOT equal to the track's
-       clientWidth: js/referral.js scrolls by clientWidth and CSS snap then
-       pulls each page onto the nearest card, which lands right for all three. */
-    width: calc(100% - 13px);
-    gap: 12px;
-    padding: 26px 19px 26px 26px;
-    border-radius: 19px;
-  }
-
-  .referral-stories__avatar {
-    width: 39px;
-    height: 39px;
-  }
-
-  .referral-stories__name {
-    font-size: 13px;
-  }
-
-  .referral-stories__body p {
-    font-size: 10px;
-  }
-}
-
-/* The section's gutter steps to 16px here — keep the track's negative margin
-   in sync with it so the net gutter stays a fixed 16px. */
-@media (max-width: 480px) {
-  .referral-stories__track {
-    margin-inline: -16px;
-  }
-}
-
 /* ====================== 06-steps.css ====================== */
 /* ==========================================================================
    Unit 06 — «Начать зарабатывать с GATE просто» (node 14086:111174)
@@ -1839,149 +1219,6 @@ body {
 .referral-steps__dot:focus-visible {
   outline: 2px solid var(--rf-pink);
   outline-offset: 3px;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .referral-steps__dot {
-    transition: none;
-  }
-}
-
-/* --- Responsive ------------------------------------------------------------ */
-
-/* NO COMP - inferred */
-@media (max-width: 1024px) {
-  .referral-steps__card {
-    padding: 28px 22px;
-  }
-}
-
-/* Mobile comp, node 14132:113931 (real values, not inferred).
-   The comp is a horizontal track 1066px wide inside a 343px window: each slide
-   carries its own numbered marker whose centre sits on the card centre, with a
-   1.6px #D9D9D9 rule running out of it to both window edges. That is why the
-   desktop .referral-steps__progress row is swapped for a per-slide
-   .referral-steps__marker here rather than being merely restyled.
-   Measured: section gap 24px, marker 38.53px, marker->card gap 21px, card
-   radius 24, padding 24, title/body gap 6.4px, title 20/1.2/0.4px tracking,
-   body 12/1.5 #000, dots 12px with a 28px active pill. */
-@media (max-width: 768px) {
-  .referral-steps {
-    padding-block: 64px;
-  }
-
-  .referral-steps__heading {
-    text-align: center;
-  }
-
-  /* Replaced by the per-slide marker below. */
-  .referral-steps__progress {
-    display: none;
-  }
-
-  .referral-steps__carousel {
-    gap: 24px;
-    margin-top: 24px;
-  }
-
-  /* Same full-bleed track as .referral-stories__track: escape the section's
-     own inline padding so the gutter is a fixed 16px, and let the next slide
-     peek 21px past the right edge. The carousel is a centred flex column, so
-     the track must stretch instead of keeping width:100% - with a definite
-     width the negative margins only shift the box instead of widening it. */
-  .referral-steps__track {
-    width: auto;
-    align-self: stretch;
-    margin-inline: -56px;
-    padding-inline: 16px;
-    gap: 8px;
-    /* else `scroll-snap-align: start` snaps to the padding edge and pins the
-       card to the screen edge */
-    scroll-padding-inline: 16px;
-  }
-
-  .referral-steps__card {
-    width: calc(100% - 13px);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 21px;
-    background: none;
-    border-radius: 0;
-    padding: 0;
-    /* clips the marker's connector rules at the slide edge so they cannot
-       inflate the track's scrollWidth and throw off the JS page maths */
-    overflow: hidden;
-  }
-
-  .referral-steps__marker {
-    display: block;
-    position: relative;
-    flex: 0 0 auto;
-    width: 39px;
-    height: 39px;
-    line-height: 0;
-  }
-
-  .referral-steps__marker img {
-    width: 100%;
-    height: 100%;
-    display: block;
-  }
-
-  /* the connector rules: out of the marker to both edges of the slide */
-  .referral-steps__marker::before,
-  .referral-steps__marker::after {
-    content: "";
-    position: absolute;
-    top: 50%;
-    width: 100vw;
-    height: 1.6px;
-    background: #d9d9d9;
-  }
-
-  .referral-steps__marker::before {
-    right: 100%;
-    margin-right: 16px;
-  }
-
-  .referral-steps__marker::after {
-    left: 100%;
-    margin-left: 16px;
-  }
-
-  .referral-steps__panel {
-    width: 100%;
-    background: linear-gradient(180deg, #DFECE9 0%, #EEEEEE 100%);
-    border-radius: 24px;
-    padding: 24px;
-    text-align: center;
-  }
-
-  .referral-steps__card-title {
-    font-size: 20px;
-    line-height: 1.2;
-    letter-spacing: 0.4px;
-    margin-bottom: 6px;
-  }
-
-  .referral-steps__card-body {
-    font-size: 12px;
-    line-height: 1.5;
-    color: #000;
-  }
-}
-
-/* The section's gutter steps to 16px here - keep the track's negative margin
-   in sync with it so the net gutter stays a fixed 16px. */
-@media (max-width: 480px) {
-  .referral-steps {
-    padding-block: 48px;
-  }
-
-  .referral-steps__track {
-    margin-inline: -16px;
-  }
 }
 
 /* ====================== 07-industries.css ====================== */
@@ -2189,101 +1426,6 @@ body {
   color: rgba(255, 255, 255, .85);
 }
 
-/* --- Responsive ------------------------------------------------------------ */
-
-/* NO COMP — inferred */
-@media (max-width: 1200px) {
-  .referral-industries__intro {
-    padding: 32px 36px;
-  }
-}
-
-/* NO COMP — inferred */
-@media (max-width: 1024px) {
-  .referral-industries__panel {
-    padding: 32px;
-  }
-
-  .referral-industries__checklist {
-    gap: 16px 32px;
-  }
-}
-
-/* NO COMP — inferred */
-@media (max-width: 768px) {
-  .referral-industries {
-    padding-block: 64px;
-  }
-
-  .referral-industries__panel {
-    padding: 24px;
-    border-radius: 24px;
-  }
-
-  .referral-industries__intro {
-    padding: 24px;
-    border-radius: 20px;
-  }
-
-  .referral-industries__checklist {
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
-
-  .referral-industries__grid {
-    grid-template-columns: 1fr;
-  }
-
-  .referral-industries__card--wide,
-  .referral-industries__card--narrow,
-  .referral-industries__card--equal {
-    grid-column: span 1;
-  }
-
-  .referral-industries__card--photo {
-    min-height: 240px;
-  }
-}
-
-/* NO COMP — inferred */
-@media (max-width: 640px) {
-  .referral-industries__intro-title {
-    font-size: 21px;
-  }
-
-  .referral-industries__card-title {
-    font-size: 20px;
-  }
-}
-
-/* NO COMP — inferred */
-@media (max-width: 480px) {
-  .referral-industries {
-    padding-block: 48px;
-  }
-
-  .referral-industries__panel {
-    padding: 16px;
-  }
-
-  .referral-industries__intro {
-    padding: 20px;
-  }
-
-  .referral-industries__card {
-    padding: 20px;
-    min-height: auto;
-  }
-
-  .referral-industries__card--photo {
-    min-height: 200px;
-  }
-
-  .referral-industries__card-title {
-    font-size: 18px;
-  }
-}
-
 /* ====================== 08-easy.css ====================== */
 /* ==========================================================================
    Unit 08 — "Рекомендовать GATE легко"
@@ -2419,48 +1561,6 @@ body {
   outline-offset: 3px;
 }
 
-/* --- Responsive ------------------------------------------------------------ */
-
-/* NO COMP — inferred */
-@media (max-width: 1024px) {
-  .referral-easy__grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* NO COMP — inferred */
-@media (max-width: 768px) {
-  .referral-easy {
-    border-radius: 24px;
-    padding-block: 48px;
-  }
-
-  .referral-easy__subcopy {
-    font-size: 18px;
-  }
-
-  .referral-easy__card {
-    padding: 24px;
-  }
-}
-
-/* NO COMP — inferred */
-@media (max-width: 480px) {
-  .referral-easy {
-    border-radius: 16px;
-    padding-block: 40px;
-  }
-
-  .referral-easy__card-title {
-    font-size: 22px;
-  }
-
-  .referral-easy__cta {
-    width: 100%;
-    padding: 16px 24px;
-  }
-}
-
 /* ====================== 09-cta.css ====================== */
 /* ==========================================================================
    Unit 09 — CTA banner (node 14086:111774, s10.png — teal-toned photo variant).
@@ -2477,6 +1577,8 @@ body {
   border-radius: 24px;
   overflow: hidden;
   isolation: isolate;
+  background-image: url("/assets/images/referral/cta-bg-placeholder.png");
+  background-size: cover;
 }
 
 .referral-cta__bg {
@@ -2543,56 +1645,6 @@ body {
 .referral-cta__button:focus-visible {
   outline: 2px solid var(--rf-bright-teal);
   outline-offset: 3px;
-}
-
-/* --- Responsive ------------------------------------------------------------ */
-
-/* NO COMP — inferred */
-@media (max-width: 768px) {
-  .referral-cta__banner {
-    height: 320px;
-    border-radius: 20px;
-  }
-
-  .referral-cta__content {
-    padding: 32px;
-    max-width: 100%;
-  }
-
-  .referral-cta__title {
-    /* Same reason as the <=480 rule below: a fixed size in the 481-768 band still
-       let "Присоединяйтесь" exceed the banner's inner width at ~560. */
-    font-size: clamp(16px, 4.4vw, 30px);
-  }
-}
-
-/* NO COMP — inferred */
-@media (max-width: 480px) {
-  .referral-cta__banner {
-    height: 360px;
-  }
-
-  .referral-cta__scrim {
-    background: linear-gradient(180deg, rgba(0, 9, 10, 0.35) 0%, rgba(0, 9, 10, 0.85) 65%, rgba(0, 9, 10, 0.92) 100%);
-  }
-
-  .referral-cta__content {
-    padding: 20px 16px;
-    justify-content: flex-end;
-  }
-
-  .referral-cta__title {
-    /* Fluid: "Присоединяйтесь" is the longest word on the page; at a fixed 24px
-       it exceeded the banner's inner width and broke mid-word. */
-    /* Ratio solved by measurement, not guessed: "Присоединяйтесь" (15 chars) needs
-       <=14.9px at a 320 viewport, <=18.8px at 375, <=21.6px at 414. 4.4vw sits under
-       that curve at every width, so the word never breaks mid-way. */
-    font-size: clamp(14px, 4.4vw, 24px);
-  }
-
-  .referral-cta__button {
-    width: 100%;
-  }
 }
 
 /* ====================== 10-faq.css ====================== */
@@ -2707,10 +1759,477 @@ body {
   list-style: disc;
 }
 
-/* --- Responsive ------------------------------------------------------------ */
+/* ====================== 99-responsive.css ====================== */
+/* ==========================================================================
+   Responsive — every media query of the page, collected in one place instead
+   of being scattered through the section blocks above.
 
-/* NO COMP — inferred */
+   One @media per breakpoint, widest first. Inside a block the rules keep the
+   exact order they had before, and the blocks run widest→narrowest, which is
+   the order the sections used too — so which rule wins at any width is
+   unchanged. No declaration was edited, added or dropped; only moved.
+   Each run is labelled with the section fragment it came from.
+   ========================================================================== */
+
+/* ---------- ≤ 1200px ---------- */
+@media (max-width: 1200px) {
+  /* 03-benefits */
+  /* NO COMP — inferred */
+  .referral-benefits__card-title {
+    font-size: 22px;
+  }
+
+  /* 04-who */
+  /* NO COMP — inferred */
+  .referral-who__content {
+    padding: 40px 32px;
+  }
+
+  /* 07-industries */
+  /* NO COMP — inferred */
+  .referral-industries__intro {
+    padding: 32px 36px;
+  }
+}
+
+/* ---------- ≤ 1024px ---------- */
+@media (max-width: 1024px) {
+  /* 01-hero */
+  /* NO COMP — inferred */
+  .referral-hero {
+    min-height: 0;
+    padding-bottom: 48px;
+  }
+
+  .referral-hero__body {
+    padding-top: 140px;
+    grid-template-columns: 1fr minmax(200px, 380px);
+    gap: 24px;
+  }
+
+  .referral-hero__collage {
+    margin-top: 0;
+  }
+
+  /* 02b-commission */
+  /* NO COMP — inferred */
+  .referral-commission__percent {
+    font-size: 56px;
+  }
+
+  .referral-commission__desc {
+    font-size: 20px;
+  }
+
+  /* 03-benefits */
+  .referral-benefits {
+    padding-block: 72px;
+  }
+
+  .referral-benefits__hero {
+    min-height: 420px;
+    padding: 32px;
+  }
+
+  .referral-benefits__badge {
+    width: 140px;
+    height: 140px;
+  }
+
+  .referral-benefits__badge-icon {
+    width: 80px;
+    height: 80px;
+  }
+
+  /* 04-who */
+  /* NO COMP — inferred */
+  .referral-who {
+    padding-block: 72px;
+  }
+
+  .referral-who__card {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+
+  .referral-who__media {
+    min-height: 320px;
+    order: -1;
+  }
+
+  /* 06-steps */
+  /* NO COMP - inferred */
+  .referral-steps__card {
+    padding: 28px 22px;
+  }
+
+  /* 07-industries */
+  /* NO COMP — inferred */
+  .referral-industries__panel {
+    padding: 32px;
+  }
+
+  .referral-industries__checklist {
+    gap: 16px 32px;
+  }
+
+  /* 08-easy */
+  /* NO COMP — inferred */
+  .referral-easy__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------- ≤ 1023px ---------- */
+@media (max-width: 1023px) {
+  /* 03-benefits */
+  /* NO COMP — inferred */
+  /* NO COMP — inferred. The 654fr/642fr split keeps dividing below ~1024, which
+     crushed the left card to ~105px at an 800 viewport and forced the display h3
+     ("Реальные деньги, а не бонусы") to break mid-word. Collapse to one column
+     before that happens rather than letting the ratio squeeze it. */
+  .referral-benefits__grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* 05-stories */
+  /* NO COMP — inferred: 2 cards visible, matching the JS reference table. */
+  .referral-stories__card {
+    width: calc((100% - 24px) / 2);
+  }
+
+  .referral-commission__cards {
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .referral-commission__photo {
+    flex: none;
+    width: 150px;
+    height: 144px;
+  }
+
+  .referral-commission__panel {
+    padding: 24px;
+  }
+
+  .referral-hero__title {
+    font-size: 57px;
+  }
+}
+
+/* ---------- ≤ 900px ---------- */
+@media (max-width: 900px) {
+  /* 02-calculator */
+  /* NO COMP — inferred: stack the two controls once 369+405+32 no longer fits. */
+  .referral-calc__controls {
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .referral-calc__control--clients,
+  .referral-calc__control--size {
+    flex: 1 1 auto;
+    width: 100%;
+  }
+
+  .referral-calc__result-year {
+    font-size: 48px;
+  }
+}
+
+/* ---------- (max-width: var(--rf-breakpoint-tablet)) — DEAD BLOCK ----------
+   var() is not allowed in a media query, so this never matches and the
+   rules inside have never applied. Kept verbatim and in its original
+   cascade position - fixing it would change what the page renders. */
+@media (max-width: var(--rf-breakpoint-tablet)) {
+  /* 00-base */
+  /* NO COMP — inferred */
+  .referral__container {
+    padding-inline: 24px;
+  }
+
+  .referral__h2 {
+    /* Fluid here too: at a fixed 36px, "рекомендовать" overflowed its box around
+       520px and broke mid-word. Measured ceiling is ~34px at 520. */
+    font-size: clamp(19px, 6.2vw, 36px);
+  }
+}
+
+/* ---------- ≤ 768px ---------- */
 @media (max-width: 768px) {
+  /* 01-hero */
+  /* NO COMP — inferred: stack text above collage, collage centred and capped,
+     still visible (not hidden) at phone/tablet widths. */
+  .referral-hero {
+    border-radius: 0 0 40px 40px;
+  }
+
+  .referral-hero__body {
+    padding-top: 160px;
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .referral-hero__title {
+    /* Fluid: "Реферальная" is ~470px at 44px but the column is ~408px at 520. */
+    font-size: clamp(24px, 7vw, 44px);
+    letter-spacing: 1.5px;
+  }
+
+  .referral-hero__subcopy {
+    font-size: 18px;
+  }
+
+  .referral-hero__cta {
+    width: 100%;
+  }
+
+  .referral-hero__collage {
+    max-width: 420px;
+    margin-inline: auto;
+    margin-top: 0;
+  }
+
+  /* 02b-commission */
+  /* NO COMP — inferred */
+  .referral-commission {
+    padding-block: 48px;
+  }
+
+  .referral-commission__heading {
+    font-size: 20px;
+  }
+
+  .referral-commission__break {
+    display: none;
+  }
+
+  /* 03-benefits */
+  /* NO COMP — inferred */
+  .referral-benefits {
+    padding-block: 56px;
+  }
+
+  .referral-benefits__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .referral-benefits__hero {
+    min-height: 0;
+  }
+
+  .referral-benefits__hero-bottom {
+    max-width: 100%;
+  }
+
+  .referral-benefits__title {
+    margin-bottom: 32px;
+  }
+
+  /* 04-who */
+  /* NO COMP — inferred */
+  .referral-who {
+    padding-block: 56px;
+  }
+
+  .referral-who__title {
+    margin-bottom: 32px;
+  }
+
+  .referral-who__content {
+    padding: 32px 24px;
+  }
+
+  .referral-who__item-title {
+    font-size: 20px;
+  }
+
+  /* 06-steps */
+  /* Mobile comp, node 14132:113931 (real values, not inferred).
+     The comp is a horizontal track 1066px wide inside a 343px window: each slide
+     carries its own numbered marker whose centre sits on the card centre, with a
+     1.6px #D9D9D9 rule running out of it to both window edges. That is why the
+     desktop .referral-steps__progress row is swapped for a per-slide
+     .referral-steps__marker here rather than being merely restyled.
+     Measured: section gap 24px, marker 38.53px, marker->card gap 21px, card
+     radius 24, padding 24, title/body gap 6.4px, title 20/1.2/0.4px tracking,
+     body 12/1.5 #000, dots 12px with a 28px active pill. */
+  .referral-steps {
+    padding-block: 64px;
+  }
+
+  .referral-steps__heading {
+    text-align: center;
+  }
+
+  /* Replaced by the per-slide marker below. */
+  .referral-steps__progress {
+    display: none;
+  }
+
+  .referral-steps__carousel {
+    gap: 24px;
+    margin-top: 24px;
+  }
+
+  /* Same full-bleed track as .referral-stories__track: escape the section's
+     own inline padding so the gutter is a fixed 16px, and let the next slide
+     peek 21px past the right edge. The carousel is a centred flex column, so
+     the track must stretch instead of keeping width:100% - with a definite
+     width the negative margins only shift the box instead of widening it. */
+  .referral-steps__track {
+    width: auto;
+    align-self: stretch;
+    margin-inline: -56px;
+    padding-inline: 16px;
+    gap: 8px;
+    /* else `scroll-snap-align: start` snaps to the padding edge and pins the
+       card to the screen edge */
+    scroll-padding-inline: 16px;
+  }
+
+  .referral-steps__card {
+    width: calc(100% - 13px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 21px;
+    background: none;
+    border-radius: 0;
+    padding: 0;
+    /* clips the marker's connector rules at the slide edge so they cannot
+       inflate the track's scrollWidth and throw off the JS page maths */
+    overflow: hidden;
+  }
+
+  .referral-steps__marker {
+    display: block;
+    position: relative;
+    flex: 0 0 auto;
+    width: 39px;
+    height: 39px;
+    line-height: 0;
+  }
+
+  .referral-steps__marker img {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  /* the connector rules: out of the marker to both edges of the slide */
+  .referral-steps__marker::before,
+  .referral-steps__marker::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 100vw;
+    height: 1.6px;
+    background: #d9d9d9;
+  }
+
+  .referral-steps__marker::before {
+    right: 100%;
+    margin-right: 16px;
+  }
+
+  .referral-steps__marker::after {
+    left: 100%;
+    margin-left: 16px;
+  }
+
+  .referral-steps__panel {
+    width: 100%;
+    background: linear-gradient(180deg, #DFECE9 0%, #EEEEEE 100%);
+    border-radius: 24px;
+    padding: 24px;
+    text-align: center;
+  }
+
+  .referral-steps__card-title {
+    font-size: 20px;
+    line-height: 1.2;
+    letter-spacing: 0.4px;
+    margin-bottom: 6px;
+  }
+
+  .referral-steps__card-body {
+    font-size: 12px;
+    line-height: 1.5;
+    color: #000;
+  }
+
+  /* 07-industries */
+  /* NO COMP — inferred */
+  .referral-industries {
+    padding-block: 64px;
+  }
+
+  .referral-industries__panel {
+    padding: 24px;
+    border-radius: 24px;
+  }
+
+  .referral-industries__intro {
+    padding: 24px;
+    border-radius: 20px;
+  }
+
+  .referral-industries__checklist {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .referral-industries__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .referral-industries__card--wide,
+  .referral-industries__card--narrow,
+  .referral-industries__card--equal {
+    grid-column: span 1;
+  }
+
+  .referral-industries__card--photo {
+    min-height: 240px;
+  }
+
+  /* 08-easy */
+  /* NO COMP — inferred */
+  .referral-easy {
+    border-radius: 24px;
+    padding-block: 48px;
+  }
+
+  .referral-easy__subcopy {
+    font-size: 18px;
+  }
+
+  .referral-easy__card {
+    padding: 24px;
+  }
+
+  /* 09-cta */
+  /* NO COMP — inferred */
+  .referral-cta__banner {
+    height: 320px;
+    border-radius: 20px;
+  }
+
+  .referral-cta__content {
+    padding: 32px;
+    max-width: 100%;
+  }
+
+  .referral-cta__title {
+    /* Same reason as the <=480 rule below: a fixed size in the 481-768 band still
+       let "Присоединяйтесь" exceed the banner's inner width at ~560. */
+    font-size: clamp(16px, 4.4vw, 30px);
+  }
+
+  /* 10-faq */
+  /* NO COMP — inferred */
   .referral-faq {
     border-radius: 24px 24px 0 0;
     padding: 48px 0 64px;
@@ -2726,11 +2245,481 @@ body {
   }
 }
 
-/* NO COMP — inferred */
+/* ---------- ≤ 767px ---------- */
+@media (max-width: 767px) {
+  /* 02-calculator */
+  /* NO COMP — inferred */
+  .referral-calc {
+    padding-block: 40px 20px;
+  }
+
+  .referral-calc__title {
+    margin-bottom: 28px;
+  }
+
+  .referral-calc__card {
+    padding: 20px;
+  }
+
+  .referral-calc__label-row {
+    align-items: flex-start;
+  }
+
+  .referral-calc__value {
+    font-size: 28px;
+  }
+
+  .referral-calc__result-year {
+    font-size: 40px;
+    letter-spacing: 0.8px;
+  }
+
+  .referral-calc__result {
+    gap: 12px;
+    min-height: 0;
+    padding: 20px 16px;
+  }
+
+  /* 05-stories */
+  /* Mobile comp (node 14132:113835). Real values, not inferred, for the
+     ACTIVE card (14154:121598): one card per page below 768 with 21px of the
+     next one peeking past the right edge (cards 2-3 in the comp are the same
+     card at the same size, offset by the 8px gap - not separate target sizes),
+     rail plus swipe are the paging means.
+     Card radius ~19px (was 24), padding ~26/19/26/26 (was 24/20 uniform),
+     avatar shrinks to ~39px (was 48), name 13px (was 16), body copy 10px
+     (was 12); headline stays 16px, unchanged. The comp's track uses a FIXED
+     16px gutter (not the container's stepped 24px→16px ladder) — matches the
+     MOBILE-SPEC's "16px side gutters" baseline directly, so pin it rather
+     than inherit the wider 24px tier that applies 480-768px elsewhere.
+     The comp's per-card internal gap is actually two-tier (person↔text 13px,
+     headline↔body 7px); approximated here as a single blended 12px on
+     .referral-stories__card rather than restructuring the card into a nested
+     wrapper — close visually, flagged in the report. */
+  .referral-stories {
+    padding-block: 40px;
+  }
+
+  .referral-stories__title {
+    font-size: 21px;
+    margin-bottom: 28px;
+  }
+
+  .referral-stories__break {
+    display: inline;
+  }
+
+  /* Track needs a FIXED 16px gutter, so it escapes the section's own inline
+     padding with a matching negative margin and then applies its own 16px.
+     The gutter comes from `.referral section:not(:first-child):not(:last-child)`
+     in 00-base — 56px here, stepping to 16px at <=480 (the `.referral__container`
+     padding rules never apply: their media queries use var(), which is invalid).
+     The carousel is a centred flex column, so the track must also drop its
+     width:100% and stretch instead — with a definite width the negative
+     margins only shift the box sideways instead of widening it, which left
+     the card narrow and the right gutter oversized. */
+  .referral-stories__track {
+    width: auto;
+    align-self: stretch;
+    margin-inline: -56px;
+    padding-inline: 16px;
+    /* One card per page: the pitch (card + gap) must equal the track's
+       clientWidth, which is what js/referral.js scrolls by, so the gap has to
+       be twice the 16px gutter. With any other gap the pages drift and the
+       last card never reaches its snap position. */
+    gap: 8px;
+    /* Without this, `scroll-snap-align: start` snaps to the padding edge and
+       eats the left gutter, pinning the card to the screen edge. */
+    scroll-padding-inline: 16px;
+  }
+
+  .referral-stories__card {
+    /* Peek: the comp puts a 330px card in a 375px window with a 16px gutter and
+       an 8px gap, so 21px of the NEXT card stays visible past the right edge -
+       the affordance that tells you the row scrolls. 100% here is the track's
+       content box (viewport - 2x16), so `- 13px` leaves exactly that 21px.
+       The pitch (card + gap) is deliberately NOT equal to the track's
+       clientWidth: js/referral.js scrolls by clientWidth and CSS snap then
+       pulls each page onto the nearest card, which lands right for all three. */
+    width: calc(100% - 13px);
+    gap: 12px;
+    padding: 26px 19px 26px 26px;
+    border-radius: 19px;
+  }
+
+  .referral-stories__avatar {
+    width: 39px;
+    height: 39px;
+  }
+
+  .referral-stories__name {
+    font-size: 13px;
+  }
+
+  .referral-stories__body p {
+    font-size: 10px;
+  }
+}
+
+/* ---------- ≤ 640px ---------- */
+@media (max-width: 640px) {
+  /* 00-base */
+  /* --- Long-word breaking on narrow viewports -------------------------------
+     NO COMP — inferred. Russian display headings contain words long enough
+     ("Реферальная", "зарабатывать", "Присоединяйтесь") that their min-content
+     width exceeds a 375px viewport, which forced document-level horizontal
+     overflow. Allow them to break rather than push the page wide. Applied only
+     at <=640 so desktop line-breaking is untouched. */
+  .referral h1,
+  .referral h2,
+  .referral h3,
+  .referral__h2,
+  .referral__h2-accent,
+  .referral__h3 {
+    /* `anywhere` rather than `break-word`: only `anywhere` reduces the element's
+       MIN-CONTENT size. With `break-word` these headings are flex/grid items whose
+       width still resolves to min-content (380px for "Реферальная" at 34px), which
+       pushed the document to 396px on a 375px viewport. */
+    overflow-wrap: anywhere;
+    hyphens: auto;
+    /* let the heading shrink below min-content inside a flex column */
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  /* 07-industries */
+  /* NO COMP — inferred */
+  .referral-industries__intro-title {
+    font-size: 21px;
+  }
+
+  .referral-industries__card-title {
+    font-size: 20px;
+  }
+}
+
+/* ---------- (max-width: var(--rf-breakpoint-mobile)) — DEAD BLOCK ----------
+   var() is not allowed in a media query, so this never matches and the
+   rules inside have never applied. Kept verbatim and in its original
+   cascade position - fixing it would change what the page renders. */
+@media (max-width: var(--rf-breakpoint-mobile)) {
+  /* 00-base */
+  /* NO COMP — inferred */
+  .referral__container {
+    padding-inline: 16px;
+  }
+
+  .referral__h2 {
+    /* Fluid below 480 so long Russian display words ("Рассчитайте",
+       "Присоединяйтесь") shrink to fit instead of being broken mid-word by the
+       overflow-wrap:anywhere safety net further down this file. A fixed 31px
+       stopped shrinking and started hyphen-less mid-word breaks at <=390px. */
+    font-size: clamp(19px, 6.2vw, 31px);
+  }
+
+  .referral__h3 {
+    font-size: 26px;
+  }
+
+  /* 02-calculator */
+  .referral-calc {
+    padding: 0;
+  }
+}
+
+/* ---------- ≤ 480px ---------- */
 @media (max-width: 480px) {
+  /* 00-base */
+  .referral section:not(:first-child):not(:last-child) {
+    padding: 0 16px 80px 16px;
+  }
+
+  /* 00-base */
+  .referral__h2 {
+    font-size: 21px;
+  }
+
+  /* 01-hero */
+  /* NO COMP — inferred */
+  .referral-hero__body {
+    padding-top: 150px;
+    padding-inline: 16px;
+  }
+
+  .referral-hero__title {
+    /* Fluid: "Реферальная" is 363px at 34px and the column is only 273px at a
+       320 viewport, so a fixed size forced a mid-word break. */
+    font-size: clamp(20px, 7vw, 34px);
+  }
+
+  .referral-hero__subcopy {
+    font-size: 16px;
+  }
+
+  .referral-hero__cta {
+    height: 52px;
+    padding: 0 24px;
+  }
+
+  .referral-hero__collage {
+    max-width: 320px;
+  }
+
+  /* 02-calculator */
+  /* NO COMP — inferred: four 96px chips + gaps exceed a 320-375px card, so let
+     them share two rows evenly rather than overflow. */
+  .referral-calc__chips {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+
+  .referral-calc__chip {
+    width: 100%;
+    padding: 5px 0;
+    font-weight: 400 !important;
+  }
+
+  .referral-calc__result-year {
+    font-size: 28px;
+  }
+
+  .referral-calc__label {
+    font-size: 14px;
+  }
+
+  .referral-calc__result-label {
+    font-size: 12px;
+  }
+
+  .referral-calc__result-month {
+    font-size: 10px;
+  }
+
+  .referral-calc__note {
+    font-size: 8px;
+  }
+
+  /* 02b-commission */
+  /* NO COMP — inferred */
+  .referral-commission__heading {
+    font-size: 16px;
+  }
+
+  .referral-commission__desc {
+    font-size: 12px;
+  }
+
+  .referral-commission__panel {
+    padding: 17px;
+  }
+
+  /* 03-benefits */
+  .referral-benefits__hero-top {
+    justify-content: center;
+  }
+
+  .referral-benefits__hero-bottom {
+    text-align: center;
+    margin-top: 70px;
+  }
+
+  .referral__h3 {
+    font-size: 24px;
+  }
+
+  .referral-benefits__hero-text {
+    font-size: 16px;
+  }
+
+  /* 03-benefits */
+  /* NO COMP — inferred */
+  .referral-benefits {
+    padding-block: 40px;
+  }
+
+  .referral-benefits__hero {
+    padding: 24px;
+  }
+
+  .referral-benefits__badge {
+    width: 112px;
+    height: 112px;
+  }
+
+  .referral-benefits__badge-icon {
+    width: 64px;
+    height: 64px;
+  }
+
+  .referral-benefits__card {
+    padding: 32px 24px;
+    text-align: center;
+  }
+
+  .referral-benefits__card-head {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .referral-benefits__card-title {
+    font-size: 18px;
+  }
+
+  .referral-benefits__card-text {
+    font-size: 16px;
+  }
+
+  .referral-benefits__icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .referral-benefits__list {
+    gap: 32px;
+  }
+
+  /* 04-who */
+  /* NO COMP — inferred */
+  .referral-who {
+    padding-block: 40px;
+  }
+
+  .referral-who__content {
+    padding: 24px 16px;
+  }
+
+  .referral-who__media {
+    min-height: 240px;
+  }
+
+  .referral-who__item {
+    padding-block: 16px;
+  }
+
+  .referral-who__note {
+    padding: 16px;
+  }
+
+  .referral-who__item-text, .referral-who__note {
+    font-size: 16px;
+  }
+
+  /* 05-stories */
+  /* The section's gutter steps to 16px here — keep the track's negative margin
+     in sync with it so the net gutter stays a fixed 16px. */
+  .referral-stories__track {
+    margin-inline: -16px;
+  }
+
+  /* 06-steps */
+  /* The section's gutter steps to 16px here - keep the track's negative margin
+     in sync with it so the net gutter stays a fixed 16px. */
+  .referral-steps {
+    padding-block: 48px;
+  }
+
+  .referral-steps__track {
+    margin-inline: -16px;
+  }
+
+  .referral-cta__banner {
+    background-position-x: 600px;
+  }
+
+  #referral-cta-title {
+    text-align: left !important;
+  }
+
+  .referral-cta__content {
+    width: 90%;
+  }
+
+  /* 07-industries */
+  /* NO COMP — inferred */
+  .referral-industries {
+    padding-block: 48px;
+    padding: 0 0 80px 0 !important;
+  }
+
+  #referral-industries-heading {
+    padding: 0 16px;
+  }
+
+  .referral-industries__panel {
+    padding: 16px 16px 0 16px;
+  }
+
+  .referral-industries__intro {
+    padding: 20px;
+  }
+
+  .referral-industries__card {
+    padding: 20px;
+    min-height: auto;
+  }
+
+  .referral-industries__card--photo {
+    min-height: 200px;
+  }
+
+  .referral-industries__card-title {
+    font-size: 18px;
+  }
+
+  /* 08-easy */
+  /* NO COMP — inferred */
+  .referral-easy {
+    border-radius: 16px;
+    padding: 40px 16px;
+  }
+
+  .referral-easy__subcopy, .referral-easy__list li {
+    font-size: 16px;
+  }
+
+  .referral-easy__card-title {
+    font-size: 24px;
+  }
+
+  .referral-easy__cta {
+    width: 100%;
+    padding: 16px 24px;
+  }
+
+  /* 09-cta */
+  /* NO COMP — inferred */
+  .referral-cta__banner {
+    height: 360px;
+  }
+
+  .referral-cta__content {
+    padding: 20px 16px;
+    justify-content: flex-end;
+  }
+
+  .referral-cta__title {
+    /* Fluid: "Присоединяйтесь" is the longest word on the page; at a fixed 24px
+       it exceeded the banner's inner width and broke mid-word. */
+    /* Ratio solved by measurement, not guessed: "Присоединяйтесь" (15 chars) needs
+       <=14.9px at a 320 viewport, <=18.8px at 375, <=21.6px at 414. 4.4vw sits under
+       that curve at every width, so the word never breaks mid-way. */
+    font-size: clamp(14px, 4.4vw, 24px);
+  }
+
+  .referral-easy-wrapper {
+    padding: 0 0 80px 0 !important;
+  }
+
+
+  .referral-cta__button {
+    width: 100%;
+  }
+
+  /* 10-faq */
+  /* NO COMP — inferred */
   .referral-faq {
     border-radius: 16px 16px 0 0;
-    padding: 40px 0 48px;
+    padding: 56px 16px 80px 16px;
   }
 
   .referral-faq__list {
@@ -2749,5 +2738,28 @@ body {
   .referral-faq__answer p,
   .referral-faq__answer ul {
     font-size: 14px;
+  }
+
+  .referral__h4 {
+    font-size: 16px;
+    margin: 40px 0 24px 0;
+  }
+}
+
+/* ---------- (prefers-reduced-motion: reduce) ---------- */
+@media (prefers-reduced-motion: reduce) {
+  /* 02-calculator */
+  .referral-calc__chip {
+    transition: none;
+  }
+
+  /* 05-stories */
+  .referral-stories__dot {
+    transition: none;
+  }
+
+  /* 06-steps */
+  .referral-steps__dot {
+    transition: none;
   }
 }

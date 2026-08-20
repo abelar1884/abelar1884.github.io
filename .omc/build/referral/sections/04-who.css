@@ -17,10 +17,10 @@
 
 .referral-who__card {
   display: grid;
-  grid-template-columns: 723fr 605fr;
+  grid-template-columns: 1fr 1fr;
   align-items: stretch;
   border-radius: 24px;
-  background-color: var(--rf-bright-teal);
+  background: linear-gradient(180deg, #DFECE9 0%, #EEEEEE 100%);
   overflow: hidden;
 }
 
@@ -50,7 +50,7 @@
 .referral-who__item-title {
   font-family: var(--font-inter);
   font-weight: 700;
-  font-size: 20px;
+  font-size: 28px;
   line-height: 1.3;
   color: var(--rf-teal);
   margin: 0 0 8px;
@@ -59,15 +59,14 @@
 .referral-who__item-text {
   font-family: var(--font-inter);
   font-weight: 400;
-  font-size: 16px;
+  font-size: 20px;
   line-height: 1.4;
-  color: var(--rf-gray-2);
   margin: 0;
 }
 
 .referral-who__note {
   font-family: var(--font-inter);
-  font-size: 16px;
+  font-size: 20px;
   line-height: 1.4;
   color: #fff;
   background-color: var(--rf-teal);
@@ -82,117 +81,5 @@
   min-height: 400px;
   object-fit: cover;
   display: block;
-}
-
-/* --- Responsive ------------------------------------------------------------- */
-
-/* NO COMP — inferred */
-@media (max-width: 1200px) {
-  .referral-who__content {
-    padding: 40px 32px;
-  }
-}
-
-/* NO COMP — inferred */
-@media (max-width: 1024px) {
-  .referral-who {
-    padding-block: 72px;
-  }
-
-  .referral-who__card {
-    grid-template-columns: 1fr;
-  }
-
-  .referral-who__media {
-    min-height: 320px;
-    order: -1;
-  }
-}
-
-/* Mobile comp (node 14163:121761). Real values, not inferred:
-   list comes FIRST, portrait comes AFTER the note — the tablet rule's
-   order:-1 above is cancelled here. Card becomes one flex column with a
-   mobile-only gradient background (#DFECE9→#EEEEEE, same literal comp
-   value used elsewhere in this build, not --rf-bright-teal), padding
-   32px top / 24px sides / 0 bottom — the portrait bleeds flush to the
-   card's bottom edge (its own 24px radius lines up with the card's).
-   Item titles stay 20px (real value — the previous 18px reduction was
-   invented and wrong). Divider hairline rgba(0,70,80,.1) (was .12).
-   Note: padding 16px/24px, radius 16px, font 16px/1.5. Portrait aspect
-   ratio 295:525.555 from the comp's own image bounds. */
-@media (max-width: 768px) {
-  .referral-who {
-    padding-block: 56px;
-  }
-
-  .referral-who__title {
-    font-size: 21px;
-    margin-bottom: 32px;
-  }
-
-  .referral-who__card {
-    display: flex;
-    flex-direction: column;
-    background: linear-gradient(180deg, #dfece9 0%, #eee 100%);
-    border-radius: 24px;
-  }
-
-  .referral-who__content {
-    padding: 32px 24px 0;
-  }
-
-  .referral-who__list {
-    margin-bottom: 16px;
-  }
-
-  .referral-who__item {
-    padding-block: 16px;
-    border-top-color: rgba(0, 70, 80, 0.1);
-  }
-
-  .referral-who__item-title {
-    font-size: 20px;
-  }
-
-  .referral-who__item-text {
-    color: #000;
-  }
-
-  .referral-who__note {
-    padding: 16px 24px;
-    border-radius: 16px;
-    font-size: 16px;
-    line-height: 1.5;
-    margin: 0;
-  }
-
-  .referral-who__media {
-    order: 0;
-    min-height: 0;
-    height: auto;
-    width: calc(100% - 48px);
-    margin: 16px 24px 0;
-    aspect-ratio: 295 / 525.555;
-    border-radius: 24px;
-  }
-}
-
-/* NO COMP — inferred */
-@media (max-width: 480px) {
-  .referral-who {
-    padding-block: 40px;
-  }
-
-  .referral-who__content {
-    padding-inline: 16px;
-  }
-
-  .referral-who__media {
-    width: calc(100% - 32px);
-    margin-inline: 16px;
-  }
-
-  .referral-who__note {
-    padding: 16px;
-  }
+  border-radius: 24px;
 }

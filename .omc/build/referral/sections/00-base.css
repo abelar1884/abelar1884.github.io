@@ -27,6 +27,8 @@ body {
     0 80px 48px rgba(0, 9, 10, .05),
     0 143px 57px rgba(0, 9, 10, .01),
     0 223px 62px rgba(0, 9, 10, 0);
+  --rf-breakpoint-tablet: 768px;
+  --rf-breakpoint-mobile: 480px;
 }
 
 /* --- Container ------------------------------------------------------------ */
@@ -34,8 +36,11 @@ body {
 .referral__container {
   max-width: 1440px;
   margin-inline: auto;
-  padding-inline: 56px;
   box-sizing: border-box;
+}
+
+.referral__container_gap {
+  padding-bottom: 100px;
 }
 
 /* --- Chrome overlay: navbar sits inside the teal hero panel ---------------
@@ -63,7 +68,7 @@ body {
 .referral__h2 {
   font-family: var(--font-cofo-kak);
   font-weight: 900;
-  font-size: 48px;
+  font-size: 40px;
   line-height: 1.1;
   letter-spacing: 1px;
   color: var(--rf-teal);
@@ -77,85 +82,19 @@ body {
 .referral__h3 {
   font-family: var(--font-cofo-kak);
   font-weight: 900;
-  font-size: 32px;
+  font-size: 50px;
   line-height: 1.25;
   letter-spacing: 2px;
   color: var(--rf-teal);
   margin: 0;
 }
 
-/* --- Responsive: container + display type --------------------------------- */
-
-/* NO COMP — inferred */
-@media (max-width: 768px) {
-  .referral__container {
-    padding-inline: 24px;
-  }
-
-  .referral__h2 {
-    /* Fluid here too: at a fixed 36px, "рекомендовать" overflowed its box around
-       520px and broke mid-word. Measured ceiling is ~34px at 520. */
-    font-size: clamp(19px, 6.2vw, 36px);
-  }
+.referral__h4 {
+  font-size: 32px;
+  color: var(--rf-teal);
+  font-weight: bold;
 }
 
-/* NO COMP — inferred */
-@media (max-width: 480px) {
-  .referral__container {
-    padding-inline: 16px;
-  }
-
-  .referral__h2 {
-    /* Fluid below 480 so long Russian display words ("Рассчитайте",
-       "Присоединяйтесь") shrink to fit instead of being broken mid-word by the
-       overflow-wrap:anywhere safety net further down this file. A fixed 31px
-       stopped shrinking and started hyphen-less mid-word breaks at <=390px. */
-    font-size: clamp(19px, 6.2vw, 31px);
-  }
-
-  .referral__h3 {
-    font-size: 26px;
-  }
-}
-
-/* --- Long-word breaking on narrow viewports -------------------------------
-   NO COMP — inferred. Russian display headings contain words long enough
-   ("Реферальная", "зарабатывать", "Присоединяйтесь") that their min-content
-   width exceeds a 375px viewport, which forced document-level horizontal
-   overflow. Allow them to break rather than push the page wide. Applied only
-   at <=640 so desktop line-breaking is untouched. */
-@media (max-width: 640px) {
-  .referral h1,
-  .referral h2,
-  .referral h3,
-  .referral__h2,
-  .referral__h2-accent,
-  .referral__h3 {
-    /* `anywhere` rather than `break-word`: only `anywhere` reduces the element's
-       MIN-CONTENT size. With `break-word` these headings are flex/grid items whose
-       width still resolves to min-content (380px for "Реферальная" at 34px), which
-       pushed the document to 396px on a 375px viewport. */
-    overflow-wrap: anywhere;
-    hyphens: auto;
-    /* let the heading shrink below min-content inside a flex column */
-    min-width: 0;
-    max-width: 100%;
-  }
-}
-
-/* --- Mobile-only blocks ---------------------------------------------------
-   Four content blocks exist ONLY in the mobile comp (frame 14132:112911) and
-   have no desktop design: the 4 hero feature cards, «Нам доверяют», «Экспертная
-   живая поддержка 24/7», and «Все тревел-услуги в одном сервисе». Per the user's
-   decision they render below 768 and are hidden above it, so each breakpoint
-   matches its own comp and nothing is invented for desktop.
-   Single shared gate — do not add a second visibility mechanism per block. */
-.referral-m {
-  display: none;
-}
-
-@media (max-width: 768px) {
-  .referral-m {
-    display: block;
-  }
+.referral section:not(:first-child):not(:last-child) {
+  padding: 0 56px 100px 56px;
 }

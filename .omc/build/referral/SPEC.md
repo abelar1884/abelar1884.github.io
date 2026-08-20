@@ -23,8 +23,11 @@ so your fragment must be **self-contained and order-independent**.
 
 - No `<html>`, `<head>`, `<body>`, no `<link>`, no `<script>` tags in your `.html` fragment.
 - No `:root` blocks, no `@import`, no `body{}` rules in your `.css` fragment.
-- Put **your unit's media queries at the bottom of your own `.css` fragment.** Do not try to
-  group them globally — assembly preserves your file's internal order.
+- **Media queries live in `99-responsive.css`, not in your unit's fragment.** That file holds
+  every breakpoint of the page, one `@media` per breakpoint, widest first; add your rules to
+  the right block, labelled with your unit's name. (This replaces the old "media queries at
+  the bottom of your own fragment" rule — they were scattered across a dozen fragments and
+  were consolidated. Adding them back to a unit fragment re-scatters them.)
 - If you need a shared helper, do **not** invent one. Use the tokens below or ask the lead.
 
 ## Naming

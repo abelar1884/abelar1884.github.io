@@ -3,7 +3,7 @@
    ========================================================================== */
 
 .referral-benefits {
-  padding-block: 96px;
+  padding-block: 0;
 }
 
 .referral-benefits__title {
@@ -13,13 +13,6 @@
 
 .referral-benefits__accent {
   color: var(--rf-pink);
-}
-
-/* Mobile-only forced line breaks (comp shows these headings as deliberate
-   2-liners even where the text would fit on one line at mobile widths).
-   Hidden on desktop, shown ≤768 — see the mobile-comp media query below. */
-.referral-benefits__break {
-  display: none;
 }
 
 .referral-benefits__grid {
@@ -39,22 +32,12 @@
   flex-direction: column;
   justify-content: space-between;
   border-radius: 24px;
-  background-color: var(--rf-teal);
   padding: 40px;
   box-sizing: border-box;
   overflow: hidden;
   isolation: isolate;
-}
-
-.referral-benefits__hero::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image: url("../assets/images/referral/bg-ruble-pattern.svg");
-  background-repeat: repeat;
-  background-size: 120px auto;
-  opacity: 0.12;
-  z-index: -1;
+  background: url("/assets/images/referral/bg-ruble.jpg");
+  background-size: cover;
 }
 
 .referral-benefits__hero-top {
@@ -104,15 +87,14 @@
 
 .referral-benefits__card {
   border-radius: 20px;
-  background-color: var(--rf-bright-teal);
+  background: linear-gradient(180deg, #DFECE9 0%, #EEEEEE 100%);
   padding: 32px 40px;
   box-sizing: border-box;
 }
 
 .referral-benefits__card-head {
   display: flex;
-  align-items: center;
-  gap: 16px;
+  gap: 12px;
   margin-bottom: 16px;
 }
 
@@ -147,157 +129,4 @@
   line-height: 1.44;
   color: var(--rf-gray-1);
   margin: 0;
-}
-
-/* --- Responsive ------------------------------------------------------------- */
-
-/* NO COMP — inferred */
-@media (max-width: 1200px) {
-  .referral-benefits__card-title {
-    font-size: 22px;
-  }
-}
-
-/* NO COMP — inferred */
-/* NO COMP — inferred. The 654fr/642fr split keeps dividing below ~1024, which
-   crushed the left card to ~105px at an 800 viewport and forced the display h3
-   ("Реальные деньги, а не бонусы") to break mid-word. Collapse to one column
-   before that happens rather than letting the ratio squeeze it. */
-@media (max-width: 1023px) {
-  .referral-benefits__grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-@media (max-width: 1024px) {
-  .referral-benefits {
-    padding-block: 72px;
-  }
-
-  .referral-benefits__hero {
-    min-height: 420px;
-    padding: 32px;
-  }
-
-  .referral-benefits__badge {
-    width: 140px;
-    height: 140px;
-  }
-
-  .referral-benefits__badge-icon {
-    width: 80px;
-    height: 80px;
-  }
-}
-
-/* Mobile comp (node 14136:120872). Real values, not inferred:
-   root is a single 32px-gap column: title, hero card, then the three light
-   cards — .referral-benefits__grid stops being a grid at all. Title 21px
-   with a mobile-only break (see .referral-benefits__break above). Hero card:
-   border 2px rgba(217,217,217,.15), padding-block 32/px 0 (content is
-   centred so there's no visible bleed), badge 124px/icon 91.5px, hero-title
-   24px/tracking .48px, hero-text 16px — all centred (desktop is left-
-   aligned, hence the alignment overrides below). Light cards: background is
-   a literal mobile-only gradient (#DFECE9 → #EEEEEE, NOT --rf-bright-teal —
-   a genuine comp value, not an invented hex), icon circle shrinks to 40px,
-   card-head becomes a centred column (icon above title, desktop is a left
-   aligned row), title 18px/tracking .36px, body text 16px, ALL CENTRED. */
-@media (max-width: 768px) {
-  .referral-benefits {
-    padding-block: 56px;
-  }
-
-  .referral-benefits__grid {
-    display: flex;
-    flex-direction: column;
-    gap: 32px;
-  }
-
-  .referral-benefits__title {
-    font-size: 21px;
-    margin-bottom: 32px;
-  }
-
-  .referral-benefits__break {
-    display: inline;
-  }
-
-  .referral-benefits__hero {
-    min-height: 0;
-    border: 2px solid rgba(217, 217, 217, 0.15);
-    padding: 32px 0;
-    align-items: center;
-    text-align: center;
-  }
-
-  .referral-benefits__hero-top {
-    justify-content: center;
-  }
-
-  .referral-benefits__badge {
-    width: 124px;
-    height: 124px;
-  }
-
-  .referral-benefits__badge-icon {
-    width: 91px;
-    height: 91px;
-  }
-
-  .referral-benefits__hero-bottom {
-    max-width: 279px;
-    margin-inline: auto;
-  }
-
-  .referral-benefits__hero-title {
-    font-size: 24px;
-    line-height: 1.25;
-    letter-spacing: 0.48px;
-  }
-
-  .referral-benefits__hero-text {
-    font-size: 16px;
-    line-height: 1.5;
-  }
-
-  .referral-benefits__list {
-    gap: 32px;
-  }
-
-  .referral-benefits__card {
-    background: linear-gradient(180deg, #dfece9 0%, #eee 100%);
-    padding: 32px 24px;
-    text-align: center;
-  }
-
-  .referral-benefits__card-head {
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 8px;
-  }
-
-  .referral-benefits__icon {
-    width: 40px;
-    height: 40px;
-  }
-
-  .referral-benefits__icon img {
-    width: 28px;
-    height: 28px;
-  }
-
-  .referral-benefits__card-title {
-    font-size: 18px;
-    line-height: 1.25;
-    letter-spacing: 0.36px;
-  }
-
-  .referral-benefits__card-text {
-    font-size: 16px;
-    line-height: 1.5;
-    color: #000;
-    max-width: 293px;
-    margin-inline: auto;
-  }
 }
