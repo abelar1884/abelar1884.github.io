@@ -210,10 +210,10 @@
 }
 
 /* Mobile comp (node 14132:113835). Real values, not inferred, for the
-   ACTIVE/full-size card (14154:121598 — the first, unscaled card; cards 2-3
-   in this comp are the SAME cards rendered smaller as a carousel "peek"
-   preview, not distinct target sizes, so they aren't used as a separate
-   reference): 1 card visible below 768, rail is the primary paging means.
+   ACTIVE card (14154:121598): one card per page below 768 with 21px of the
+   next one peeking past the right edge (cards 2-3 in the comp are the same
+   card at the same size, offset by the 8px gap - not separate target sizes),
+   rail plus swipe are the paging means.
    Card radius ~19px (was 24), padding ~26/19/26/26 (was 24/20 uniform),
    avatar shrinks to ~39px (was 48), name 13px (was 16), body copy 10px
    (was 12); headline stays 16px, unchanged. The comp's track uses a FIXED
@@ -256,14 +256,21 @@
        clientWidth, which is what js/referral.js scrolls by, so the gap has to
        be twice the 16px gutter. With any other gap the pages drift and the
        last card never reaches its snap position. */
-    gap: 32px;
+    gap: 8px;
     /* Without this, `scroll-snap-align: start` snaps to the padding edge and
        eats the left gutter, pinning the card to the screen edge. */
     scroll-padding-inline: 16px;
   }
 
   .referral-stories__card {
-    width: 100%;
+    /* Peek: the comp puts a 330px card in a 375px window with a 16px gutter and
+       an 8px gap, so 21px of the NEXT card stays visible past the right edge -
+       the affordance that tells you the row scrolls. 100% here is the track's
+       content box (viewport - 2x16), so `- 13px` leaves exactly that 21px.
+       The pitch (card + gap) is deliberately NOT equal to the track's
+       clientWidth: js/referral.js scrolls by clientWidth and CSS snap then
+       pulls each page onto the nearest card, which lands right for all three. */
+    width: calc(100% - 13px);
     gap: 12px;
     padding: 26px 19px 26px 26px;
     border-radius: 19px;

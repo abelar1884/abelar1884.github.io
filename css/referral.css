@@ -384,6 +384,7 @@ body {
 @media (max-width: 480px) {
   .referral-hero__body {
     padding-top: 150px;
+    padding-inline: 16px;
   }
 
   .referral-hero__title {
@@ -765,18 +766,36 @@ body {
 
 /* NO COMP — inferred: four 96px chips + gaps exceed a 320-375px card, so let
    them share two rows evenly rather than overflow. */
-@media (max-width: 479px) {
+@media (max-width: 480px) {
   .referral-calc__chips {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
   }
 
   .referral-calc__chip {
     width: 100%;
+    padding: 5px 0;
+    font-weight: 400 !important;
   }
 
   .referral-calc__result-year {
-    font-size: 32px;
+    font-size: 28px;
+  }
+
+  .referral-calc__label {
+    font-size: 14px;
+  }
+
+  .referral-calc__result-label {
+    font-size: 12px;
+  }
+
+  .referral-calc__result-month {
+    font-size: 10px;
+  }
+
+  .referral-calc__note {
+    font-size: 8px;
   }
 }
 
@@ -1560,10 +1579,10 @@ body {
 }
 
 /* Mobile comp (node 14132:113835). Real values, not inferred, for the
-   ACTIVE/full-size card (14154:121598 — the first, unscaled card; cards 2-3
-   in this comp are the SAME cards rendered smaller as a carousel "peek"
-   preview, not distinct target sizes, so they aren't used as a separate
-   reference): 1 card visible below 768, rail is the primary paging means.
+   ACTIVE card (14154:121598): one card per page below 768 with 21px of the
+   next one peeking past the right edge (cards 2-3 in the comp are the same
+   card at the same size, offset by the 8px gap - not separate target sizes),
+   rail plus swipe are the paging means.
    Card radius ~19px (was 24), padding ~26/19/26/26 (was 24/20 uniform),
    avatar shrinks to ~39px (was 48), name 13px (was 16), body copy 10px
    (was 12); headline stays 16px, unchanged. The comp's track uses a FIXED
@@ -1606,14 +1625,21 @@ body {
        clientWidth, which is what js/referral.js scrolls by, so the gap has to
        be twice the 16px gutter. With any other gap the pages drift and the
        last card never reaches its snap position. */
-    gap: 32px;
+    gap: 8px;
     /* Without this, `scroll-snap-align: start` snaps to the padding edge and
        eats the left gutter, pinning the card to the screen edge. */
     scroll-padding-inline: 16px;
   }
 
   .referral-stories__card {
-    width: 100%;
+    /* Peek: the comp puts a 330px card in a 375px window with a 16px gutter and
+       an 8px gap, so 21px of the NEXT card stays visible past the right edge -
+       the affordance that tells you the row scrolls. 100% here is the track's
+       content box (viewport - 2x16), so `- 13px` leaves exactly that 21px.
+       The pitch (card + gap) is deliberately NOT equal to the track's
+       clientWidth: js/referral.js scrolls by clientWidth and CSS snap then
+       pulls each page onto the nearest card, which lands right for all three. */
+    width: calc(100% - 13px);
     gap: 12px;
     padding: 26px 19px 26px 26px;
     border-radius: 19px;
@@ -1858,12 +1884,24 @@ body {
     margin-top: 24px;
   }
 
+  /* Same full-bleed track as .referral-stories__track: escape the section's
+     own inline padding so the gutter is a fixed 16px, and let the next slide
+     peek 21px past the right edge. The carousel is a centred flex column, so
+     the track must stretch instead of keeping width:100% - with a definite
+     width the negative margins only shift the box instead of widening it. */
   .referral-steps__track {
-    gap: 16px;
+    width: auto;
+    align-self: stretch;
+    margin-inline: -56px;
+    padding-inline: 16px;
+    gap: 8px;
+    /* else `scroll-snap-align: start` snaps to the padding edge and pins the
+       card to the screen edge */
+    scroll-padding-inline: 16px;
   }
 
   .referral-steps__card {
-    width: 100%;
+    width: calc(100% - 13px);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -1934,10 +1972,15 @@ body {
   }
 }
 
-/* NO COMP - inferred */
+/* The section's gutter steps to 16px here - keep the track's negative margin
+   in sync with it so the net gutter stays a fixed 16px. */
 @media (max-width: 480px) {
   .referral-steps {
     padding-block: 48px;
+  }
+
+  .referral-steps__track {
+    margin-inline: -16px;
   }
 }
 
