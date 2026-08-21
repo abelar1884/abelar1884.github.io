@@ -275,11 +275,18 @@
    * 2 500 000. A plain /12 gives 208 333.33, so the design rounds to the
    * nearest 500. Reproduced here so the default state matches the comp exactly.
    */
-  var RATES_PER_CLIENT = {
-    small: 100000,
-    medium: 250000,
-    large: 500000, // verified against the comp
-    holding: 500000, // capped so nothing exceeds the hero's "до 500 000 ₽"
+  var RATES_PER_YEAR = {
+    small: 200000,
+    medium: 300000,
+    large: 500000,
+    holding: 1000000,
+  };
+
+  var RATES_PER_MONTH = {
+    small: 16700,
+    medium: 25000,
+    large: 41700,
+    holding: 83000,
   };
 
   var MONTHLY_ROUND_TO = 500;
@@ -307,25 +314,16 @@
     var radios = Array.prototype.slice.call(
       root.querySelectorAll(".referral-calc__radio")
     );
-    if (!slider || !clientsOut || !yearOut || !monthOut || !radios.length) return;
 
-    function selectedRate() {
-      for (var i = 0; i < radios.length; i++) {
-        if (radios[i].checked) {
-          var rate = RATES_PER_CLIENT[radios[i].value];
-          if (typeof rate === "number") return rate;
-        }
-      }
-      return RATES_PER_CLIENT.large;
-    }
+    if (!slider || !clientsOut || !yearOut || !monthOut || !radios.length) return;
 
     function recompute() {
       var clients = parseInt(slider.value, 10);
       if (isNaN(clients)) clients = parseInt(slider.min, 10) || 1;
 
-      var perYear = clients * selectedRate();
-      var perMonth =
-        Math.round(perYear / 12 / MONTHLY_ROUND_TO) * MONTHLY_ROUND_TO;
+      var type = radios.find((input) => input.checked).value;
+      var perYear = clients * RATES_PER_YEAR[type];
+      var perMonth = clients * RATES_PER_MONTH[type];
 
       clientsOut.textContent = String(clients);
       yearOut.textContent = formatRubles(perYear) + " ₽";

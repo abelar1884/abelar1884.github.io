@@ -282,7 +282,7 @@ body {
 .referral-calc__card {
   box-sizing: border-box;
   width: 100%;
-  max-width: 882px;
+  max-width: 900px;
   margin-inline: auto;
   padding: 20px 32px 32px;
   border-radius: 24px;
@@ -307,7 +307,7 @@ body {
 }
 
 .referral-calc__control--clients {
-  flex: 0 1 380px;
+  flex: 0 1 397px;
 }
 
 .referral-calc__control--size {
@@ -322,6 +322,7 @@ body {
   font-size: 16px;
   line-height: 1.3;
   color: var(--rf-teal);
+  white-space: nowrap;
 }
 
 .referral-calc__label-row {
@@ -1335,8 +1336,8 @@ body {
 
 /* Row pattern per spec: row1 wide/narrow, row2 narrow/wide, row3 narrow/wide,
    row4 equal/equal. Wide ~7/12, narrow ~5/12, equal 6/6. */
-.referral-industries__card--wide { grid-column: span 7; }
-.referral-industries__card--narrow { grid-column: span 5; }
+.referral-industries__card--wide { grid-column: span 8; }
+.referral-industries__card--narrow { grid-column: span 4; }
 .referral-industries__card--equal { grid-column: span 6; }
 
 .referral-industries__card--pale {
@@ -1437,6 +1438,12 @@ body {
   border-radius: 32px;
   padding: 56px 40px 40px 40px;
   overflow: hidden;
+}
+
+.referral-easy-wrapper {
+  max-width: 1440px;
+  margin: 0 auto;
+  box-sizing: content-box;
 }
 
 .referral-easy__container {
@@ -1577,8 +1584,9 @@ body {
   border-radius: 24px;
   overflow: hidden;
   isolation: isolate;
-  background-image: url("/assets/images/referral/cta-bg-placeholder.png");
+  background-image: url("/assets/images/referral/the-man.jpg");
   background-size: cover;
+  background-position-y: -75px;
 }
 
 .referral-cta__bg {
@@ -1916,6 +1924,11 @@ body {
   .referral-hero__title {
     font-size: 57px;
   }
+
+  .referral-cta__banner {
+    background-position-y: 0;
+    background-position: center;
+  }
 }
 
 /* ---------- ≤ 900px ---------- */
@@ -1935,6 +1948,10 @@ body {
 
   .referral-calc__result-year {
     font-size: 48px;
+  }
+
+  .referral-calc__label {
+    white-space: wrap;
   }
 }
 
@@ -2215,6 +2232,7 @@ body {
   .referral-cta__banner {
     height: 320px;
     border-radius: 20px;
+    background-position-y: 0;
   }
 
   .referral-cta__content {
@@ -2381,7 +2399,6 @@ body {
        width still resolves to min-content (380px for "Реферальная" at 34px), which
        pushed the document to 396px on a 375px viewport. */
     overflow-wrap: anywhere;
-    hyphens: auto;
     /* let the heading shrink below min-content inside a flex column */
     min-width: 0;
     max-width: 100%;
@@ -2623,7 +2640,7 @@ body {
   }
 
   .referral-cta__banner {
-    background-position-x: 600px;
+    background-position-x: 440px;
   }
 
   #referral-cta-title {
@@ -2741,7 +2758,7 @@ body {
   }
 
   .referral__h4 {
-    font-size: 16px;
+    font-size: 20px;
     margin: 40px 0 24px 0;
   }
 }

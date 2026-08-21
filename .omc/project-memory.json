@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "lastScanned": 1787120309751,
+  "lastScanned": 1787298532834,
   "projectRoot": "C:\\projects\\abelar1884.github.io",
   "techStack": {
     "languages": [
@@ -49,27 +49,27 @@
       "path": "assets",
       "purpose": "Static assets",
       "fileCount": 0,
-      "lastAccessed": 1787120309735,
+      "lastAccessed": 1787298532800,
       "keyFiles": []
     },
     "css": {
       "path": "css",
       "purpose": null,
-      "fileCount": 5,
-      "lastAccessed": 1787120309735,
+      "fileCount": 6,
+      "lastAccessed": 1787298532800,
       "keyFiles": [
         "about.css",
         "article.css",
         "index.css",
-        "support.css",
-        "template.css"
+        "referral.css",
+        "support.css"
       ]
     },
     "fonts": {
       "path": "fonts",
       "purpose": null,
       "fileCount": 4,
-      "lastAccessed": 1787120309740,
+      "lastAccessed": 1787298532800,
       "keyFiles": [
         "cofo-kak-black.otf",
         "UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa0ZL7W0Q5n-wU.woff2",
@@ -80,11 +80,12 @@
     "js": {
       "path": "js",
       "purpose": null,
-      "fileCount": 4,
-      "lastAccessed": 1787120309740,
+      "fileCount": 5,
+      "lastAccessed": 1787298532800,
       "keyFiles": [
         "about.js",
         "gallery.js",
+        "referral.js",
         "template.js",
         "toc.js"
       ]
